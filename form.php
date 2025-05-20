@@ -19,7 +19,8 @@
         </div>
         <div>
             <label form="">Isi Laporan</label>
-            <input type="text" name="isilaporan"><br>
+            <textarea> type="text" n><br>
+            <textarea name="isilaporan"></textarea>
         </div>
         <div>
             <label for="foto">Pilih file foto : </label><br>
