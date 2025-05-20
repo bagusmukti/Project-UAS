@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['foto'])) {
     $foto = $_FILES['foto']['name'];
-    $target_dir = "/uploaded_pics";
+    $target_dir = "../Project-UAS/assets/uploaded_pics";
     $target_file = $target_dir . basename($_FILES['foto']['name']);
     if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_file)) {
         echo "<br>File berhasil diupload: " . $target_file;

@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include '../Project-UAS/config/koneksi.php';
 
 $nama = isset($_GET['name']) ? mysqli_real_escape_string($conn, $_GET['nama']) : '';
 $status = isset($_GET['status']) ? mysqli_real_escape_string($conn, $_GET['status']) : '';
