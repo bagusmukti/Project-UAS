@@ -12,7 +12,7 @@ $types = '';
 
 if (!empty($search_nama)) {
     $query .= " AND nama LIKE ?";
-    $params[] = "%$search_nama";
+    $params[] = "%$search_nama%";
     $types .= 's';
 }
 
@@ -51,6 +51,18 @@ var_dump($complaints); // Debug, ngko hapus
 <body>
     <h1>Dashboard Admin</h1>
     <br>
+    <form action="" method="get">
+        <label for="search_nama">Nama : </label>
+        <input type="text" name="search_nama" id="search_nama">
+
+        <label for="search_status">Status :</label>
+        <select name="search_status" id="search_status">
+            <option value="">-- Pilih Status --</option>
+            <option value="menunggu">Menunggu</option>
+            <option value="diproses">Diproses</option>
+            <option value="selesai">Selesai</option>
+        </select>
+    </form>
     <table border="1">
         <tr>
             <td>Nama Pelapor</td>
