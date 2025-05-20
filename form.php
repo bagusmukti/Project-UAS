@@ -19,8 +19,7 @@
         </div>
         <div>
             <label form="">Isi Laporan</label>
-            <textarea> type="text" n><br>
-            <textarea name="isilaporan"></textarea>
+            <textarea name="isilaporan"> </textarea><br>
         </div>
         <div>
             <label for="foto">Pilih file foto : </label><br>
