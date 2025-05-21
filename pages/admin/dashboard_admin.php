@@ -68,6 +68,7 @@ $conn->close();
             <td>Email</td>
             <td>Isi Laporan</td>
             <td>Foto</td>
+            <td>Status</td>
             <td>Aksi</td>
         </tr>
         <?php foreach ($complaints as $row): ?>
@@ -82,6 +83,7 @@ $conn->close();
                         <p>Tidak ada foto</p>
                     <?php endif; ?>
                 </td>
+                <td></td><?= htmlspecialchars($row["status"]) ?></td>
                 <td colspan="2">
                     <a href="edit.php?id=<?= $row['id'] ?>">Balas</a>
                     <a href="delete.php?id=<?= $row['id'] ?>"
