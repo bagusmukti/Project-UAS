@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <form action="proseslogin.php" method="POST" enctype="multipart/form-data">
+    <form action="proses_login.php" method="POST" enctype="multipart/form-data">
         <div>
             <label form="">Name</label>
             <input type="text" name="name"><br>
