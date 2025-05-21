@@ -34,9 +34,6 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
 
 $stmt->close();
 $conn->close();
-
-var_dump($complaints); // Debug, ngko hapus
-
 ?>
 
 <!DOCTYPE html>
@@ -54,15 +51,16 @@ var_dump($complaints); // Debug, ngko hapus
     <br>
     <form action="" method="get">
         <label for="search_nama">Nama : </label>
-        <input type="text" name="search_nama" id="search_nama">
+        <input type="text" name="search_nama" id="search_nama" value="<?= htmlspecialchars($search_nama) ?>">
 
         <label for="search_status">Status :</label>
         <select name="search_status" id="search_status">
             <option value="">-- Pilih Status --</option>
-            <option value="menunggu">Menunggu</option>
-            <option value="diproses">Diproses</option>
-            <option value="selesai">Selesai</option>
+            <option value="menunggu" <?= $search_status === 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
+            <option value="diproses" <?= $search_status === 'diproses' ? 'selected' : '' ?>>Diproses</option>
+            <option value="selesai" <?= $search_status === 'selesai' ? 'selected' : '' ?>>Selesai</option>
         </select>
+        <button type="submit">Cari</button>
     </form>
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
@@ -74,13 +72,20 @@ var_dump($complaints); // Debug, ngko hapus
         </tr>
         <?php foreach ($complaints as $row): ?>
             <tr>
-                <td><?= $row["nama"] ?></td>
-                <td><?= $row["email"] ?></td>
-                <td><?= $row["isi_lap"] ?></td>
-                <td><?= $row["foto"] ?></td>
+                <td><?= htmlspecialchars($row["nama"]) ?></td>
+                <td><?= htmlspecialchars($row["email"]) ?></td>
+                <td><?= htmlspecialchars($row["isi_lap"]) ?></td>
                 <td>
-                    <a href="edit.php">Balas</a>
-                    <a href="delete.php">Hapus</a>
+                    <?php if (!empty($row['foto'])): ?>
+                        <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>" alt="Laporan Foto" width="100px">
+                    <?php else: ?>
+                        <p>Tidak ada foto</p>
+                    <?php endif; ?>
+                </td>
+                <td colspan="2">
+                    <a href="edit.php?id=<?= $row['id'] ?>">Balas</a>
+                    <a href="delete.php?id=<?= $row['id'] ?>"
+                        onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
                 </td>
             </tr>
         <?php endforeach ?>
