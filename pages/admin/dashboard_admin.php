@@ -46,10 +46,11 @@ var_dump($complaints); // Debug, ngko hapus
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href=".../assets/css/style.css">
 </head>
 
 <body>
-    <h1>Dashboard Admin</h1>
+    <h2>Dashboard Admin</h2>
     <br>
     <form action="" method="get">
         <label for="search_nama">Nama : </label>
@@ -63,7 +64,7 @@ var_dump($complaints); // Debug, ngko hapus
             <option value="selesai">Selesai</option>
         </select>
     </form>
-    <table border="1">
+    <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <td>Nama Pelapor</td>
             <td>Email</td>
@@ -79,6 +80,7 @@ var_dump($complaints); // Debug, ngko hapus
                 <td><?= $row["foto"] ?></td>
                 <td>
                     <a href="edit.php">Balas</a>
+                    <a href="delete.php">Hapus</a>
                 </td>
             </tr>
         <?php endforeach ?>
