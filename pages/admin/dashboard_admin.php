@@ -6,7 +6,11 @@ include '../../config/koneksi.php';
 $search_nama = $_GET['search_nama'] ?? '';
 $search_status = $_GET['search_status'] ?? '';
 
-$query = "SELECT * FROM tbl_peng WHERE 1=1";
+$query = "SELECT p.*, s.status 
+            FROM tbl_peng p 
+            LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng 
+            LEFT JOIN tbl_status_peng s ON pp.id_status = s.id
+            WHERE 1=1";
 $params = [];
 $types = '';
 
@@ -27,7 +31,6 @@ if (!empty($params)) {
     $stmt->bind_param($types, ...$params);
 }
 
-
 $stmt->execute();
 $result = $stmt->get_result();
 $complaints = $result->fetch_all(MYSQLI_ASSOC);
@@ -43,7 +46,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href=".../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 
 <body>
@@ -57,7 +60,7 @@ $conn->close();
         <select name="search_status" id="search_status">
             <option value="">-- Pilih Status --</option>
             <option value="menunggu" <?= $search_status === 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
-            <option value="diproses" <?= $search_status === 'diproses' ? 'selected' : '' ?>>Diproses</option>
+            <option value="diproses" <?= $search_status === 'proses' ? 'selected' : '' ?>>Diproses</option>
             <option value="selesai" <?= $search_status === 'selesai' ? 'selected' : '' ?>>Selesai</option>
         </select>
         <button type="submit">Cari</button>
@@ -83,7 +86,7 @@ $conn->close();
                         <p>Tidak ada foto</p>
                     <?php endif; ?>
                 </td>
-                <td></td><?= htmlspecialchars($row["status"]) ?></td>
+                <td><?= htmlspecialchars($row["status_peng"] ?? 'menunggu') ?></td>
                 <td colspan="2">
                     <a href="edit.php?id=<?= $row['id'] ?>">Balas</a>
                     <a href="delete.php?id=<?= $row['id'] ?>"
