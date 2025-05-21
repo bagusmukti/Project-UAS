@@ -78,7 +78,7 @@ var_dump($complaints); // Debug, ngko hapus
                 <td><?= $row["isi_lap"] ?></td>
                 <td><?= $row["foto"] ?></td>
                 <td>
-                    <a href="/balas.php/<?= $row["id"] ?>">Balas</a>
+                    <a href="edit.php">Balas</a>
                 </td>
             </tr>
         <?php endforeach ?>
