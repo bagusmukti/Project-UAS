@@ -1,4 +1,5 @@
 <?php
+include '../config/koneksi.php';
 session_start();
 
 if (empty($_POST['name'])) {
