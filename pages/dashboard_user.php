@@ -14,7 +14,7 @@ try {
     $user_id = $_SESSION['user_id'];
 
     // Perbaikan query dengan alias yang konsisten dan COALESCE untuk status default
-    $query = "SELECT p.*, COALESCE(s.status, 'menunggu') AS status
+    $query = "SELECT p.*, COALESCE(s.status, 'menunggu') AS status, pp.answ_peng
               FROM tbl_peng p
               LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng
               LEFT JOIN tbl_status_peng s ON pp.id_status = s.id
@@ -27,7 +27,9 @@ try {
     $complaints = mysqli_fetch_all($result, MYSQLI_ASSOC);
 } catch (Exception $e) {
     error_log("Database error: " . $e->getMessage());
-    echo "Terjadi kesalahan pada server. Silakan coba lagi nanti.";
+    $_SESSION['error'] = "Terjadi kesalahan saat memuat data. Silakan coba lagi.";
+    header("Location: dashboard_user.php");
+    exit();
 }
 ?>
 
@@ -65,6 +67,7 @@ try {
 
 <body>
     <h2>Dashboard User</h2>
+    <a href="logout.php">Logout</a>
 
     <?php if (isset($_SESSION['success'])): ?>
         <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
@@ -85,10 +88,11 @@ try {
             <th>Isi Laporan</th>
             <th>Foto</th>
             <th>Status</th>
+            <th>Balasan</th>
         </tr>
         <?php if (empty($complaints)): ?>
             <tr>
-                <td colspan="5" style="text-align: center;">Tidak ada laporan yang ditemukan</td>
+                <td colspan="6" style="text-align: center;">Tidak ada laporan yang ditemukan</td>
             </tr>
         <?php else: ?>
             <?php foreach ($complaints as $row): ?>
@@ -106,6 +110,13 @@ try {
                         <?php endif; ?>
                     </td>
                     <td><?= htmlspecialchars($row["status"]) ?></td>
+                    <td>
+                        <?php if (!empty($row['answ_peng'])): ?>
+                            <?= nl2br(htmlspecialchars($row['answ_peng'])) ?>
+                        <?php else: ?>
+                            <p>Belum ada balasan</p>
+                        <?php endif; ?>
+                    </td>
                 </tr>
             <?php endforeach ?>
         <?php endif; ?>
