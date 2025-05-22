@@ -58,7 +58,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
         }
 
         .action-links a {
-            margin-right: 10px;
+            margin-right: 10px; 
         }
     </style>
 </head>
