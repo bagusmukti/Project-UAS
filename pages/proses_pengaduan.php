@@ -1,21 +1,28 @@
 <?php
+
+// Sertakan file koneksi database
 include '../config/koneksi.php';
+
+// Mulai sesi
 session_start();
 
+// Cek apakah pengguna sudah login sebagai user
 if (!isset($_SESSION['user_id'])) {
     header("Location: login_page.php");
     exit();
 }
 
+// Cek apakah form di-submit
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $user_id = $_SESSION['user_id'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $isilaporan = $_POST['isilaporan'];
-    $foto = '';
+    $user_id = $_SESSION['user_id']; // Ambil ID user dari sesi
+    $name = $_POST['name']; // Ambil nama dari form
+    $email = $_POST['email']; // Ambil email dari form
+    $isilaporan = $_POST['isilaporan']; // Ambil isi laporan dari form
+    $foto = ''; // Inisialisasi variabel foto
 
     $errors = [];
 
+    // Validasi input
     if (empty($name)) {
         $errors[] = "Nama wajib diisi!";
     }
@@ -28,26 +35,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = "Isi laporan wajib diisi!";
     }
 
+    // Validasi file foto
     if (!empty($_FILES['foto']['name'])) {
-        $target_dir = "../assets/uploaded_pics";
+        $target_dir = "../assets/uploaded_pics/"; // Ganti dengan direktori tujuan upload
 
-        $file_ext = pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION);
-        $filename = uniqid('laporan_', true) . '.' . $file_ext;
+        $filename = $_FILES['foto']['name'];
         $target_file = $target_dir . $filename;
 
-        $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
-        $max_size = 2 * 1024 * 1024; // 2MB
-
-        if (!in_array($_FILES['foto']['type'], $allowed_types)) {
-            $errors[] = "Hanya file JPG, PNG, dan GIF yang diizinkan!";
-        } elseif ($_FILES['foto']['size'] > $max_size) {
-            $errors[] = "Ukuran file maksimal 2MB!";
-        } elseif (!move_uploaded_file($_FILES['foto']['tmp_name'], $target_file)) {
-            $errors[] = "Gagal mengupload foto!";
-        } else {
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_file)) {
             $foto = $filename;
+        } else {
+            $errors[] = "Gagal mengupload file!";
         }
     }
+
 
     // Jika ada error, redirect kembali
     if (!empty($errors)) {
@@ -62,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             (id_user, nama, email, isi_lap, foto) 
             VALUES (?, ?, ?, ?, ?)");
 
+
         $stmt->bind_param(
             "issss",
             $user_id,
@@ -71,16 +73,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $foto
         );
 
+        // Eksekusi statement
         if ($stmt->execute()) {
             $_SESSION['success'] = "Laporan berhasil dikirim!";
         } else {
             throw new Exception("Gagal menyimpan data ke database");
         }
     } catch (Exception $e) {
-        $_SESSION['error'] = "Terjadi kesalahan sistem: " . $e->getMessage();
+        $_SESSION['error'] = "Terjadi kesalahan sistem: " . $e->getMessage(); // Log error
     } finally {
-        $stmt->close();
-        header("Location: dashboard_user.php");
+        $stmt->close(); // Tutup statement
+        header("Location: dashboard_user.php"); // Redirect ke halaman dashboard
         exit();
     }
 }
