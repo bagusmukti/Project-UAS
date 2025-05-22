@@ -53,7 +53,7 @@ $conn->close();
     <h2>Dashboard Admin</h2>
     <br>
     <form action="" method="get">
-        <label for="search_nama">Nama : </label>
+        <label for="search_nama">Cari nama pelapor: </label>
         <input type="text" name="search_nama" id="search_nama" value="<?= htmlspecialchars($search_nama) ?>">
 
         <label for="search_status">Status :</label>
