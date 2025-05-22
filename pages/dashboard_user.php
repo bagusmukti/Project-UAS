@@ -80,7 +80,7 @@ catch (Exception $e) {
 
 <body>
     <h2>Dashboard User</h2>
-    <a href="logout.php">Logout</a>
+    <a href="logout_page.php">Logout</a>
 
     <!-- Notifikasi -->
     <?php if (isset($_SESSION['success'])): ?>
