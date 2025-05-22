@@ -2,50 +2,122 @@
 session_start();
 include '../../config/koneksi.php';
 
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: ../login.php');
-    exit;
-}
+// Cek session admin
+// if (!isset($_SESSION['user_id']) || $_SESSION['level'] !== 'admin') {
+//     header("Location: ../login_page.php");
+//     exit();
+// }
 
-$id = $_GET['id'];
-$query = "SELECT p.*, pp.status, pp.balasan 
+$id = $_GET['id'] ?? 0;
+
+// Ambil data pengaduan
+$query = "SELECT p.*, s.status, pp.answ_peng 
           FROM tbl_peng p
-          LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng 
+          LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng
+          LEFT JOIN tbl_status_peng s ON pp.id_status = s.id
           WHERE p.id = ?";
+
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $id);
 $stmt->execute();
-$complaint = $stmt->get_result()->fetch_assoc();
+$result = $stmt->get_result();
+$data = $result->fetch_assoc();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $status = $_POST['status'];
-    $balasan = $_POST['balasan'];
+// Handle form submit
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $status_id = $_POST['status'];
+    $jawaban = $_POST['jawaban'];
 
-    $stmt = $conn->prepare("UPDATE complaints SET status = ?, balasan = ? WHERE id = ?");
-    $stmt->bind_param("ssi", $status, $balasan, $id);
-    $stmt->execute();
+    // Mulai transaksi
+    $conn->begin_transaction();
 
-    header('Location: dashboard.php');
-    exit;
+    try {
+        // Update atau insert ke tbl_proses_peng
+        if ($data['status']) {
+            $stmt = $conn->prepare("UPDATE tbl_proses_peng 
+                                   SET id_status = ?, answ_peng = ? 
+                                   WHERE id_peng = ?");
+            $stmt->bind_param("isi", $status_id, $jawaban, $id);
+        } else {
+            $stmt = $conn->prepare("INSERT INTO tbl_proses_peng 
+                                   (id_peng, id_status, answ_peng) 
+                                   VALUES (?, ?, ?)");
+            $stmt->bind_param("iis", $id, $status_id, $jawaban);
+        }
+
+        $stmt->execute();
+
+        $conn->commit();
+        $_SESSION['success'] = "Pengaduan berhasil diupdate!";
+        header("Location: dashboard_admin.php");
+        exit();
+    } catch (Exception $e) {
+        $conn->rollback();
+        $_SESSION['error'] = "Gagal update: " . $e->getMessage();
+    }
 }
+
+// Ambil daftar status
+$statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSOC);
 ?>
 
-<div class="container">
-    <h2>Edit Pengaduan</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-    <form method="POST">
-        <div class="form-group">
-            <label>Status</label>
-            <select name="status" class="form-control">
-                <option value="menunggu" <?= $complaint['status'] == 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
-                <option value="diproses" <?= $complaint['status'] == 'diproses' ? 'selected' : '' ?>>Diproses</option>
-                <option value="selesai" <?= $complaint['status'] == 'selesai' ? 'selected' : '' ?>>Selesai</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Balasan</label>
-            <textarea name="balasan" class="form-control" rows="5"><?= htmlspecialchars($complaint['balasan']) ?></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-    </form>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Pengaduan</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Edit Pengaduan #<?= $id ?></h2>
+
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert error"><?= $_SESSION['error'] ?></div>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+
+        <form method="POST">
+            <div class="form-group">
+                <label>Status:</label>
+                <select name="status" required>
+                    <?php foreach ($statuses as $status): ?>
+                        <option value="<?= $status['id'] ?>"
+                            <?= ($data['status'] ?? '') === $status['status'] ? 'selected' : '' ?>>
+                            <?= ucfirst($status['status']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Jawaban:</label>
+                <textarea name="jawaban"><?= htmlspecialchars($data['answ_peng'] ?? '') ?></textarea>
+            </div>
+
+            <button type="submit">Simpan</button>
+            <a href="dashboard_admin.php">Kembali</a>
+        </form>
+    </div>
+</body>
+
+</html>
