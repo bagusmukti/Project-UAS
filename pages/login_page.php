@@ -1,37 +1,43 @@
 <?php
 
+// Mulai sesi
 session_start();
 
+// Sertakan file koneksi database
 include '../config/koneksi.php';
 
+// Jika Formulir metode POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = $_POST['username']; // Ambil data dari form
+    $password = $_POST['password']; // Ambil data dari form
 
     // Cek apakah username dan password valid
-    $query = "SELECT id, username, level, password FROM tbl_user WHERE username = ?";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "s", $username);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
+    $query = "SELECT id, username, level, password FROM tbl_user WHERE username = ?"; // Siapkan statement SELECT
+    $stmt = mysqli_prepare($conn, $query); // Siapkan statement
+    mysqli_stmt_bind_param($stmt, "s", $username); // Bind parameter
+    mysqli_stmt_execute($stmt); // Eksekusi statement
+    $result = mysqli_stmt_get_result($stmt); // Ambil hasil query
 
+    // Cek apakah ada hasil
     if ($user = mysqli_fetch_assoc($result)) {
-        if (password_verify($password, $user['password'])) {
-            if($user['level'] == 'admin')
+        if (password_verify($password, $user['password'])) { // Verifikasi password
+            if($user['level'] == 'admin') // Cek level user 
             {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['level'] = 'admin';
-                header("Location: ../pages/admin/dashboard_admin.php");
+                // Jika level admin
+                $_SESSION['user_id'] = $user['id']; // Simpan ID user ke session
+                $_SESSION['level'] = 'admin'; // Simpan level user ke session
+                header("Location: ../pages/admin/dashboard_admin.php"); // Redirect ke halaman dashboard admin
                 exit();    
             }
             else {
-                $_SESSION['user_id'] = $user['id'];
-                header("Location: dashboard_user.php");
+                // Jika level masyarakat
+                $_SESSION['user_id'] = $user['id']; // Simpan ID user ke session
+                header("Location: dashboard_user.php"); // Redirect ke halaman dashboard user
                 exit();
             }
 
         } else {
-            echo "Username atau Password salah.";
+            echo "Username atau Password salah."; // Jika password tidak valid
         }
     } else {
         // Login gagal

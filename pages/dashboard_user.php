@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 // Sertakan file koneksi database
 include '../config/koneksi.php';
 
-$complaints = [];
+$complaints = []; // Inisialisasi array untuk menyimpan data laporan
 
 // Ambil data laporan dari database
 try {
