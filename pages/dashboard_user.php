@@ -2,23 +2,32 @@
 
 session_start();
 
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: login_page.php");
     exit();
 }
 
 include '../config/koneksi.php';
 
-try {
-    $user_id = $_SESSION['user'];
-    $stmt = $pdo->prepare("SELECT * FROM tbl_peng WHERE id_user = :user");
-    $stmt->bindParam(':user', $user_id, PDO::PARAM_INT);
-    $stmt->execute();
+$complaints = [];
 
-    $complaints = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-    exit();
+try {
+    $user_id = $_SESSION['user_id'];
+
+    $query = "SELECT tp.*, s.status
+              FROM tbl_peng p
+              LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng
+              LEFT JOIN tbl_status_peng s ON pp.id_status = s.id
+              WHERE p.id_user = ?";
+
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $complaints = mysqli_fetch_all($result, MYSQLI_ASSOC);
+} catch (Exception $e) {
+    error_log("Database error: " . $e->getMessage());
+    echo "Terjadi kesalahan pada server. Silakan coba lagi nanti.";
 }
 ?>
 
