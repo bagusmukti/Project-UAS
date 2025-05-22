@@ -20,8 +20,13 @@
             <input type="text" name="email"><br>
         </div>
         <div>
+<<<<<<< HEAD
+            <label form="">Isi Laporan</label>
+            <textarea name="isilaporan"> </textarea><br>
+=======
             <label form="" class="label-user">Isi Laporan</label>
             <input type="text" name="isilaporan"><br>
+>>>>>>> main
         </div>
         <div>
             <label for="foto" class="label-user">Pilih file foto : </label><br>
