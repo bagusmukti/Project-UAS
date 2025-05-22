@@ -65,6 +65,9 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
 
 <body>
     <h2>Dashboard Admin</h2>
+
+    <br>
+    <form action="" method="get">
     <a href="logout.php">Logout</a>
 
     <form method="get" style="margin: 20px 0;">
