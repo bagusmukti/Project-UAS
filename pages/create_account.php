@@ -9,7 +9,7 @@
 
 <body>
     <h2>Buat AKun</h2>
-    <form action="">
+    <form action="" method="post">
         <div>
             <label for="">username</label>
             <input type="text" name="username" id="">
@@ -27,3 +27,30 @@
 </body>
 
 </html>
+
+<?php
+
+include '../config/koneksi.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+
+    // Cek apakah username sudah ada di database
+    $query = "SELECT * FROM tbl_user WHERE username='$username'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        echo "Username sudah ada. Silakan pilih username lain.";
+    } else {
+        // Simpan data ke database
+        $query = "INSERT INTO tbl_user (username, password, email) VALUES ('$username', '$password', '$email')";
+        if (mysqli_query($conn, $query)) {
+            echo "Akun berhasil dibuat. Silakan login.";
+        } else {
+            echo "Error: " . mysqli_error($koneksi);
+        }
+    }
+}
+
+?>
