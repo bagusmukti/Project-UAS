@@ -10,7 +10,7 @@
 
 <body>
     <h2 class="h2-user">Pengaduan Masyarakat</h2>
-    <form action="proses_login.php" method="POST" enctype="multipart/form-data" class="form-user">
+    <form action="proses_pengaduan.php" method="POST" enctype="multipart/form-data" class="form-user">
         <div>
             <label form="" class="label-user">Name</label>
             <input type="text" name="name"><br>
