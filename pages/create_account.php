@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <h2>Buat AKun</h2>
+    <h2>Buat Akun</h2>
 
     <?php if (!empty($error)): ?>
         <div class="error"><?= $error ?></div>
