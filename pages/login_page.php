@@ -30,6 +30,8 @@
 
 <?php
 
+session_start();
+
 include '../config/koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -42,15 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (mysqli_num_rows($result) > 0) {
         // Login berhasil
         $_SESSION['username'] = $username;
-        header("Location: pages/form_pengaduan.php");
+        header("Location: dashboard_user.php");
         exit();
     } else {
         // Login gagal
         echo "Username atau password salah.";
     }
-} else {
-    // Jika bukan POST, redirect ke halaman login
-    header("Location: login_page.php");
-    exit();
 }
 ?>
