@@ -49,3 +49,23 @@ input[type="email"] {
   font: 16px;
   width: 100%;
 }
+
+/* Style untuk tabel */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 30px;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #31c6d4;
+  border-color: black;
+  color: #000;
+}
