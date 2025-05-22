@@ -27,3 +27,31 @@
 </body>
 
 </html>
+
+<?php
+
+include '../config/koneksi.php';
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Cek apakah username dan password valid
+    $query = "SELECT * FROM tbl_user WHERE username='$username' AND password='$password'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        // Login berhasil
+        $_SESSION['username'] = $username;
+        header("Location: pages/form_pengaduan.php");
+        exit();
+    } else {
+        // Login gagal
+        echo "Username atau password salah.";
+    }
+} else {
+    // Jika bukan POST, redirect ke halaman login
+    header("Location: login_page.php");
+    exit();
+}
+?>
