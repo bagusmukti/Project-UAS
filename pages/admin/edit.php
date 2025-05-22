@@ -8,7 +8,11 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 $id = $_GET['id'];
-$stmt = $conn->prepare("SELECT * FROM complaints WHERE id = ?");
+$query = "SELECT p.*, pp.status, pp.balasan 
+          FROM tbl_peng p
+          LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng 
+          WHERE p.id = ?";
+$stmt = $conn->prepare($query);
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $complaint = $stmt->get_result()->fetch_assoc();
