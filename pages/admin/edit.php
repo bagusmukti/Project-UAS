@@ -1,63 +1,70 @@
 <?php
+
+// Mulai sesi
 session_start();
+
+// Cek apakah user admin sudah login
 include '../../config/koneksi.php';
 
 // Cek session admin
-// if (!isset($_SESSION['user_id']) || $_SESSION['level'] !== 'admin') {
-//     header("Location: ../login_page.php");
-//     exit();
-// }
+if (!isset($_SESSION['user_id']) || $_SESSION['level'] !== 'admin') {
+    header("Location: ../login_page.php");
+    exit();
+}
 
+// Ambil ID pengaduan dari URL
 $id = $_GET['id'] ?? 0;
 
 // Ambil data pengaduan
+// Menggunakan LEFT JOIN untuk mendapatkan status pengaduan
 $query = "SELECT p.*, s.status, pp.answ_peng 
           FROM tbl_peng p
           LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng
           LEFT JOIN tbl_status_peng s ON pp.id_status = s.id
           WHERE p.id = ?";
 
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
-$data = $result->fetch_assoc();
+$stmt = $conn->prepare($query); // Menyiapkan statement
+$stmt->bind_param("i", $id); // Mengikat parameter
+$stmt->execute(); // Eksekusi query
+$result = $stmt->get_result(); // Mendapatkan hasil
+$data = $result->fetch_assoc(); // Mengambil data pengaduan
 
-// Handle form submit
+// Jika form disubmit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status_id = $_POST['status'];
     $jawaban = $_POST['jawaban'];
 
-    // Mulai transaksi
-    $conn->begin_transaction();
+    $conn->begin_transaction(); // Memulai transaksi
 
     try {
         // Update atau insert ke tbl_proses_peng
         if ($data['status']) {
+            // Jika sudah ada status, update
             $stmt = $conn->prepare("UPDATE tbl_proses_peng 
                                    SET id_status = ?, answ_peng = ? 
                                    WHERE id_peng = ?");
-            $stmt->bind_param("isi", $status_id, $jawaban, $id);
+            $stmt->bind_param("isi", $status_id, $jawaban, $id); // Mengikat parameter
         } else {
+            // Jika belum ada status, insert
             $stmt = $conn->prepare("INSERT INTO tbl_proses_peng 
                                    (id_peng, id_status, answ_peng) 
                                    VALUES (?, ?, ?)");
-            $stmt->bind_param("iis", $id, $status_id, $jawaban);
+            $stmt->bind_param("iis", $id, $status_id, $jawaban); // Mengikat parameter
         }
 
-        $stmt->execute();
+        $stmt->execute(); // Eksekusi query
 
-        $conn->commit();
-        $_SESSION['success'] = "Pengaduan berhasil diupdate!";
-        header("Location: dashboard_admin.php");
-        exit();
+        $conn->commit(); // Commit transaksi
+        $_SESSION['success'] = "Pengaduan berhasil diupdate!"; // Set session success message
+        header("Location: dashboard_admin.php"); // Redirect ke halaman dashboard
+        exit(); // Keluar dari script
     } catch (Exception $e) {
-        $conn->rollback();
-        $_SESSION['error'] = "Gagal update: " . $e->getMessage();
+        $conn->rollback(); // Rollback transaksi jika terjadi kesalahan
+        $_SESSION['error'] = "Gagal update: " . $e->getMessage(); // Set session error message
     }
 }
 
-// Ambil daftar status
+// Ambil semua status pengaduan
 $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSOC);
 ?>
 
@@ -91,24 +98,27 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
     <div class="container">
         <h2>Edit Pengaduan #<?= $id ?></h2>
 
+        <!-- Tampilkan pesan sukses atau error -->
         <?php if (isset($_SESSION['error'])): ?>
             <div class="alert error"><?= $_SESSION['error'] ?></div>
             <?php unset($_SESSION['error']); ?>
         <?php endif; ?>
 
+        <!-- Tampilan pesan sukses -->
         <form method="POST">
             <div class="form-group">
                 <label>Status:</label>
                 <select name="status" required>
-                    <?php foreach ($statuses as $status): ?>
+                    <?php foreach ($statuses as $status): ?> <!-- Looping status pengaduan -->
                         <option value="<?= $status['id'] ?>"
                             <?= ($data['status'] ?? '') === $status['status'] ? 'selected' : '' ?>>
                             <?= ucfirst($status['status']) ?>
-                        </option>
+                        </option> <!-- Menampilkan status -->
                     <?php endforeach; ?>
                 </select>
             </div>
 
+            <!-- Tampilkan jawaban jika ada -->
             <div class="form-group">
                 <label>Jawaban:</label>
                 <textarea name="jawaban"><?= htmlspecialchars($data['answ_peng'] ?? '') ?></textarea>

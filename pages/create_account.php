@@ -1,46 +1,51 @@
 <?php
 
+// Sertakan koneksi database
 include '../config/koneksi.php';
 
+// Jika Formulir metode POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
+    $username = $_POST['username']; // Ambil data dari form
+    $password = $_POST['password']; // Ambil data dari form
+    $email = $_POST['email']; // Ambil data dari form
 
-    $errors = [];
+    $errors = []; // Array untuk menyimpan error
 
     if (empty($username)) {
-        $errors[] = "Username tidak boleh kosong.";
+        $errors[] = "Username tidak boleh kosong."; // Validasi username
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Email tidak valid.";
+        $errors[] = "Email tidak valid."; // Validasi email
     }
 
     if (empty($password)) {
-        $errors[] = "Password tidak boleh kosong.";
+        $errors[] = "Password tidak boleh kosong."; // Validasi password
     }
 
+    // Jika tidak ada error
     if (empty($errors)) {
-        $stmt = mysqli_prepare($conn, "SELECT id FROM tbl_user WHERE username = ?");
-        mysqli_stmt_bind_param($stmt, "s", $username);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_store_result($stmt);
+        $stmt = mysqli_prepare($conn, "SELECT id FROM tbl_user WHERE username = ?"); // Siapkan statement
+        mysqli_stmt_bind_param($stmt, "s", $username); // Bind parameter
+        mysqli_stmt_execute($stmt); // Eksekusi statement
+        mysqli_stmt_store_result($stmt); // Simpan hasil
 
+        // Cek apakah username sudah terdaftar
         if (mysqli_stmt_num_rows($stmt) > 0) {
-            $errors[] = "Username sudah terdaftar.";
+            $errors[] = "Username sudah terdaftar."; // Jika username sudah ada
         } else {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash password
 
-            $insert_stmt = mysqli_prepare($conn, "INSERT INTO tbl_user (username, password, email, level) VALUES (?, ?, ?, 'masyarakat')");
-            mysqli_stmt_bind_param($insert_stmt, "sss", $username, $hashed_password, $email);
+            $insert_stmt = mysqli_prepare($conn, "INSERT INTO tbl_user (username, password, email, level) VALUES (?, ?, ?, 'masyarakat')"); // Siapkan statement untuk insert
+            mysqli_stmt_bind_param($insert_stmt, "sss", $username, $hashed_password, $email); // Bind parameter
 
+            // Eksekusi statement untuk insert
             if (mysqli_stmt_execute($insert_stmt)) {
-                echo "Akun berhasil dibuat! Silakan login.";
-                header("Location: login_page.php");
+                echo "Akun berhasil dibuat! Silakan login."; // Tampilkan pesan sukses
+                header("Location: login_page.php"); // Redirect ke halaman login
                 exit();
             } else {
-                $errors[] = "Gagal membuat akun.";
+                $errors[] = "Gagal membuat akun."; // Jika gagal insert
             }
         }
     }
