@@ -3,10 +3,10 @@ session_start();
 include '../../config/koneksi.php';
 
 // Cek session admin
-// if (!isset($_SESSION['user_id']) || $_SESSION['level'] !== 'admin') {
-//     header("Location: ../login_page.php");
-//     exit();
-// }
+if (!isset($_SESSION['user_id']) || $_SESSION['level'] !== 'admin') {
+    header("Location: ../login_page.php");
+    exit();
+}
 
 // Handle search
 $search_nama = $_GET['search_nama'] ?? '';
@@ -58,7 +58,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
         }
 
         .action-links a {
-            margin-right: 10px;
+            margin-right: 10px; 
         }
     </style>
 </head>
@@ -68,7 +68,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
 
     <br>
     <form action="" method="get">
-    <a href="logout.php">Logout</a>
+    <a href="../logout_page.php">Logout</a>
 
     <form method="get" style="margin: 20px 0;">
         <input type="text" name="search_nama" placeholder="Cari nama..."

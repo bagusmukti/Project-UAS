@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     // Cek apakah username dan password valid
-    $query = "SELECT id, username, password FROM tbl_user WHERE username = ?";
+    $query = "SELECT id, username, level, password FROM tbl_user WHERE username = ?";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "s", $username);
     mysqli_stmt_execute($stmt);
@@ -17,9 +17,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($user = mysqli_fetch_assoc($result)) {
         if (password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            header("Location: dashboard_user.php");
-            exit();
+            if($user['level'] == 'admin')
+            {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['level'] = 'admin';
+                header("Location: ../pages/admin/dashboard_admin.php");
+                exit();    
+            }
+            else {
+                $_SESSION['user_id'] = $user['id'];
+                header("Location: dashboard_user.php");
+                exit();
+            }
+
         } else {
             echo "Username atau Password salah.";
         }
