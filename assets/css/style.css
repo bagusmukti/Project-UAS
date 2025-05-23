@@ -70,3 +70,14 @@ th {
   border-color: black;
   color: #000;
 }
+
+/* Styling untuk tombol edit dan delete */
+.edit-button,
+.delete-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
