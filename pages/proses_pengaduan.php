@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name']; // Ambil nama dari form
     $email = $_POST['email']; // Ambil email dari form
     $isilaporan = $_POST['isilaporan']; // Ambil isi laporan dari form
-    $foto = ''; // Inisialisasi variabel foto
+    $file = $_FILES['foto']; // Ambil file foto dari form
 
     $errors = [];
 
@@ -35,20 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = "Isi laporan wajib diisi!";
     }
 
-    // Validasi file foto
-    if (!empty($_FILES['foto']['name'])) {
-        $target_dir = "../assets/uploaded_pics/"; // Ganti dengan direktori tujuan upload
-
-        $filename = $_FILES['foto']['name'];
-        $target_file = $target_dir . $filename;
-
-        if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_file)) {
-            $foto = $filename;
-        } else {
-            $errors[] = "Gagal mengupload file!";
-        }
-    }
-
 
     // Jika ada error, redirect kembali
     if (!empty($errors)) {
@@ -58,31 +44,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     try {
+        // Mulai transaksi
+        $conn->begin_transaction();
+
+        // Simpan data laporan tanpa foto
         // Insert data dengan prepared statement
         $stmt = $conn->prepare("INSERT INTO tbl_peng 
-            (id_user, nama, email, isi_lap, foto) 
-            VALUES (?, ?, ?, ?, ?)");
-
+            (id_user, nama, email, isi_lap) 
+            VALUES (?, ?, ?, ?)");
 
         $stmt->bind_param(
-            "issss",
+            "isss",
             $user_id,
             $name,
             $email,
-            $isilaporan,
-            $foto
+            $isilaporan
         );
 
-        // Eksekusi statement
-        if ($stmt->execute()) {
-            $_SESSION['success'] = "Laporan berhasil dikirim!";
-        } else {
-            throw new Exception("Gagal menyimpan data ke database");
-        }
-    } catch (Exception $e) {
-        $_SESSION['error'] = "Terjadi kesalahan sistem: " . $e->getMessage(); // Log error
-    } finally {
+        $stmt->execute();
+        $id_laporan = $conn->insert_id; // Ambil ID laporan yang baru saja dimasukkan
         $stmt->close(); // Tutup statement
+
+        // Proses upload foto jika ada
+        if (!empty($_FILES['foto']['name'])) {
+            $file = $_FILES['foto'];
+            $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $target_dir = "../assets/uploaded_pics/";
+
+            $new_filename = "laporan_$id_laporan" . ($extension ? ".$extension" : "");
+            $target_file = $target_dir . $new_filename;
+
+            if (move_uploaded_file($file['tmp_name'], $target_file)) {
+                // Update nama file foto di database
+                $stmt = $conn->prepare("UPDATE tbl_peng SET foto = ? WHERE id = ?");
+                $stmt->bind_param("si", $new_filename, $id_laporan);
+                $stmt->execute();
+                $stmt->close(); // Tutup statement
+            } else {
+                $_SESSION['error'] = "Gagal mengupload foto!";
+            }
+        }
+
+        $conn->commit(); // Commit transaksi
+        $_SESSION['success'] = "Laporan berhasil dikirim!"; // Set session success
+    } catch (Exception $e) {
+        $conn->rollback(); // Rollback transaksi jika terjadi error
+        $_SESSION['error'] = "Error: " . $e->getMessage(); // Log error
+    } finally {
         header("Location: dashboard_user.php"); // Redirect ke halaman dashboard
         exit();
     }
