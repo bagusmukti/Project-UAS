@@ -132,7 +132,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                         <td><?= htmlspecialchars($row['isi_lap']) ?></td>
                         <td>
                             <?php if (!empty($row['foto'])): ?> <!-- Jika ada foto -->
-                                <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
+                                <img src="../../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
                                     alt="Laporan <?= $row['id'] ?>"
                                     loading="lazy">
                             <?php else: ?> <!-- Jika tidak ada foto -->
