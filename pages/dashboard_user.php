@@ -20,7 +20,7 @@ try {
     $user_id = $_SESSION['user_id'];
 
     // Query untuk mengambil data laporan
-    $query = "SELECT p.*, COALESCE(s.status, 'menunggu') AS status, pp.answ_peng
+    $query = "SELECT p.*, COALESCE(s.status, 'menunggu') AS status, pp.answ_peng, pp.answ_foto
               FROM tbl_peng p
               LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng
               LEFT JOIN tbl_status_peng s ON pp.id_status = s.id
@@ -103,6 +103,7 @@ catch (Exception $e) {
             <th>Foto</th>
             <th>Status</th>
             <th>Balasan</th>
+            <th>Foto Balasan</th>
         </tr>
         <!-- Tampilkan data laporan -->
         <!-- Jika tidak ada laporan -->
@@ -138,6 +139,15 @@ catch (Exception $e) {
                         <?php else: ?>
                             <!-- Jika tidak ada balasan, tampilkan pesan -->
                             <p>Belum ada balasan</p>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php if (!empty($row['answ_foto'])): ?>
+                            <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['answ_foto']) ?>"
+                                alt="Foto Balasan"
+                                loading="lazy">
+                        <?php else: ?>
+                            <p>Tidak ada foto balasan</p>
                         <?php endif; ?>
                     </td>
                 </tr>
