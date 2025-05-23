@@ -42,11 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($_FILES['fotoadmin']['name'])) {
             $target_dir = "../../assets/uploaded_pics/"; // Ganti dengan direktori tujuan upload
 
-            $filename = basename($_FILES['fotoadmin']['name']);
-            $target_file = $target_dir . $filename;
+            $extension = pathinfo($_FILES['fotoadmin']['name'], PATHINFO_EXTENSION);
+
+            $new_filename = "balasan_laporan_" . $id . "." . $extension; // Nama file baru
+            $target_file = $target_dir . $new_filename;
 
             // Validasi file (opsional)
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            $imageFileType = strtolower($extension);
             $allowed_types = array('jpg', 'jpeg', 'png', 'gif');
 
             if (!in_array($imageFileType, $allowed_types)) {
@@ -54,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if (move_uploaded_file($_FILES['fotoadmin']['tmp_name'], $target_file)) {
-                $fotoadmin = $filename;
+                $fotoadmin = $new_filename;
             } else {
                 throw new Exception("Gagal mengupload file!");
             }
