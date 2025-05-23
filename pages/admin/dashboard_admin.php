@@ -79,6 +79,17 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
 <body>
     <h2>Dashboard Admin</h2>
 
+    <!-- Notifikasi -->
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-error"><?= $_SESSION['error'] ?></div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
     <br>
     <form action="" method="get">
         <a href="../logout_page.php">Logout</a>
