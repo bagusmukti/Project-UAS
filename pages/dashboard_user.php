@@ -109,7 +109,7 @@ catch (Exception $e) {
         <!-- Jika tidak ada laporan -->
         <?php if (empty($complaints)): ?>
             <tr>
-                <td colspan="6" style="text-align: center;">Tidak ada laporan yang ditemukan</td>
+                <td colspan="7" style="text-align: center;">Tidak ada laporan yang ditemukan</td>
             </tr>
         <?php else: ?>
             <!-- Jika ada laporan -->
