@@ -66,14 +66,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form action="" method="post" enctype="multipart/form-data">
             <div>
                 <label class="label-user" for="">Username</label>
-                <input type="text" name="username" id="" class="input-form">
+                <input type="text" name="username" id="">
             </div>
             <div>
                 <label class="label-user" for="">Password</label>
-                <input type="text" name="password" id="" class="input-form">
+                <input type="password" name="password" id="">
             </div><br>
             <button type="submit" class="button-user">Login</button><br><br>
-            <div>
+            <div class="label-login">
                 <span>Belum punya akun?</span>
                 <a href="create_account.php">Klik disini</a>
             </div>
