@@ -119,3 +119,7 @@ th {
 .btn-buataduan:hover {
     background-color: green;
 }
+
+.text-dashboard {
+  text-align: center;
+}
