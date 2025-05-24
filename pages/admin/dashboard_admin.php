@@ -159,10 +159,23 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                                     -
                                 <?php endif; ?>
                             </td>
-                            <td><?= htmlspecialchars($row['status'] ?? 'menunggu') ?></td> <!-- Menampilkan status -->
+
+                            <!-- Menampilkan status -->
+                            <?php
+                            $currentStatus = strtolower($row["status"] ?? 'menunggu');
+                            $currentStatusClass = str_replace(' ', '-', $currentStatus);
+                            ?>
+
+                            <td class="cell-status">
+                                <span class="status-badge status-<?= $currentStatusClass ?>">
+                                    <?= htmlspecialchars($row["status"] ?? 'Menunggu') ?>
+                                </span>
+                            </td>
+
+                            </td>
                             <td class="action-links"> <!-- Tindakan untuk edit dan hapus -->
-                                <a href="edit.php?id=<?= $row['id'] ?>">Berikan Tanggapan</a>
-                                <a href="delete.php?id=<?= $row['id'] ?>"
+                                <a class="btn-tanggapi" href="edit.php?id=<?= $row['id'] ?>">Berikan Tanggapan</a>
+                                <a class="btn-logout" href="delete.php?id=<?= $row['id'] ?>"
                                     onclick="return confirm('Yakin menghapus laporan ini?')">Hapus</a>
                             </td>
                         </tr>
