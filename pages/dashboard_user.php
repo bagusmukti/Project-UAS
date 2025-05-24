@@ -58,9 +58,6 @@ catch (Exception $e) {
 </head>
 
 <body>
-
-
-
     <table>
         <tr>
             <td>
