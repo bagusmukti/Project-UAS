@@ -36,6 +36,15 @@ try {
     $result = mysqli_stmt_get_result($stmt);
     // Menyimpan hasil ke dalam array
     $complaints = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    $query_user = "SELECT username FROM tbl_user WHERE id = ?";
+    $stmt_user = mysqli_prepare($conn, $query_user);
+    mysqli_stmt_bind_param($stmt_user, "i", $user_id);
+    mysqli_stmt_execute($stmt_user);
+    $result_user = mysqli_stmt_get_result($stmt_user);
+    $user = mysqli_fetch_assoc($result_user);
+    $username = $user['username'] ?? 'User'; // Ambil username atau default ke 'User'
+    mysqli_stmt_close($stmt_user);
 }
 // Cek apakah ada error
 catch (Exception $e) {
@@ -62,7 +71,7 @@ catch (Exception $e) {
         <table cellpadding="10" cellspacing="0" class="tabellll">
             <tr>
                 <td class="header-db">
-                    <h1 class="text-dashboard">Dashboard User</h1>
+                    <h1 class="text-dashboard">Hai <?= htmlspecialchars($username) ?></h1>
                 </td>
                 <td class="header-sisa">
                     <a href="form_pengaduan.php" class="btn-buataduan">
