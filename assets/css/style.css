@@ -284,10 +284,54 @@ th {
 
 .text-dashboard {
   text-align: left;
+  font-size: 1.8rem;
+  margin: 0;
+  color: #000;
+}
+
+.main-container h3 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  margin-bottom: 25px;
 }
 
 .table-container {
   padding: 20px;
+  background: white;
+}
+
+.search-container {
+  padding: 15px;
+  margin-bottom: 25px 0;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+input[type="text"].search-input {
+  flex: 2;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.status-select {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.main-container {
+  padding: 20px;
+  background: white;
 }
 
 .tabellll,
@@ -305,15 +349,86 @@ th {
 }
 
 .header-db-admin {
-  width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #fff;
+  color: white;
+  border-radius: 8px 8px 0 0;
 }
 
 .header-sisa-admin {
   width: 10px;
 }
 
+.photo-thumbnail {
+  max-width: 100px;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  overflow: hidden;
+}
+
+.data-table th {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.data-table td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.data-table th {
+  background: #31c6d4;
+  font-weight: bold;
+  color: white;
+}
+
+.data-table tr:hover {
+  background: #f1f1f1;
+}
+
+.data-table td:last-child {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.action-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 80px; /* Sesuaikan dengan tinggi minimal yang diinginkan */
+  padding: 8px 0;
+  position: relative;
+  gap: 10px;
+  border: none;
+}
+
 .btn-filter {
-  padding: 5px 5px;
+  background: #3674b5;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-filter:hover {
+  background: #285a8f;
+  transform: translateY(-2px);
 }
 
 .btn-tanggapi {
@@ -324,10 +439,11 @@ th {
   text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .btn-tanggapi:hover {
-  background-color: green;
+  background-color: rgb(0, 82, 0);
 }
 
 .cell-status {
