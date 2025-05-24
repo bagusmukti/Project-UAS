@@ -80,10 +80,10 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
     <div class="table-container">
         <table cellpadding="10" cellspacing="0" class="tabellll">
             <tr>
-                <td class="header-db">
+                <td class="header-db-admin">
                     <h1 class="text-dashboard">Dashboard Admin</h1>
                 </td>
-                <td>
+                <td class="header-sisa-admin">
                     <a href="../logout_page.php" class="btn-logout">
                         Logout
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
