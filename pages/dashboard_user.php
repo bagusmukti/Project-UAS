@@ -58,10 +58,22 @@ catch (Exception $e) {
 </head>
 
 <body>
-    <h2>Dashboard User</h2>
-    <a href="logout_page.php" class="btn-logout">Logout <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
-            <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
-        </svg></a>
+    <table>
+        <tr>
+            <td>
+                <h2>Dashboard User</h2>
+            </td>
+            <td>
+                <a href="logout_page.php" class="btn-logout">Logout <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                        <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
+                    </svg>
+                </a>
+            </td>
+            <td>
+                <a href="form_pengaduan.php" class="btn-buataduan">Buat Aduan</a>
+            </td>
+        </tr>
+    </table>
 
     <!-- Notifikasi -->
     <?php if (isset($_SESSION['success'])): ?>
@@ -73,8 +85,6 @@ catch (Exception $e) {
         <div class="alert alert-error"><?= $_SESSION['error'] ?></div>
         <?php unset($_SESSION['error']); ?>
     <?php endif; ?>
-
-    <a href="form_pengaduan.php" class="btn-buataduan">Buat Aduan</a>
 
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
