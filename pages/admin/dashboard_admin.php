@@ -113,15 +113,26 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
         <!-- Tabel untuk mencari aduan-->
         <div class="table-container">
             <form method="get" style="margin: 20px 0;">
-                <input type="text" name="search_nama" placeholder="Cari nama..."
-                    value="<?= htmlspecialchars($search_nama) ?>">
-
-                <select name="search_status" class="btn-filter">
+                <table>
+                    <tr>
+                        <th>
+                            <input type="text" name="search_nama" placeholder="Cari nama..."
+                                value="<?= htmlspecialchars($search_nama) ?>">
+                        </th>
+                        <th>
+<select name="search_status" class="btn-filter">
                     <option value="">Semua Status</option>
                     <option value="menunggu" <?= $search_status === 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
                     <option value="proses" <?= $search_status === 'proses' ? 'selected' : '' ?>>Proses</option>
                     <option value="selesai" <?= $search_status === 'selesai' ? 'selected' : '' ?>>Selesai</option>
                 </select>
+                        </th>
+                    </tr>
+                </table>
+
+
+
+                
 
                 <button type="submit" class="btn-filter">Filter</button>
             </form>
