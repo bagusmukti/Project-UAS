@@ -111,7 +111,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
     <form action="" method="get">
 
         <!-- Tabel untuk mencari aduan-->
-        <div class="table-container">
+        <div class="table-search">
             <form method="get" style="margin: 20px 0;">
                 <table>
                     <tr>
@@ -120,21 +120,16 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                                 value="<?= htmlspecialchars($search_nama) ?>">
                         </th>
                         <th>
-<select name="search_status" class="btn-filter">
-                    <option value="">Semua Status</option>
-                    <option value="menunggu" <?= $search_status === 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
-                    <option value="proses" <?= $search_status === 'proses' ? 'selected' : '' ?>>Proses</option>
-                    <option value="selesai" <?= $search_status === 'selesai' ? 'selected' : '' ?>>Selesai</option>
-                </select>
+                            <select name="search_status" class="btn-filter">
+                                <option value="">Semua Status</option>
+                                <option value="menunggu" <?= $search_status === 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
+                                <option value="proses" <?= $search_status === 'proses' ? 'selected' : '' ?>>Proses</option>
+                                <option value="selesai" <?= $search_status === 'selesai' ? 'selected' : '' ?>>Selesai</option>
+                            </select>
+                            <button type="submit" class="btn-filter">Filter</button>
                         </th>
                     </tr>
                 </table>
-
-
-
-                
-
-                <button type="submit" class="btn-filter">Filter</button>
             </form>
         </div>
 
