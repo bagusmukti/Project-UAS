@@ -127,7 +127,7 @@ catch (Exception $e) {
                                 <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
                                     alt="Laporan Foto"
                                     loading="lazy"
-                                    style="width: 300px; height: auto; max-width: 100%;">
+                                    style="width: 1000px; height: auto; max-width: 100%;">
                             <?php else: ?>
                                 <!-- Jika tidak ada foto, tampilkan pesan -->
                                 <p>Tidak ada foto</p>
