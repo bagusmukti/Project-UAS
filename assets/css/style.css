@@ -191,8 +191,9 @@ textarea {
   padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
-  font: 16px;
   width: 100%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
 }
 
 /* Style untuk tabel */
@@ -257,10 +258,30 @@ th {
   background-color: rgb(1, 102, 1);
 }
 
+.button-user-back {
+  background-color: #007bff;
+  font-weight: bold;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.button-user:hover,
+.button-user-back:hover {
+  background-color: #004a99;
+}
+
 .btn-buataduan svg,
-.btn-logout svg {
+.btn-logout svg,
+.button-user-back svg {
   display: inline-block;
   vertical-align: middle;
+  gap: 8px;
 }
 
 .text-dashboard {
@@ -317,39 +338,39 @@ th {
 }
 
 .status-badge {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 0.85em;
-    white-space: nowrap;
-    display: inline-block;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    transition: all 0.3s ease;
-    cursor: default;
-    text-transform: capitalize;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.85em;
+  white-space: nowrap;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: default;
+  text-transform: capitalize;
 }
 
 .status-badge:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .status-menunggu {
-    background-color: #ffc107;
-    color: #333;
-    border: 1px solid #e0a800;
+  background-color: #ffc107;
+  color: #333;
+  border: 1px solid #e0a800;
 }
 
 .status-proses {
-    background-color: #17a2b8;
-    color: white;
-    border: 1px solid #138496;
+  background-color: #17a2b8;
+  color: white;
+  border: 1px solid #138496;
 }
 
 .status-selesai {
-    background-color: #28a745;
-    color: white;
-    border: 1px solid #218838;
+  background-color: #28a745;
+  color: white;
+  border: 1px solid #218838;
 }
 
 .login {
