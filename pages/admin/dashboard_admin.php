@@ -77,7 +77,24 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
 </head>
 
 <body>
-    <h2>Dashboard Admin</h2>
+    <div class="table-container">
+        <table cellpadding="10" cellspacing="0" class="tabellll">
+            <tr>
+                <td class="header-db">
+                    <h1 class="text-dashboard">Dashboard Admin</h1>
+                </td>
+                <td>
+                    <a href="../logout_page.php" class="btn-logout">
+                        Logout
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                            <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
+                        </svg>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
 
     <!-- Notifikasi -->
     <?php if (isset($_SESSION['success'])): ?>
@@ -92,7 +109,6 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
 
     <br>
     <form action="" method="get">
-        <a href="../logout_page.php">Logout</a>
 
         <!-- Tabel untuk mencari aduan-->
         <form method="get" style="margin: 20px 0;">
