@@ -71,7 +71,7 @@ catch (Exception $e) {
         <table cellpadding="10" cellspacing="0" class="tabellll">
             <tr>
                 <td class="header-db">
-                    <h1 class="text-dashboard">Hai <?= htmlspecialchars($username) ?></h1>
+                    <h1 class="text-dashboard">Selamat Datang, <?= htmlspecialchars($username) ?></h1>
                 </td>
                 <td class="header-sisa">
                     <a href="form_pengaduan.php" class="btn-buataduan">
@@ -142,7 +142,18 @@ catch (Exception $e) {
                                 <p>Tidak ada foto</p>
                             <?php endif; ?>
                         </td>
-                        <td><?= htmlspecialchars($row["status"]) ?></td>
+
+                        <!-- Menampilkan status -->
+                        <?php
+                        $currentStatus = strtolower($row["status"] ?? 'menunggu');
+                        $currentStatusClass = str_replace(' ', '-', $currentStatus);
+                        ?>
+
+                        <td class="cell-status">
+                            <span class="status-badge status-<?= $currentStatusClass ?>">
+                                <?= htmlspecialchars($row["status"]) ?? 'Menunggu' ?>
+                            </span>
+                        </td>
                         <td>
                             <!-- Cek apakah ada balasan -->
                             <!-- Jika ada balasan, tampilkan isi balasan -->
@@ -158,8 +169,7 @@ catch (Exception $e) {
                                 <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['answ_foto']) ?>"
                                     alt="Foto Balasan"
                                     loading="lazy"
-                                    style="width: 100px; height: auto; max-width: 100%;"
-                                >
+                                    style="width: 100px; height: auto; max-width: 100%;">
                             <?php else: ?>
                                 <p>Tidak ada foto balasan</p>
                             <?php endif; ?>
