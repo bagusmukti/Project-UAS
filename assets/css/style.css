@@ -222,3 +222,15 @@ th {
 .tabellll th {
   border: none;
 }
+
+.header-db {
+  width: 300px;
+}
+
+.header-buat {
+  width: 100px;
+}
+
+.header-logout {
+  width: 100px;
+}
