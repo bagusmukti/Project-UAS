@@ -281,3 +281,7 @@ th {
 .header-sisa-admin {
   width: 10px;
 }
+
+.btn-filter {
+  padding: 5px 5px;
+}

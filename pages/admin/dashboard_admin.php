@@ -116,58 +116,60 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                 <input type="text" name="search_nama" placeholder="Cari nama..."
                     value="<?= htmlspecialchars($search_nama) ?>">
 
-                <select name="search_status">
+                <select name="search_status" class="btn-filter">
                     <option value="">Semua Status</option>
                     <option value="menunggu" <?= $search_status === 'Menunggu' ? 'selected' : '' ?>>Menunggu</option>
                     <option value="proses" <?= $search_status === 'Proses' ? 'selected' : '' ?>>Proses</option>
                     <option value="selesai" <?= $search_status === 'Selesai' ? 'selected' : '' ?>>Selesai</option>
                 </select>
 
-                <button type="submit">Filter</button>
+                <button type="submit" class="btn-filter">Filter</button>
             </form>
         </div>
 
 
         <!-- Tabel untuk menampilkan data pengaduan -->
-        <h3>Data Pengaduan</h3>
-        <table border="1" cellpadding="10" cellspacing="0">
-            <tr>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Isi Laporan</th>
-                <th>Foto</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-            <?php if (empty($complaints)): ?> <!-- Jika tidak ada data -->
+        <div class="table-container">
+            <h3 style="text-align: center;">Data Pengaduan</h3>
+            <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
-                    <td colspan="6">Tidak ada data ditemukan</td>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Isi Laporan</th>
+                    <th>Foto</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
                 </tr>
-            <?php else: ?> <!-- Jika ada data -->
-                <?php foreach ($complaints as $row): ?> <!-- Looping data -->
+                <?php if (empty($complaints)): ?> <!-- Jika tidak ada data -->
                     <tr>
-                        <td><?= htmlspecialchars($row['nama']) ?></td>
-                        <td><?= htmlspecialchars($row['email']) ?></td>
-                        <td><?= htmlspecialchars($row['isi_lap']) ?></td>
-                        <td>
-                            <?php if (!empty($row['foto'])): ?> <!-- Jika ada foto -->
-                                <img src="../../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
-                                    alt="Laporan <?= $row['id'] ?>"
-                                    loading="lazy">
-                            <?php else: ?> <!-- Jika tidak ada foto -->
-                                -
-                            <?php endif; ?>
-                        </td>
-                        <td><?= htmlspecialchars($row['status'] ?? 'menunggu') ?></td> <!-- Menampilkan status -->
-                        <td class="action-links"> <!-- Tindakan untuk edit dan hapus -->
-                            <a href="edit.php?id=<?= $row['id'] ?>">Berikan Tanggapan</a>
-                            <a href="delete.php?id=<?= $row['id'] ?>"
-                                onclick="return confirm('Yakin menghapus laporan ini?')">Hapus</a>
-                        </td>
+                        <td colspan="6">Tidak ada data ditemukan</td>
                     </tr>
-                <?php endforeach; ?>
-            <?php endif; ?>
-        </table>
+                <?php else: ?> <!-- Jika ada data -->
+                    <?php foreach ($complaints as $row): ?> <!-- Looping data -->
+                        <tr>
+                            <td><?= htmlspecialchars($row['nama']) ?></td>
+                            <td><?= htmlspecialchars($row['email']) ?></td>
+                            <td><?= htmlspecialchars($row['isi_lap']) ?></td>
+                            <td>
+                                <?php if (!empty($row['foto'])): ?> <!-- Jika ada foto -->
+                                    <img src="../../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
+                                        alt="Laporan <?= $row['id'] ?>"
+                                        loading="lazy">
+                                <?php else: ?> <!-- Jika tidak ada foto -->
+                                    -
+                                <?php endif; ?>
+                            </td>
+                            <td><?= htmlspecialchars($row['status'] ?? 'menunggu') ?></td> <!-- Menampilkan status -->
+                            <td class="action-links"> <!-- Tindakan untuk edit dan hapus -->
+                                <a href="edit.php?id=<?= $row['id'] ?>">Berikan Tanggapan</a>
+                                <a href="delete.php?id=<?= $row['id'] ?>"
+                                    onclick="return confirm('Yakin menghapus laporan ini?')">Hapus</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </table>
+        </div>
 </body>
 
 </html>
