@@ -217,7 +217,8 @@ th {
   padding: 20px;
 }
 
-.tabellll {
-  border: 1px solid white !important;
-  border-collapse: collapse;
+.tabellll,
+.tabellll td,
+.tabellll th {
+  border: none;
 }
