@@ -6,7 +6,7 @@
 
 /* Styling dasar untuk body */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Arial", sans-serif;
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
@@ -16,9 +16,18 @@ body {
 /* Styling untuk Index */
 /* Styling untuk header */
 .header-index {
-  background-color: #3674B5;
-  padding: 1rem 2rem;
+  background-color: #19467a;
+  padding: 10px 2rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  justify-content: flex-end;
+}
+
+.h1-index {
+  color: #fff;
+  font-weight: bolder;
+  font-size: 2.5rem;
+  margin-bottom: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
 }
 
 .main-index {
@@ -27,18 +36,20 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background-color: #f8f9fa;
+  background-color: #f2ca00;
 }
 
 .hero-content {
   text-align: center;
-  max-width: 800px;
+  max-width: 1000px;
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  color: #7f8c8d;
-  margin-bottom: 2.5rem;
+  font-size: 1.5rem;
+  margin-top: 0;
+  color: #fff;
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
 }
 
 .cta-section {
@@ -55,40 +66,70 @@ body {
 }
 
 .cta-button {
-  background-color: #578FCA;
+  background-color: #19467a;
   color: white;
   padding: 10px 50px;
   border-radius: 5px;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 .cta-button:hover {
-  background-color: #A1E3F9;
+  background-color: #fff;
   transform: translateY(-2px);
 }
 
+.cta-button:hover svg {
+  fill: #19467a;
+}
+
 .footer-index {
-  background-color: #3674B5;
+  background-color: #19467a;
   color: white;
   text-align: center;
-  padding: 1rem;
+  padding: 8px;
   margin-top: auto;
 }
 
 .btn-login-index {
-  background-color: #3498db;
+  background-color: #19467a;
   color: white;
   padding: 8px 30px;
-  border-radius: 5px;
+  border-radius: 10px;
   text-decoration: none;
   float: right;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   transition: background-color 0.3s ease;
 }
 
 .btn-login-index:hover {
-  background-color: #2980b9;
+  background-color: #fff;
+}
+
+.btn-login-index:hover svg {
+  fill: #19467a;
+}
+
+.btn-login-index:hover .login-text-index {
+  color: #19467a;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-text-index {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+.btn-login-index svg .cta-button svg {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* batas css index */
