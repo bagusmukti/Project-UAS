@@ -118,9 +118,9 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
 
                 <select name="search_status">
                     <option value="">Semua Status</option>
-                    <option value="menunggu" <?= $search_status === 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
-                    <option value="proses" <?= $search_status === 'proses' ? 'selected' : '' ?>>Proses</option>
-                    <option value="selesai" <?= $search_status === 'selesai' ? 'selected' : '' ?>>Selesai</option>
+                    <option value="menunggu" <?= $search_status === 'Menunggu' ? 'selected' : '' ?>>Menunggu</option>
+                    <option value="proses" <?= $search_status === 'Proses' ? 'selected' : '' ?>>Proses</option>
+                    <option value="selesai" <?= $search_status === 'Selesai' ? 'selected' : '' ?>>Selesai</option>
                 </select>
 
                 <button type="submit">Filter</button>
