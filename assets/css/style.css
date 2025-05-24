@@ -90,3 +90,18 @@ th {
   border-radius: 4px;
   cursor: pointer;
 }
+
+/* button logout */
+.btn-logout {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn-logout:hover {
+    background-color: #2980b9;
+}
