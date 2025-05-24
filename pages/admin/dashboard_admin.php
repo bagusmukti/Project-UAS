@@ -14,11 +14,11 @@ if (!isset($_SESSION['user_id']) || $_SESSION['level'] !== 'admin') {
 
 // fitur search
 $search_nama = $_GET['search_nama'] ?? '';
-$search_status = $_GET['search_status'] ?? '';
+$search_status = isset($_GET['search_status']) ? strtolower($_GET['search_status']) : '';
 
 // Query untuk menampilkan data pengaduan
 // Menggunakan LEFT JOIN untuk mendapatkan status pengaduan
-$query = "SELECT p.*, s.status 
+$query = "SELECT p.*, COALESCE(LOWER(s.status), 'menunggu') AS status 
           FROM tbl_peng p 
           LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng 
           LEFT JOIN tbl_status_peng s ON pp.id_status = s.id
@@ -37,7 +37,7 @@ if (!empty($search_nama)) {
 
 // Filter berdasarkan status
 if (!empty($search_status)) {
-    $query .= " AND s.status = ?"; // Menggunakan status yang dipilih
+    $query .= " AND (COALESCE(LOWER(s.status), 'menunggu') = ?)"; // Menggunakan status yang dipilih
     $params[] = $search_status; // Menambahkan status ke parameter
     $types .= 's'; // Tipe data string
 }
@@ -118,9 +118,9 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
 
                 <select name="search_status" class="btn-filter">
                     <option value="">Semua Status</option>
-                    <option value="menunggu" <?= $search_status === 'Menunggu' ? 'selected' : '' ?>>Menunggu</option>
-                    <option value="proses" <?= $search_status === 'Proses' ? 'selected' : '' ?>>Proses</option>
-                    <option value="selesai" <?= $search_status === 'Selesai' ? 'selected' : '' ?>>Selesai</option>
+                    <option value="menunggu" <?= $search_status === 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
+                    <option value="proses" <?= $search_status === 'proses' ? 'selected' : '' ?>>Proses</option>
+                    <option value="selesai" <?= $search_status === 'selesai' ? 'selected' : '' ?>>Selesai</option>
                 </select>
 
                 <button type="submit" class="btn-filter">Filter</button>
@@ -167,8 +167,8 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                             ?>
 
                             <td class="cell-status">
-                                <span class="status-badge status-<?= $currentStatusClass ?>">
-                                    <?= htmlspecialchars($row["status"] ?? 'Menunggu') ?>
+                                <span class="status-badge status-<?= $row['status'] ?>">
+                                    <?= ucfirst(htmlspecialchars($row["status"] ?? 'Menunggu')) ?>
                                 </span>
                             </td>
 
