@@ -35,7 +35,7 @@
     </main>
 
     <footer class="footer-index">
-        <p>&copy; 2025 Layanan Pengaduan Masyarakat. ALl rights reserved</p>
+        <p>&copy; 2025 Layanan Pengaduan Masyarakat. All rights reserved.</p>
     </footer>
 </body>
 
