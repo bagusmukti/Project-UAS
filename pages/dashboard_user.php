@@ -54,28 +54,7 @@ catch (Exception $e) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard User</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
-        .alert {
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-        }
 
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .alert-error {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-
-        img {
-            max-width: 100px;
-            height: auto;
-        }
-    </style>
 </head>
 
 <body>
