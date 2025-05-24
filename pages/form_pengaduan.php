@@ -11,7 +11,7 @@
 <body>
     <form action="proses_pengaduan.php" method="POST" enctype="multipart/form-data" class="form-user">
         <h2 class="h2-user">FORMULIR PENGADUAN</h2>
-        <hr><br>
+        <br>
         <div>
             <label form="" class="label-user">Name</label>
             <input type="text" name="name"><br>
@@ -25,7 +25,7 @@
             <textarea name="isilaporan"></textarea><br>
         </div>
         <div>
-            <label for="foto" class="label-user">Pilih file foto : </label><br>
+            <label for="foto" class="label-user">Pilih file foto : </label>
             <input type="file" name="foto" accept="images/"><br><br>
         </div>
         <button type="submit" class="button-user">Send</button>
