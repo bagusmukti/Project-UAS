@@ -162,6 +162,7 @@ body {
 
 /* Styling untuk berbagai jenis input */
 input[type="text"],
+input[type="password"],
 input[type="email"] {
   width: 100%;
   padding: 10px;
@@ -358,7 +359,10 @@ th {
   margin: auto;
 }
 
-.input-form {
-  width: 100%;
-  padding: 12px 15px;
+.label-login {
+  text-align: center;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
 }
