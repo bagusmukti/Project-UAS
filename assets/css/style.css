@@ -185,6 +185,7 @@ textarea {
 /* Styling untuk tombol submit */
 .button-user {
   background-color: #007bff;
+  font-weight: bold;
   color: white;
   border: none;
   padding: 10px 15px;

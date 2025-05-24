@@ -59,6 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buat Akun</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+
     <style>
         .error {
             color: red;
@@ -71,34 +73,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <h2>Buat Akun</h2>
+    <div class="login">
+        <h2 class="h2-user">Buat Akun</h2>
 
-    <?php if (!empty($error)): ?>
-        <div class="error"><?= $error ?></div>
-    <?php endif; ?>
+        <?php if (!empty($error)): ?>
+            <div class="error"><?= $error ?></div>
+        <?php endif; ?>
 
-    <?php if (!empty($success)): ?>
-        <div class="success"><?= $success ?></div>
-    <?php endif; ?>
+        <?php if (!empty($success)): ?>
+            <div class="success"><?= $success ?></div>
+        <?php endif; ?>
 
-    <form action="" method="post">
-        <div>
-            <label for="">Username</label>
-            <input type="text" name="username" id="">
+        <form action="" method="post">
+            <div>
+                <label class="label-user" for="">Username</label>
+                <input type="text" name="username" id="">
+            </div>
+            <div>
+                <label class="label-user" for="">Password</label>
+                <input type="password" name="password" id="">
+            </div>
+            <div>
+                <label class="label-user" for="">Email</label>
+                <input type="email" name="email" id="">
+            </div><br>
+            <button type="submit" class="button-user">Buat Akun</button><br><br>
+        </form>
+        <div class="label-login">
+            <span>Sudah punya akun?</span>
+            <a href="login_page.php">Klik disini</a>
         </div>
-        <div>
-            <label for="">Password</label>
-            <input type="password" name="password" id="">
-        </div>
-        <div>
-            <label for="">Email</label>
-            <input type="email" name="email" id="">
-        </div>
-        <button type="submit">Buat Akun</button>
-    </form>
-    <div>
-        <span>Sudah punya akun?</span>
-        <a href="login_page.php">Klik disini</a>
     </div>
 </body>
 

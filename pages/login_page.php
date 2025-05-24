@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
     <div class="login">
-        <h2 class="h2-user">Login</h2>
+        <h2 class="h2-user">Log In</h2>
         <br>
 
         <?php if (!empty($error)): ?>
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label class="label-user" for="">Password</label>
                 <input type="password" name="password" id="">
             </div><br>
-            <button type="submit" class="button-user">Login</button><br><br>
+            <button type="submit" class="button-user">Log In</button><br><br>
             <div class="label-login">
                 <span>Belum punya akun?</span>
                 <a href="create_account.php">Klik disini</a>
