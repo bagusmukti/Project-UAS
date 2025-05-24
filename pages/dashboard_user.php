@@ -80,6 +80,7 @@ catch (Exception $e) {
 
 <body>
     <h2>Dashboard User</h2>
+    <h2 class="h2-user">Dashboard User</h2>
     <a href="logout_page.php">Logout</a>
 
     <!-- Notifikasi -->
