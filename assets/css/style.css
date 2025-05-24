@@ -136,6 +136,8 @@ body {
 
 /* Styling untuk judul */
 .h2-user {
+  padding-top: 20px;
+  padding-bottom: 20px;
   text-align: center;
   color: #333;
 }
@@ -252,4 +254,22 @@ th {
 
 .text-dashboard {
   text-align: left;
+}
+
+.table-container {
+  padding: 20px;
+}
+
+.tabellll,
+.tabellll td,
+.tabellll th {
+  border: none;
+}
+
+.header-db {
+  width: 400px;
+}
+
+.header-sisa {
+  width: 50px;
 }
