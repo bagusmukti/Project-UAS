@@ -68,113 +68,113 @@ catch (Exception $e) {
 
 <body>
     <div class="main-container">
-        <div class="table-container"
+        <div class="table-container">
             <h1 class="text-dashboard">Selamat Datang, <?= htmlspecialchars($username) ?></h1>
-            <a href="form_pengaduan.php" class="btn-buataduan">
-                Buat Aduan
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
-                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z" />
-                </svg>
-            </a>
-            </td>
-            <td class="header-sisa">
+
+            <div class="btn-group">
+                <a href="form_pengaduan.php" class="btn-buataduan">
+                    Buat Aduan
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+                        <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z" />
+                    </svg>
+                </a>
                 <a href="logout_page.php" class="btn-logout">
                     Logout
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
                         <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
                     </svg>
                 </a>
-            </td>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Notifikasi -->
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-error"><?= $_SESSION['error'] ?></div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
+    <div class="table-container">
+        <table border="1" cellpadding="10" cellspacing="0" class="complaint-table">
+            <tr>
+                <th>Nama Pelapor</th>
+                <th>Email</th>
+                <th>Isi Laporan</th>
+                <th>Foto</th>
+                <th>Status</th>
+                <th>Balasan</th>
+                <th>Foto Balasan</th>
             </tr>
-            </>
-        </div>
-
-
-        <!-- Notifikasi -->
-        <?php if (isset($_SESSION['success'])): ?>
-            <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
-            <?php unset($_SESSION['success']); ?>
-        <?php endif; ?>
-
-        <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-error"><?= $_SESSION['error'] ?></div>
-            <?php unset($_SESSION['error']); ?>
-        <?php endif; ?>
-
-        <div class="table-container">
-            <table border="1" cellpadding="10" cellspacing="0">
+            <!-- Tampilkan data laporan -->
+            <!-- Jika tidak ada laporan -->
+            <?php if (empty($complaints)): ?>
                 <tr>
-                    <th>Nama Pelapor</th>
-                    <th>Email</th>
-                    <th>Isi Laporan</th>
-                    <th>Foto</th>
-                    <th>Status</th>
-                    <th>Balasan</th>
-                    <th>Foto Balasan</th>
+                    <td colspan="7" style="text-align: center;">Tidak ada laporan yang ditemukan</td>
                 </tr>
-                <!-- Tampilkan data laporan -->
-                <!-- Jika tidak ada laporan -->
-                <?php if (empty($complaints)): ?>
+            <?php else: ?>
+                <!-- Jika ada laporan -->
+                <?php foreach ($complaints as $row): ?>
                     <tr>
-                        <td colspan="7" style="text-align: center;">Tidak ada laporan yang ditemukan</td>
+                        <td><?= htmlspecialchars($row["nama"]) ?></td>
+                        <td><?= htmlspecialchars($row["email"]) ?></td>
+                        <td><?= htmlspecialchars($row["isi_lap"]) ?></td>
+                        <td>
+                            <!-- Cek apakah ada foto -->
+                            <!-- Jika ada foto, tampilkan gambar -->
+                            <?php if (!empty($row['foto'])): ?>
+                                <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
+                                    alt="Laporan Foto"
+                                    loading="lazy"
+                                    style="width: 100px; height: auto; max-width: 100%;"
+                                    class="photo-thumbnail">
+                            <?php else: ?>
+                                <!-- Jika tidak ada foto, tampilkan pesan -->
+                                <p>Tidak ada foto</p>
+                            <?php endif; ?>
+                        </td>
+
+                        <!-- Menampilkan status -->
+                        <?php
+                        $currentStatus = strtolower($row["status"] ?? 'menunggu');
+                        $currentStatusClass = str_replace(' ', '-', $currentStatus);
+                        ?>
+
+                        <td class="cell-status">
+                            <span class="status-badge status-<?= $currentStatusClass ?>">
+                                <?= htmlspecialchars($row["status"]) ?? 'Menunggu' ?>
+                            </span>
+                        </td>
+                        <td>
+                            <!-- Cek apakah ada balasan -->
+                            <!-- Jika ada balasan, tampilkan isi balasan -->
+                            <?php if (!empty($row['answ_peng'])): ?>
+                                <?= nl2br(htmlspecialchars($row['answ_peng'])) ?>
+                            <?php else: ?>
+                                <!-- Jika tidak ada balasan, tampilkan pesan -->
+                                <p>Belum ada balasan</p>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if (!empty($row['answ_foto'])): ?>
+                                <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['answ_foto']) ?>"
+                                    alt="Foto Balasan"
+                                    loading="lazy"
+                                    style="width: 100px; height: auto; max-width: 100%;">
+                            <?php else: ?>
+                                <p>Tidak ada foto balasan</p>
+                            <?php endif; ?>
+                        </td>
                     </tr>
-                <?php else: ?>
-                    <!-- Jika ada laporan -->
-                    <?php foreach ($complaints as $row): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($row["nama"]) ?></td>
-                            <td><?= htmlspecialchars($row["email"]) ?></td>
-                            <td><?= htmlspecialchars($row["isi_lap"]) ?></td>
-                            <td>
-                                <!-- Cek apakah ada foto -->
-                                <!-- Jika ada foto, tampilkan gambar -->
-                                <?php if (!empty($row['foto'])): ?>
-                                    <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
-                                        alt="Laporan Foto"
-                                        loading="lazy"
-                                        style="width: 100px; height: auto; max-width: 100%;">
-                                <?php else: ?>
-                                    <!-- Jika tidak ada foto, tampilkan pesan -->
-                                    <p>Tidak ada foto</p>
-                                <?php endif; ?>
-                            </td>
-
-                            <!-- Menampilkan status -->
-                            <?php
-                            $currentStatus = strtolower($row["status"] ?? 'menunggu');
-                            $currentStatusClass = str_replace(' ', '-', $currentStatus);
-                            ?>
-
-                            <td class="cell-status">
-                                <span class="status-badge status-<?= $currentStatusClass ?>">
-                                    <?= htmlspecialchars($row["status"]) ?? 'Menunggu' ?>
-                                </span>
-                            </td>
-                            <td>
-                                <!-- Cek apakah ada balasan -->
-                                <!-- Jika ada balasan, tampilkan isi balasan -->
-                                <?php if (!empty($row['answ_peng'])): ?>
-                                    <?= nl2br(htmlspecialchars($row['answ_peng'])) ?>
-                                <?php else: ?>
-                                    <!-- Jika tidak ada balasan, tampilkan pesan -->
-                                    <p>Belum ada balasan</p>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if (!empty($row['answ_foto'])): ?>
-                                    <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['answ_foto']) ?>"
-                                        alt="Foto Balasan"
-                                        loading="lazy"
-                                        style="width: 100px; height: auto; max-width: 100%;">
-                                <?php else: ?>
-                                    <p>Tidak ada foto balasan</p>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
-                <?php endif; ?>
-            </table>
-        </div>
+                <?php endforeach ?>
+            <?php endif; ?>
+        </table>
+    </div>
     </div>
 </body>
 

@@ -101,22 +101,6 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Pengaduan</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        textarea {
-            width: 100%;
-            height: 150px;
-        }
-    </style>
 </head>
 
 <body>
@@ -128,6 +112,26 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
             <div class="alert error"><?= htmlspecialchars($_SESSION['error']) ?></div>
             <?php unset($_SESSION['error']); ?>
         <?php endif; ?>
+
+        <div class="form-group">
+            <label class="label-user">Isi Laporan:</label>
+            <div class="original-complaint">
+                <?= nl2br(htmlspecialchars($data['isi_lap'] ?? '')) ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="label-user">Foto Laporan:</label>
+            <div class="original-photo">
+                <?php if (!empty($data['foto'])): ?>
+                    <img src="../../assets/uploaded_pics/<?= htmlspecialchars($data['foto']) ?>"
+                        alt="Foto Aduan"
+                        class="complaint-photo">
+                <?php else: ?>
+                    <p>Tidak ada foto yang diunggah</p>
+                <?php endif; ?>
+            </div>
+        </div>
 
         <!-- Tampilan pesan sukses -->
         <form method="POST" enctype="multipart/form-data">
@@ -151,9 +155,14 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
             <div class="form-group">
                 <label class="label-user" for="fotoadmin">Unggah Bukti foto:</label>
                 <input type="file" name="fotoadmin" accept="image/*"><br><br>
+            </div>
+
+            <div class="form-group">
                 <?php if (!empty($data['answ_foto'])): ?>
-                    <p>Foto saat ini: <?= htmlspecialchars($data['answ_foto']) ?></p>
-                    <img src="../../assets/uploaded_pics/<?= htmlspecialchars($data['answ_foto']) ?>" width="200">
+                    <label class="label-user">Foto saat ini: <?= htmlspecialchars($data['answ_foto']) ?></label>
+                    <div class="original-photo">
+                        <img src="../../assets/uploaded_pics/<?= htmlspecialchars($data['answ_foto']) ?>" width="200">
+                    </div>
                 <?php endif; ?>
             </div>
 
