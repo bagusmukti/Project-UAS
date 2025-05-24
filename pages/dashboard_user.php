@@ -72,7 +72,7 @@ catch (Exception $e) {
         <?php unset($_SESSION['error']); ?>
     <?php endif; ?>
 
-    <a href="form_pengaduan.php">Buat Aduan</a>
+    <a href="form_pengaduan.php" class="btn-buataduan">Buat Aduan</a>
 
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
