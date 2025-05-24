@@ -95,7 +95,7 @@ th {
 .btn-logout {
     display: inline-block;
     padding: 10px 15px;
-    background-color: #3498db;
+    background-color: red;
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -103,5 +103,23 @@ th {
 }
 
 .btn-logout:hover {
-    background-color: #2980b9;
+    background-color: red;
+}
+
+.btn-buataduan {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: green;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn-buataduan:hover {
+    background-color: green;
+}
+
+.text-dashboard {
+  text-align: center;
 }
