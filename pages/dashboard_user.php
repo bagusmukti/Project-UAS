@@ -157,7 +157,9 @@ catch (Exception $e) {
                             <?php if (!empty($row['answ_foto'])): ?>
                                 <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['answ_foto']) ?>"
                                     alt="Foto Balasan"
-                                    loading="lazy">
+                                    loading="lazy"
+                                    style="width: 100px; height: auto; max-width: 100%;"
+                                >
                             <?php else: ?>
                                 <p>Tidak ada foto balasan</p>
                             <?php endif; ?>
