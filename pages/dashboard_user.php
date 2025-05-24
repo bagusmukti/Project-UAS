@@ -4,7 +4,7 @@
 session_start();
 
 // Cek apakah pengguna sudah login
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || $_SESSION['level'] !== 'masyarakat') {
     header("Location: login_page.php");
     exit();
 }
