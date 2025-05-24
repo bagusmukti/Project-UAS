@@ -59,7 +59,7 @@ catch (Exception $e) {
 
 <body>
     <div class="table-container">
-        <table cellpadding="10" cellspacing="0" class="bismillah">
+        <table cellpadding="10" cellspacing="0" class="tabellll">
             <tr>
                 <td>
                     <h2 class="text-dashboard">Dashboard User</h2>
