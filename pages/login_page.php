@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 // Jika level masyarakat
                 $_SESSION['user_id'] = $user['id']; // Simpan ID user ke session
+                $_SESSION['level'] = 'masyarakat'; // Simpan level user ke session
                 header("Location: dashboard_user.php"); // Redirect ke halaman dashboard user
                 exit();
             }
