@@ -127,7 +127,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.btn-login-index svg .cta-button svg {
+.btn-login-index svg,
+.cta-button svg {
   display: inline-block;
   vertical-align: middle;
 }
@@ -232,10 +233,11 @@ th {
   text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .btn-logout:hover {
-  background-color: red;
+  background-color: rgb(176, 0, 0);
 }
 
 .btn-buataduan {
@@ -246,10 +248,17 @@ th {
   text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .btn-buataduan:hover {
-  background-color: green;
+  background-color: rgb(1, 102, 1);
+}
+
+.btn-buataduan svg,
+.btn-logout svg {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .text-dashboard {
