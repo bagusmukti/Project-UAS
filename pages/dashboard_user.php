@@ -58,7 +58,7 @@ catch (Exception $e) {
 </head>
 
 <body>
-    <h2 class="text-dashboard">Dashboard User</h2>
+    <h1 class="text-dashboard">Dashboard User</h1>
     <a href="logout_page.php" class="btn-logout">Logout</a>
 
     <!-- Notifikasi -->
