@@ -442,3 +442,15 @@ th {
   box-sizing: border-box;
   text-decoration: none;
 }
+
+.table-search,
+.table-search td,
+.table-search th {
+  background-color: white;
+  border: none;
+}
+
+.kolom-search {
+  flex: 1 1 calc(75% - 10px);
+  box-sizing: border-box;
+}
