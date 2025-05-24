@@ -64,7 +64,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+    <!-- <style>
         img {
             max-width: 100px;
             height: auto;
@@ -73,71 +73,55 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
         .action-links a {
             margin-right: 10px;
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
-    <div class="table-container">
-        <table cellpadding="10" cellspacing="0" class="tabellll">
-            <tr>
-                <td class="header-db-admin">
-                    <h1 class="text-dashboard">Dashboard Admin</h1>
-                </td>
-                <td class="header-sisa-admin">
-                    <a href="../logout_page.php" class="btn-logout">
-                        Logout
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
-                            <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
-                        </svg>
-                    </a>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <div class="main-container">
+        <div class="header-db-admin">
+            <h1 class="text-dashboard">Dashboard Admin</h1>
+            <a href="../logout_page.php" class="btn-logout">
+                Logout
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
+                </svg>
+            </a>
+        </div>
 
+        <!-- Notifikasi -->
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
 
-    <!-- Notifikasi -->
-    <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
-        <?php unset($_SESSION['success']); ?>
-    <?php endif; ?>
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-error"><?= $_SESSION['error'] ?></div>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
 
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-error"><?= $_SESSION['error'] ?></div>
-        <?php unset($_SESSION['error']); ?>
-    <?php endif; ?>
-
-    <br>
-    <form action="" method="get">
+        <br>
+        <!-- Tabel untuk menampilkan data pengaduan -->
+        <!-- <div class="table-container"> -->
+        <h3 style="text-align: center; margin-top: 30px;">Data Pengaduan</h3>
 
         <!-- Tabel untuk mencari aduan-->
-        <div class="table-search">
-            <form method="get" style="margin: 20px 0;">
-                <table>
-                    <tr>
-                        <th>
-                            <input type="text" name="search_nama" placeholder="Cari nama..."
-                                value="<?= htmlspecialchars($search_nama) ?>">
-                        </th>
-                        <th>
-                            <select name="search_status" class="btn-filter">
-                                <option value="">Semua Status</option>
-                                <option value="menunggu" <?= $search_status === 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
-                                <option value="proses" <?= $search_status === 'proses' ? 'selected' : '' ?>>Proses</option>
-                                <option value="selesai" <?= $search_status === 'selesai' ? 'selected' : '' ?>>Selesai</option>
-                            </select>
-                            <button type="submit" class="btn-filter">Filter</button>
-                        </th>
-                    </tr>
-                </table>
+        <div class="search-container">
+            <form method="get" class="search-form">
+                <input type="text" name="search_nama" placeholder="Cari nama..."
+                    value="<?= htmlspecialchars($search_nama) ?>" class="search-input">
+
+                <select name="search_status" class="status-select">
+                    <option value="">Semua Status</option>
+                    <option value="menunggu" <?= $search_status === 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
+                    <option value="proses" <?= $search_status === 'proses' ? 'selected' : '' ?>>Proses</option>
+                    <option value="selesai" <?= $search_status === 'selesai' ? 'selected' : '' ?>>Selesai</option>
+                </select>
+                <button type="submit" class="btn-filter">Cari</button>
             </form>
         </div>
 
-
-        <!-- Tabel untuk menampilkan data pengaduan -->
-        <div class="table-container">
-            <h3 style="text-align: center;">Data Pengaduan</h3>
-            <table border="1" cellpadding="10" cellspacing="0">
+        <table border="1" cellpadding="10" cellspacing="0" class="data-table">
+            <thead>
                 <tr>
                     <th>Nama</th>
                     <th>Email</th>
@@ -146,6 +130,8 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
+            </thead>
+            <tbody>
                 <?php if (empty($complaints)): ?> <!-- Jika tidak ada data -->
                     <tr>
                         <td colspan="6">Tidak ada data ditemukan</td>
@@ -153,14 +139,15 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                 <?php else: ?> <!-- Jika ada data -->
                     <?php foreach ($complaints as $row): ?> <!-- Looping data -->
                         <tr>
-                            <td><?= htmlspecialchars($row['nama']) ?></td>
-                            <td><?= htmlspecialchars($row['email']) ?></td>
-                            <td><?= htmlspecialchars($row['isi_lap']) ?></td>
-                            <td>
+                            <td data-table="Nama"><?= htmlspecialchars($row['nama']) ?></td>
+                            <td data-table="Email"><?= htmlspecialchars($row['email']) ?></td>
+                            <td data-table="Isi Laporan"><?= htmlspecialchars($row['isi_lap']) ?></td>
+                            <td data-table="Foto">
                                 <?php if (!empty($row['foto'])): ?> <!-- Jika ada foto -->
                                     <img src="../../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
                                         alt="Laporan <?= $row['id'] ?>"
-                                        loading="lazy">
+                                        loading="lazy"
+                                        class="photo-thumbnail">
                                 <?php else: ?> <!-- Jika tidak ada foto -->
                                     -
                                 <?php endif; ?>
@@ -172,14 +159,14 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                             $currentStatusClass = str_replace(' ', '-', $currentStatus);
                             ?>
 
-                            <td class="cell-status">
+                            <td class="cell-status" data-table="Status">
                                 <span class="status-badge status-<?= $row['status'] ?>">
                                     <?= ucfirst(htmlspecialchars($row["status"] ?? 'Menunggu')) ?>
                                 </span>
                             </td>
 
                             </td>
-                            <td class="action-links"> <!-- Tindakan untuk edit dan hapus -->
+                            <td class="action-links" data-table="Aksi"> <!-- Tindakan untuk edit dan hapus -->
                                 <a class="btn-tanggapi" href="edit.php?id=<?= $row['id'] ?>">Berikan Tanggapan</a>
                                 <a class="btn-logout" href="delete.php?id=<?= $row['id'] ?>"
                                     onclick="return confirm('Yakin menghapus laporan ini?')">Hapus</a>
@@ -187,8 +174,10 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
-            </table>
-        </div>
+            </tbody>
+        </table>
+        <!-- </div> -->
+    </div>
 </body>
 
 </html>
