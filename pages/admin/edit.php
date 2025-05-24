@@ -120,8 +120,8 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
 </head>
 
 <body>
-    <div class="container">
-        <h2>Edit Pengaduan #<?= htmlspecialchars($id) ?></h2>
+    <div class="form-user">
+        <h2 class="h2-user">Edit Pengaduan #<?= htmlspecialchars($id) ?></h2>
 
         <!-- Tampilkan pesan sukses atau error -->
         <?php if (isset($_SESSION['error'])): ?>
@@ -132,7 +132,7 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
         <!-- Tampilan pesan sukses -->
         <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <label>Status:</label>
+                <label class="label-user">Status:</label>
                 <select name="status" required>
                     <?php foreach ($statuses as $status): ?>
                         <option value="<?= htmlspecialchars($status['id']) ?>"
@@ -144,12 +144,12 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
             </div>
 
             <div class="form-group">
-                <label>Jawaban:</label>
+                <label class="label-user">Jawaban:</label>
                 <textarea name="jawaban"><?= htmlspecialchars($data['answ_peng'] ?? '') ?></textarea>
             </div>
 
             <div class="form-group">
-                <label for="fotoadmin">Unggah Bukti foto:</label><br>
+                <label class="label-user" for="fotoadmin">Unggah Bukti foto:</label>
                 <input type="file" name="fotoadmin" accept="image/*"><br><br>
                 <?php if (!empty($data['answ_foto'])): ?>
                     <p>Foto saat ini: <?= htmlspecialchars($data['answ_foto']) ?></p>
@@ -157,8 +157,8 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
                 <?php endif; ?>
             </div>
 
-            <button type="submit">Simpan</button>
-            <a href="dashboard_admin.php">Kembali</a>
+            <button class="button-save" type="submit">Simpan</button>
+            <a class="button-back" href="dashboard_admin.php">Kembali</a>
         </form>
     </div>
 </body>
