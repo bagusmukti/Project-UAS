@@ -256,7 +256,8 @@ th {
   background-color: rgb(1, 102, 1);
 }
 
-.button-user-back {
+.button-user-back,
+.btn-filter {
   background-color: #19467a;
   font-weight: bold;
   color: white;
@@ -276,7 +277,8 @@ th {
 
 .btn-buataduan svg,
 .btn-logout svg,
-.button-user-back svg {
+.button-user-back svg,
+.btn-filter svg {
   display: inline-block;
   vertical-align: middle;
   gap: 8px;
@@ -424,6 +426,7 @@ input[type="text"].search-input {
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: inline-block;
 }
 
 .btn-filter:hover {
