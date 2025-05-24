@@ -58,7 +58,7 @@ catch (Exception $e) {
 </head>
 
 <body>
-    <table border="0">
+    <table cellpadding="10" cellspacing="0">
         <tr>
             <td>
                 <h2 class="text-dashboard">Dashboard User</h2>
