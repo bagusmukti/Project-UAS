@@ -220,17 +220,17 @@ th {
 .tabellll,
 .tabellll td,
 .tabellll th {
-  border: none;
+  border: 10px; /*kalo udah, ganti jd none*/
 }
 
 .header-db {
-  width: 300px;
+  width: 400px;
 }
 
 .header-buat {
-  width: 100px;
+  width: 50px;
 }
 
 .header-logout {
-  width: 100px;
+  width: 50px;
 }
