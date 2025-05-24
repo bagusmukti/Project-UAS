@@ -141,7 +141,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                         </td>
                         <td><?= htmlspecialchars($row['status'] ?? 'menunggu') ?></td> <!-- Menampilkan status -->
                         <td class="action-links"> <!-- Tindakan untuk edit dan hapus -->
-                            <a href="edit.php?id=<?= $row['id'] ?>">Edit</a>
+                            <a href="edit.php?id=<?= $row['id'] ?>">Berikan Tanggapan</a>
                             <a href="delete.php?id=<?= $row['id'] ?>"
                                 onclick="return confirm('Yakin menghapus laporan ini?')">Hapus</a>
                         </td>
