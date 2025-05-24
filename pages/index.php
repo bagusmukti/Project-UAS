@@ -9,16 +9,26 @@
 </head>
 
 <body>
-    <div>
-        <a href="login_page.php">Login</a>
-        <a href="create_account.php">Daftar</a>
-    </div>
-    <div>
-        <h1>Selamat Datang di Pengaduan Masyarakat</h1>
-        <h3>Laporkan Keluhan Anda</h3>
-        <p>Buat Aduan</p>
-        <span><a href="login_page.php">KLIK DISINI</a></span>
-    </div>
+    <header class="header-index">
+        <nav>
+            <a href="login_page.php" class="btn-login-index">Login</a>
+        </nav>
+    </header>
+
+    <main class="main-index">
+        <div class="hero-content">
+            <h1>Selamat Datang di Pengaduan Masyarakat</h1>
+            <p class="subtitle">Laporkan Keluhan Anda dengan Mudah dan Cepat</p>
+            <div>
+                <p>Buat Aduan Sekarang</p>
+                <a href="login_page.php" class="cta-button">KLIK DISINI</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-index">
+        <p>&copy; 2025 Layanan Pengaduan Masyarakat. ALl rights reserved</p>
+    </footer>
 </body>
 
 </html>

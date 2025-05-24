@@ -1,7 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* Styling dasar untuk body */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 20px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling untuk Index */
+/* Styling untuk header */
+.header-index {
+  background-color: #2c3e50;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-index {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  margin-bottom: 2.5rem;
+}
+
+.cta-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cta-text {
+  font-size: 1.1rem;
+  color: #34495e;
+  margin-bottom: 1rem;
+}
+
+.cta-button {
+  background-color: #27ae60;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #219a52;
+  transform: translateY(-2px);
+}
+
+.footer-index {
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.btn-login-index {
+  background-color: #3498db;
+  color: white;
+  padding: 8px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  float: right;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login-index:hover {
+  background-color: #2980b9;
 }
 
 /* Styling untuk judul */
@@ -93,31 +180,31 @@ th {
 
 /* button logout */
 .btn-logout {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: red;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
 }
 
 .btn-logout:hover {
-    background-color: red;
+  background-color: red;
 }
 
 .btn-buataduan {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: green;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: green;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
 }
 
 .btn-buataduan:hover {
-    background-color: green;
+  background-color: green;
 }
 
 .text-dashboard {
