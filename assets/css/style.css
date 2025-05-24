@@ -210,3 +210,7 @@ th {
 .text-dashboard {
   text-align: left;
 }
+
+.table-dashboard {
+    border: none;
+}
