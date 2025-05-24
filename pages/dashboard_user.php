@@ -58,10 +58,10 @@ catch (Exception $e) {
 </head>
 
 <body>
-    <table>
+    <table border="0">
         <tr>
             <td>
-                <h2>Dashboard User</h2>
+                <h2 class="text-dashboard">Dashboard User</h2>
             </td>
             <td>
                 <a href="logout_page.php" class="btn-logout">Logout <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
