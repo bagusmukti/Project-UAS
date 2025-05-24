@@ -11,6 +11,7 @@
 <body>
     <form action="proses_pengaduan.php" method="POST" enctype="multipart/form-data" class="form-user">
         <h2 class="h2-user">FORMULIR PENGADUAN</h2>
+        <hr>
         <div>
             <label form="" class="label-user">Name</label>
             <input type="text" name="name"><br>
