@@ -218,6 +218,6 @@ th {
 }
 
 .tabellll {
-  border: 1px solid white;
+  border: 1px solid white !important;
   border-collapse: collapse;
 }
