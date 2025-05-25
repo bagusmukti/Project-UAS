@@ -63,7 +63,6 @@ catch (Exception $e) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard User</title>
     <link rel="stylesheet" href="../assets/css/style.css">
-
 </head>
 
 <body>
@@ -122,14 +121,13 @@ catch (Exception $e) {
                         <td><?= htmlspecialchars($row["nama"]) ?></td>
                         <td><?= htmlspecialchars($row["email"]) ?></td>
                         <td><?= htmlspecialchars($row["isi_lap"]) ?></td>
-                        <td>
+                        <td data-table="Foto">
                             <!-- Cek apakah ada foto -->
                             <!-- Jika ada foto, tampilkan gambar -->
                             <?php if (!empty($row['foto'])): ?>
                                 <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
                                     alt="Laporan Foto"
                                     loading="lazy"
-                                    style="width: 100px; height: auto; max-width: 100%;"
                                     class="photo-thumbnail">
                             <?php else: ?>
                                 <!-- Jika tidak ada foto, tampilkan pesan -->
