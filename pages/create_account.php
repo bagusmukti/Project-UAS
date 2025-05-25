@@ -1,7 +1,12 @@
 <?php
 
+// Mulai sesi
+session_start();
+
 // Sertakan koneksi database
 include '../config/koneksi.php';
+
+$errors = []; // Array untuk menyimpan error
 
 // Jika Formulir metode POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -9,13 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password']; // Ambil data dari form
     $email = $_POST['email']; // Ambil data dari form
 
-    $errors = []; // Array untuk menyimpan error
 
     if (empty($username)) {
         $errors[] = "Username tidak boleh kosong."; // Validasi username
     }
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (empty($email)) {
+        $errors[] = "Email tidak boleh kosong."; // Validasi email
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Email tidak valid."; // Validasi email
     }
 
@@ -49,6 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     }
+
+    $_SESSION['errors'] = $errors; // Simpan error ke session
 }
 ?>
 
@@ -76,12 +84,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="login">
         <h2 class="h2-user">Buat Akun</h2>
 
-        <?php if (!empty($error)): ?>
-            <div class="error"><?= $error ?></div>
+        <?php if (!empty($_SESSION['errors'])): ?>
+            <div class="error">
+                <?php foreach ($_SESSION['errors'] as $error): ?>
+                    <div><?= $error ?></div>
+                <?php endforeach; ?>
+            </div>
+            <?php unset($_SESSION['errors']); // Hapus error setelah ditampilkan
+            ?>
         <?php endif; ?>
 
         <?php if (!empty($success)): ?>
             <div class="success"><?= $success ?></div>
+            <?php unset($_SESSION['success']); // Hapus pesan sukses setelah ditampilkan 
+            ?>
         <?php endif; ?>
 
         <form action="" method="post">
