@@ -2,11 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif; /* Terapkan ke semua elemen */
 }
 
 /* Styling dasar untuk body */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
@@ -27,7 +29,6 @@ body {
   font-weight: bolder;
   font-size: 2.5rem;
   margin-bottom: 0;
-  font-family: "Times New Roman", Times, serif;
 }
 
 .main-index {
@@ -116,14 +117,12 @@ body {
 .btn-login-index:hover .login-text-index {
   color: #19467a;
   font-weight: bold;
-  font-family: "Outfit", sans-serif;
 }
 
 .login-text-index {
   display: inline-block;
   vertical-align: middle;
   font-weight: bold;
-  font-family: "Outfit", sans-serif;
 }
 
 .btn-login-index svg,
@@ -291,7 +290,6 @@ th {
   font-size: 1.8rem;
   margin: 0;
   color: #000;
-  font-family: "Times New Roman", Times, serif;
 }
 
 .main-container h3 {
