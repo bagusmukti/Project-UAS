@@ -64,16 +64,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
-    <!-- <style>
-        img {
-            max-width: 100px;
-            height: auto;
-        }
 
-        .action-links a {
-            margin-right: 10px;
-        }
-    </style> -->
 </head>
 
 <body>

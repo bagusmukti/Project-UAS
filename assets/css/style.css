@@ -6,7 +6,7 @@
 
 /* Styling dasar untuk body */
 body {
-  font-family: "Arial", sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
@@ -27,6 +27,7 @@ body {
   font-weight: bolder;
   font-size: 2.5rem;
   margin-bottom: 0;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .main-index {
@@ -115,14 +116,14 @@ body {
 .btn-login-index:hover .login-text-index {
   color: #19467a;
   font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .login-text-index {
   display: inline-block;
   vertical-align: middle;
   font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .btn-login-index svg,
@@ -290,6 +291,7 @@ th {
   font-size: 1.8rem;
   margin: 0;
   color: #000;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .main-container h3 {
@@ -421,7 +423,7 @@ input[type="text"].search-input {
   justify-content: center;
   align-items: center;
   height: 100%;
-  vertical-align: middle;     
+  vertical-align: middle;
   padding: 50%;
   position: relative;
   gap: 10px;
