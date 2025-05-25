@@ -169,6 +169,7 @@ input[type="email"] {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
 textarea {
   width: 100%;
   height: 150px;
@@ -285,6 +286,49 @@ th {
   gap: 8px;
 }
 
+.action-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  vertical-align: middle;
+  padding: 50%;
+  position: relative;
+  gap: 10px;
+  border: none;
+}
+
+.btn-filter {
+  background: #3674b5;
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-filter:hover {
+  background: #285a8f;
+  transform: translateY(-2px);
+}
+
+.btn-tanggapi {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: green;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-tanggapi:hover {
+  background-color: rgb(0, 82, 0);
+}
+
 .text-dashboard {
   text-align: left;
   font-size: 1.8rem;
@@ -296,6 +340,11 @@ th {
   color: #2c3e50;
   font-size: 1.5rem;
   margin-bottom: 25px;
+}
+
+.main-container {
+  padding: 20px;
+  background: white;
 }
 
 .table-container {
@@ -341,11 +390,6 @@ input[type="text"].search-input {
   background-color: white;
 }
 
-.main-container {
-  padding: 20px;
-  background: white;
-}
-
 .tabellll,
 .tabellll td,
 .tabellll th {
@@ -356,10 +400,6 @@ input[type="text"].search-input {
   width: 400px;
 }
 
-.header-sisa {
-  width: 50px;
-}
-
 .header-db-admin {
   display: flex;
   justify-content: space-between;
@@ -368,10 +408,6 @@ input[type="text"].search-input {
   background: #fff;
   color: white;
   border-radius: 8px 8px 0 0;
-}
-
-.header-sisa-admin {
-  width: 10px;
 }
 
 .photo-thumbnail {
@@ -414,49 +450,6 @@ input[type="text"].search-input {
 .data-table td:last-child {
   text-align: center;
   vertical-align: middle;
-}
-
-.action-links {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  vertical-align: middle;
-  padding: 50%;
-  position: relative;
-  gap: 10px;
-  border: none;
-}
-
-.btn-filter {
-  background: #3674b5;
-  color: white;
-  padding: 8px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-
-.btn-filter:hover {
-  background: #285a8f;
-  transform: translateY(-2px);
-}
-
-.btn-tanggapi {
-  display: inline-block;
-  padding: 10px 15px;
-  background-color: green;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.btn-tanggapi:hover {
-  background-color: rgb(0, 82, 0);
 }
 
 .cell-status {
