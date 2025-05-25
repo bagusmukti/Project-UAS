@@ -6,6 +6,8 @@ session_start();
 // Sertakan file koneksi database
 include '../config/koneksi.php';
 
+$error = ''; // Inisialisasi variabel error
+
 // Jika Formulir metode POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username']; // Ambil data dari form
@@ -36,11 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 exit();
             }
         } else {
-            echo "Username atau Password salah."; // Jika password tidak valid
+            $error =  "Username atau Password salah."; // Jika password tidak valid
         }
     } else {
         // Login gagal
-        echo "Username atau password salah.";
+        $error =  "Username atau password salah.";
     }
 }
 ?>
