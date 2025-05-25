@@ -69,7 +69,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
 
 <body>
     <div class="main-container">
-        <div class="header-db-admin">
+        <div class="header-user-admin">
             <h1 class="text-dashboard">Dashboard Admin</h1>
             <a href="../logout_page.php" class="btn-logout">
                 Logout
@@ -130,7 +130,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
             <tbody>
                 <?php if (empty($complaints)): ?> <!-- Jika tidak ada data -->
                     <tr>
-                        <td colspan="6">Tidak ada data ditemukan</td>
+                        <td colspan="6" style="text-align: center;">Tidak ada data ditemukan</td>
                     </tr>
                 <?php else: ?> <!-- Jika ada data -->
                     <?php foreach ($complaints as $row): ?> <!-- Looping data -->

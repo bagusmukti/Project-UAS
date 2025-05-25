@@ -390,17 +390,11 @@ input[type="text"].search-input {
   background-color: white;
 }
 
-.tabellll,
-.tabellll td,
-.tabellll th {
-  border: none;
-}
-
 .header-db {
   width: 400px;
 }
 
-.header-db-admin {
+.header-user-admin {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -429,15 +423,7 @@ input[type="text"].search-input {
 .data-table th {
   padding: 12px 15px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
-}
-
-.data-table td {
-  padding: 12px 15px;
-  text-align: center;
-}
-
-.data-table th {
+  border-bottom: 1px solid #000000;
   background: #31c6d4;
   font-weight: bold;
   color: white;
@@ -445,6 +431,11 @@ input[type="text"].search-input {
 
 .data-table tr:hover {
   background: #f1f1f1;
+}
+
+.data-table td {
+  padding: 12px 15px;
+  text-align: center;
 }
 
 .data-table td:last-child {

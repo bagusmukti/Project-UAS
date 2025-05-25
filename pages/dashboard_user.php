@@ -68,7 +68,7 @@ catch (Exception $e) {
 
 <body>
     <div class="main-container">
-        <div class="table-container">
+        <div class="header-user-admin">
             <h1 class="text-dashboard">Selamat Datang, <?= htmlspecialchars($username) ?></h1>
 
             <div class="btn-group">
@@ -86,22 +86,20 @@ catch (Exception $e) {
                 </a>
             </div>
         </div>
-    </div>
 
 
-    <!-- Notifikasi -->
-    <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
-        <?php unset($_SESSION['success']); ?>
-    <?php endif; ?>
+        <!-- Notifikasi -->
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
 
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-error"><?= $_SESSION['error'] ?></div>
-        <?php unset($_SESSION['error']); ?>
-    <?php endif; ?>
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-error"><?= $_SESSION['error'] ?></div>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
 
-    <div class="table-container">
-        <table border="1" cellpadding="10" cellspacing="0" class="complaint-table">
+        <table border="1" cellpadding="10" cellspacing="0" class="data-table">
             <tr>
                 <th>Nama Pelapor</th>
                 <th>Email</th>
@@ -160,12 +158,12 @@ catch (Exception $e) {
                                 <p>Belum ada balasan</p>
                             <?php endif; ?>
                         </td>
-                        <td>
+                        <td data-table="Foto">
                             <?php if (!empty($row['answ_foto'])): ?>
                                 <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['answ_foto']) ?>"
                                     alt="Foto Balasan"
                                     loading="lazy"
-                                    style="width: 100px; height: auto; max-width: 100%;">
+                                    class="photo-thumbnail">
                             <?php else: ?>
                                 <p>Tidak ada foto balasan</p>
                             <?php endif; ?>
@@ -174,7 +172,6 @@ catch (Exception $e) {
                 <?php endforeach ?>
             <?php endif; ?>
         </table>
-    </div>
     </div>
 </body>
 
