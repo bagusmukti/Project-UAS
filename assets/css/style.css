@@ -25,10 +25,16 @@ body {
 }
 
 .h1-index {
-  color: black;
-  font-weight: bolder;
-  font-size: 2.5rem;
-  margin-bottom: 0;
+  color: #ffffff;
+  text-align: center;
+  font-family: "InstrumentSans-Medium", sans-serif;
+  font-size: 128px;
+  font-weight: 500;
+  position: absolute;
+  left: 777px;
+  top: 411px;
+  width: 425px;
+  height: 124px;
 }
 
 .main-index {
@@ -37,12 +43,16 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background-color: whitesmoke;
+  background-color: #82baff;
 }
 
 .hero-content {
-  text-align: center;
-  max-width: 1000px;
+  background: #82baff;
+  width: 1980px;
+  height: 1080px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
 
 .subtitle {
