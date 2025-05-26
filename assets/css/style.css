@@ -9,133 +9,84 @@
 /* Styling dasar untuk body */
 body {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  line-height: 1.6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 /* Styling untuk Index */
-/* Styling untuk header */
-.header-index {
-  background-color: #19467a;
-  padding: 10px 2rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  justify-content: flex-end;
-}
 
 .h1-index {
   color: #ffffff;
   text-align: center;
+  text-emphasis-position: under;
   font-family: "InstrumentSans-Medium", sans-serif;
-  font-size: 128px;
+  font-size: 4rem;
   font-weight: 500;
-  position: absolute;
-  left: 777px;
-  top: 411px;
-  width: 425px;
-  height: 124px;
+  margin: 0;
+  transition: transform 0.2s ease;
 }
 
 .main-index {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  text-align: center;
   background-color: #82baff;
 }
 
 .hero-content {
   background: #82baff;
-  width: 1980px;
-  height: 1080px;
-  position: absolute;
+  max-width: 1200px;
+  position: relative;
   left: 0px;
   top: 0px;
 }
 
 .subtitle {
-  font-size: 1.5rem;
-  margin-top: 0;
-  color: black;
-  margin-bottom: 2rem;
+  color: #ffffff;
+  margin: 0;
+  font-family: "InstrumentSans-Medium", sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  transition: transform 0.2s ease;
 }
 
-.cta-section {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.cta-text {
-  font-size: 1.1rem;
-  color: #34495e;
-  margin-bottom: 1rem;
+.h1-index:hover,
+.subtitle:hover {
+  background-color: #82baff;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
 }
 
 .cta-button {
-  background-color: #19467a;
-  color: white;
-  padding: 10px 50px;
-  border-radius: 5px;
-  text-decoration: none;
   display: inline-flex;
   align-items: center;
+  gap: 1rem;
+  background-color: white;
+  color: #82baff;
+  padding: 10px 50px;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-family: "InstrumentSans-Medium", sans-serif;
+  font-size: 32px;
+  text-decoration: none;
   transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 .cta-button:hover {
-  background-color: #fff;
+  background-color: #82baff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }
 
 .cta-button:hover svg {
-  fill: #19467a;
+  fill: #fff;
 }
 
-.footer-index {
-  background-color: #19467a;
-  color: white;
-  text-align: center;
-  padding: 8px;
-  margin-top: auto;
-}
-
-.btn-login-index {
-  background-color: #19467a;
-  color: white;
-  padding: 8px 30px;
-  border-radius: 10px;
-  text-decoration: none;
-  float: right;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: background-color 0.3s ease;
-}
-
-.btn-login-index:hover {
-  background-color: #fff;
-}
-
-.btn-login-index:hover svg {
-  fill: #19467a;
-}
-
-.btn-login-index:hover .login-text-index {
-  color: #19467a;
-  font-weight: bold;
-}
-
-.login-text-index {
-  display: inline-block;
-  vertical-align: middle;
-  font-weight: bold;
-}
-
-.btn-login-index svg,
 .cta-button svg {
   display: inline-block;
   vertical-align: middle;
