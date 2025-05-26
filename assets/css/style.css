@@ -160,7 +160,6 @@ textarea {
 table {
   border-collapse: collapse;
   width: 100%;
-  margin-top: 30px;
 }
 
 th,
@@ -235,6 +234,30 @@ th {
 }
 
 .btn-buataduan:hover svg {
+  fill: white;
+}
+
+.btn-delete {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color: rgb(177, 0, 0);
+  color: white;
+}
+
+.btn-delete svg {
+  transition: fill 0.3s ease;
+}
+
+.btn-delete:hover svg {
   fill: white;
 }
 
@@ -319,9 +342,10 @@ th {
 }
 
 .main-container h3 {
-  color: #2c3e50;
-  font-size: 1.5rem;
-  margin-bottom: 25px;
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
 }
 
 .main-container {
@@ -395,7 +419,7 @@ input[type="text"].search-input {
 .header-user-admin {
   background: #82baff;
   padding: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
