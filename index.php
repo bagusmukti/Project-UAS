@@ -12,7 +12,7 @@
 
     <main class="main-index">
         <div class="hero-content">
-            <h1 class="h1-index">SIAP</h1>
+            <h1 class="h1-index">S!AP</h1>
             <p class="subtitle">Sistem Informasi Aduan Publik</p>
             <div>
                 <a href="/Project-UAS/pages/login_page.php" class="cta-button">
