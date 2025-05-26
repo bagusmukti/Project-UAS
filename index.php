@@ -9,20 +9,10 @@
 </head>
 
 <body>
-    <header class="header-index">
-        <nav>
-            <a href="/Project-UAS/pages/login_page.php" class="btn-login-index">
-                <span class="login-text-index">Login</span>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
-                    <path d="M480-120v-80h280v-560H480v-80h280q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z" />
-                </svg>
-            </a>
-        </nav>
-    </header>
 
     <main class="main-index">
         <div class="hero-content">
-            <h1 class="h1-index">Selamat Datang di Pengaduan Masyarakat</h1>
+            <h1 class="h1-index">SIAP</h1>
             <p class="subtitle">Laporkan Keluhan Anda dengan Mudah dan Cepat</p>
             <div>
                 <a href="/Project-UAS/pages/login_page.php" class="cta-button">
@@ -34,9 +24,6 @@
         </div>
     </main>
 
-    <footer class="footer-index">
-        <p>&copy; 2025 Layanan Pengaduan Masyarakat. All rights reserved.</p>
-    </footer>
 </body>
 
 </html>
