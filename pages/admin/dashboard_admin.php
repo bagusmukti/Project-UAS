@@ -54,6 +54,37 @@ $stmt->execute();
 $result = $stmt->get_result();
 // Mengambil semua data pengaduan
 $complaints = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+
+
+$currentYear = date('Y');
+//$queryChart = "SELECT DATE_FORMAT(created_at, '%M') as month, COUNT(*) as count FROM tbl_peng WHERE YEAR(created_at) = $currentYear GROUP BY MONTH(created_at) ORDER BY created_at";
+$queryChart = "SELECT MONTH(created_at) as month, COUNT(*) as count FROM tbl_peng WHERE YEAR(created_at) = $currentYear GROUP BY MONTH(created_at) ORDER BY created_at";
+$stmt = $conn->prepare($queryChart);
+$stmt->execute();
+$chartData = $stmt->get_result();
+$stmt->close();
+
+$chartRows = [];
+while ($row = $chartData->fetch_assoc()) {
+    $chartRows[] = $row;
+}
+
+$queryChart2 = "SELECT 
+    COALESCE(pp.id_status, 1) AS id_status, 
+    COUNT(*) as count
+FROM tbl_peng p
+LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng
+GROUP BY COALESCE(pp.id_status, 1)";
+$stmt = $conn->prepare($queryChart2);
+$stmt->execute();
+$chartData2 = $stmt->get_result();
+$stmt->close();
+
+$chartRows2 = [];
+while ($row = $chartData2->fetch_assoc()) {
+    $chartRows2[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +95,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
@@ -117,7 +149,7 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                 </select>
                 <button type="submit" class="btn-filter">
                     <span>Cari</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#fff">
                         <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
                     </svg>
                 </button>
@@ -172,13 +204,13 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
                             </td>
                             <td class=""> <!-- Tindakan untuk edit dan hapus -->
                                 <a class="btn btn-tanggapi" href="edit.php?id=<?= $row['id'] ?>">Berikan Tanggapan
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#fff">
                                         <path d="M160-400v-80h280v80H160Zm0-160v-80h440v80H160Zm0-160v-80h440v80H160Zm360 560v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q8 9 12.5 20t4.5 22q0 11-4 22.5T863-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
                                     </svg>
                                 </a>
                                 <a class="btn btn-delete" href="delete.php?id=<?= $row['id'] ?>"
                                     onclick="return confirm('Yakin menghapus laporan ini?')">Hapus
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#fff">
                                         <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
                                     </svg>
                                 </a>
@@ -189,7 +221,149 @@ $complaints = $result->fetch_all(MYSQLI_ASSOC);
             </tbody>
         </table>
         <!-- </div> -->
+
+        <div class="chart-container">
+            <div>
+                <!-- Chart1 -->
+                <div style="width: 700px;"><canvas id="line"></canvas></div>
+            </div>
+            <div>
+                <!-- Chart2 -->
+                <h2>Data proses pengaduan : </h2>
+                <div style="width: 500px;"><canvas id="doughnut"></canvas></div>
+            </div>
+        </div>
+
     </div>
+
+
+
+    <!-- Script untuk Chart -->
+    <script>
+        // LINE CHART
+        (async function() {
+            const data_db = <?= json_encode($chartRows) ?>;
+            const data = [{
+                    month: 'Januari',
+                    count: 0
+                },
+                {
+                    month: 'Februari',
+                    count: 0
+                },
+                {
+                    month: 'Maret',
+                    count: 0
+                },
+                {
+                    month: 'April',
+                    count: 0
+                },
+                {
+                    month: 'Mei',
+                    count: 0
+                },
+                {
+                    month: 'Juni',
+                    count: 0
+                },
+                {
+                    month: 'Juli',
+                    count: 0
+                },
+                {
+                    month: 'Agustus',
+                    count: 0
+                },
+                {
+                    month: 'September',
+                    count: 0
+                },
+                {
+                    month: 'Oktober',
+                    count: 0
+                },
+                {
+                    month: 'November',
+                    count: 0
+                },
+                {
+                    month: 'Desember',
+                    count: 0
+                }
+            ];
+            data_db.forEach(row => {
+                data[row.month - 1].count = row.count;
+            });
+
+            new Chart(document.getElementById("line"), {
+                type: "line",
+                data: {
+                    labels: data.map((row) => row.month),
+                    datasets: [{
+                        label: "Data pengaduan per bulan tahun ini",
+                        data: data.map((row) => row.count),
+                        borderWidth: 3,
+                        borderColor: 'rgb(87, 87, 87)',
+                        backgroundColor: 'rgb(0, 0, 0)'
+                    }, ],
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            labels: {
+                                font: {
+                                    weight: 'bolder',
+                                    size: 16,
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: "Bulan"
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: "Jumlah Pengaduan"
+                            },
+                            ticks: {
+                                stepSize: 1,
+                            }
+                        }
+                    }
+                },
+
+            });
+        })();
+
+        // DOUGHNUT CHART
+        const status = ['Menunggu', 'Proses', 'Selesai'];
+        (async function() {
+            const data = <?= json_encode($chartRows2) ?>;
+
+            new Chart(document.getElementById("doughnut"), {
+                type: "doughnut",
+                data: {
+                    labels: data.map((row) => status[row.id_status - 1]),
+                    datasets: [{
+                        label: "Jumlah data ",
+                        data: data.map((row) => row.count),
+                        backgroundColor: [
+                            '#ffc107',
+                            '#17a2b8',
+                            '#28a745'
+                        ],
+                    }, ],
+                },
+            });
+        })();
+    </script>
 </body>
 
 </html>

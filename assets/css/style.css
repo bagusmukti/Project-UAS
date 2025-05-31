@@ -679,3 +679,11 @@ textarea {
   text-decoration: none;
   transition: all 0.3s ease;
 }
+
+.chart-container {
+  padding: 2rem;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: space-evenly;
+}
