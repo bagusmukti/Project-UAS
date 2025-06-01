@@ -687,3 +687,7 @@ textarea {
   align-items: center;
   justify-content: space-evenly;
 }
+
+.btn-tanggapi svg path { 
+  fill: white !important; 
+}
