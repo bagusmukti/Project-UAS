@@ -39,11 +39,10 @@ body {
 }
 
 .hero-content {
-  background: #82baff;
-  max-width: 1200px;
-  position: relative;
-  left: 0px;
-  top: 0px;
+  background: #ffffff;
+  padding: 2rem 5rem;
+  border: #000 1px solid;
+  border-radius: 10px;
 }
 
 .subtitle {
@@ -423,6 +422,10 @@ input[type="text"].search-input {
 
 .header-db {
   width: 400px;
+}
+
+.header-index {
+  background-color: #000;
 }
 
 .header-user-admin {
