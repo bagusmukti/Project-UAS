@@ -114,10 +114,78 @@ catch (Exception $e) {
                     </div>
             </div>
 
-            <div>
-                <h2>Ada keluhan apa hari ini?</h2>
-                <a href="form_pengaduan.php">Lapor disini</a>
-            </div>
+            <table border="1" cellpadding="10" cellspacing="0" class="data-table">
+                <tr>
+                    <th>Nama Pelapor</th>
+                    <th>Email</th>
+                    <th>Isi Laporan</th>
+                    <th>Foto</th>
+                    <th>Status</th>
+                    <th>Balasan</th>
+                    <th>Foto Balasan</th>
+                </tr>
+                <!-- Tampilkan data laporan -->
+                <!-- Jika tidak ada laporan -->
+                <?php if (empty($complaints)): ?>
+                    <tr>
+                        <td colspan="7" style="text-align: center;">Tidak ada laporan yang ditemukan</td>
+                    </tr>
+                <?php else: ?>
+                    <!-- Jika ada laporan -->
+                    <?php foreach ($complaints as $row): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($row["nama"]) ?></td>
+                            <td><?= htmlspecialchars($row["email"]) ?></td>
+                            <td><?= htmlspecialchars($row["isi_lap"]) ?></td>
+                            <td data-table="Foto">
+                                <!-- Cek apakah ada foto -->
+                                <!-- Jika ada foto, tampilkan gambar -->
+                                <?php if (!empty($row['foto'])): ?>
+                                    <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
+                                        alt="Laporan Foto"
+                                        loading="lazy"
+                                        class="photo-thumbnail">
+                                <?php else: ?>
+                                    <!-- Jika tidak ada foto, tampilkan pesan -->
+                                    <p>Tidak ada foto</p>
+                                <?php endif; ?>
+                            </td>
+
+                            <!-- Menampilkan status -->
+                            <?php
+                            $currentStatus = strtolower($row["status"] ?? 'menunggu');
+                            $currentStatusClass = str_replace(' ', '-', $currentStatus);
+                            ?>
+
+                            <td class="cell-status">
+                                <span class="status-badge status-<?= $currentStatusClass ?>">
+                                    <?= htmlspecialchars($row["status"]) ?? 'Menunggu' ?>
+                                </span>
+                            </td>
+                            <td>
+                                <!-- Cek apakah ada balasan -->
+                                <!-- Jika ada balasan, tampilkan isi balasan -->
+                                <?php if (!empty($row['answ_peng'])): ?>
+                                    <?= nl2br(htmlspecialchars($row['answ_peng'])) ?>
+                                <?php else: ?>
+                                    <!-- Jika tidak ada balasan, tampilkan pesan -->
+                                    <p>Belum ada balasan</p>
+                                <?php endif; ?>
+                            </td>
+                            <td data-table="Foto">
+                                <?php if (!empty($row['answ_foto'])): ?>
+                                    <img src="../assets/uploaded_pics/<?= htmlspecialchars($row['answ_foto']) ?>"
+                                        alt="Foto Balasan"
+                                        loading="lazy"
+                                        class="photo-thumbnail">
+                                <?php else: ?>
+                                    <p>Tidak ada foto balasan</p>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                <?php endif; ?>
+            </table>
         </div>
     </div>
 

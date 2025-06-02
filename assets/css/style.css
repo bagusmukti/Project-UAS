@@ -3,12 +3,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif; /* Terapkan ke semua elemen */
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  /* Terapkan ke semua elemen */
 }
 
 /* Styling dasar untuk body */
 body {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family:'Courier New', Courier, monospace;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -190,7 +191,6 @@ th {
 .btn-logout {
   display: inline-block;
   padding: 10px 15px;
-  background-color: white;
   color: red;
   text-decoration: none;
   border-radius: 4px;
@@ -332,22 +332,27 @@ th {
 }
 
 .btn-tanggapi:hover {
-  background-color: #f0fff0; /* hijau muda saat hover */
-  box-shadow: 0 6px 8px rgba(0, 128, 0, 0.4); /* bayangan lebih dalam */
-  transform: translateY(-2px); /* sedikit naik saat hover */
+  background-color: #f0fff0;
+  /* hijau muda saat hover */
+  box-shadow: 0 6px 8px rgba(0, 128, 0, 0.4);
+  /* bayangan lebih dalam */
+  transform: translateY(-2px);
+  /* sedikit naik saat hover */
 }
 
 .btn-tanggapi:active {
-  box-shadow: 0 2px 4px rgba(0, 128, 0, 0.2); /* tekan */
+  box-shadow: 0 2px 4px rgba(0, 128, 0, 0.2);
+  /* tekan */
   transform: translateY(1px);
 }
 
 .text-dashboard {
   text-align: left;
   font-size: 2.5rem;
-  color: white;
+  color: #82baff !important;
   font-weight: 700;
   letter-spacing: -0.5px;
+  padding-left: 5px;
 }
 
 .main-container h3 {
@@ -430,7 +435,7 @@ input[type="text"].search-input {
   padding: 1rem;
   margin-bottom: 1rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -575,7 +580,8 @@ input[type="text"].search-input {
 
 .form-buttons {
   display: flex;
-  justify-content: flex-end; /* Atur jadi flex-end jika mau "Kembali" lebih kanan */
+  justify-content: flex-end;
+  /* Atur jadi flex-end jika mau "Kembali" lebih kanan */
   gap: 10px;
   margin-top: 20px;
 }
@@ -698,6 +704,10 @@ textarea {
   transition: all 0.3s ease;
 }
 
+.user-info p{
+  margin-bottom: 0;
+}
+
 .chart-container {
   padding: 2rem;
   display: flex;
@@ -728,6 +738,58 @@ textarea {
 .form-group {
   margin-bottom: 15px;
 }
+
 .btn-tanggapi svg path {
   fill: white !important;
 }
+
+.sidebar {
+  height: 100vh;
+  width: 200px;
+  list-style: none;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-link {
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+  color: #82baff;
+  transition: background-color 0.5s;
+}
+
+.flex-column {
+  height: 100%;
+}
+
+.dropdown .dropdown-menu {
+  display: none;
+  position: static;
+  border: none;
+  box-shadow: none;
+}
+
+/* .dropdown-menu {
+  display: block !important;
+  float: none;
+  width: auto;
+  margin-top: 0;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+} */
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  position: absolute;
+  z-index: 1000;
+  color: #82baff;
+
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+

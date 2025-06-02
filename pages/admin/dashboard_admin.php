@@ -95,6 +95,7 @@ while ($row = $chartData2->fetch_assoc()) {
     <title>Dashboard Admin</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/butterpop.css">
+   
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
