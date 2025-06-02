@@ -40,9 +40,10 @@ body {
 
 .hero-content {
   background: #ffffff;
-  padding: 2rem 5rem;
+  padding: 25px 25px;
   border: #000 1px solid;
   border-radius: 10px;
+  text-align: center;
 }
 
 .subtitle {
@@ -64,17 +65,19 @@ body {
 .cta-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   background-color: white;
   color: #82baff;
   padding: 10px 50px;
   border-radius: 5px;
-  margin-top: 10px;
+  margin: 10px auto 0 auto; /* Ini bikin tombol di tengah horizontal */
   font-family: "InstrumentSans-Medium", sans-serif;
   font-size: 32px;
   text-decoration: none;
   transition: transform 0.2s ease, background-color 0.3s ease;
 }
+
 
 .cta-button:hover {
   background-color: #82baff;
@@ -345,6 +348,14 @@ th {
   text-align: left;
   font-size: 2.5rem;
   color: white;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.text-index {
+  text-align: left;
+  font-size: 2.5rem;
+  color: #82baff;
   font-weight: 700;
   letter-spacing: -0.5px;
 }
@@ -733,4 +744,9 @@ textarea {
 }
 .btn-tanggapi svg path {
   fill: white !important;
+}
+
+.slmtdtg {
+  font-size: small;
+  font-weight: lighter;
 }
