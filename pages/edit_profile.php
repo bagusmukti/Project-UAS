@@ -32,6 +32,7 @@ if (isset($_POST['edit'])) {
         $stmt->execute();
         $stmt->close();
         $_SESSION['success'] = "Profile updated successfully!";
+        header("Location: dashboard_user.php");
     }
     $checkStmt->close();
 }
@@ -340,21 +341,6 @@ if ($result->num_rows == 1) {
     <script src="../assets/js/butterpop.js"></script>
 
     <script>
-        <?php if (!empty($_SESSION['success'])): ?>
-            ButterPop.show({
-                message: "<?= $_SESSION['success'] ?>",
-                type: "success",
-                position: "bottom-right",
-                theme: "velvet",
-                duration: 4000,
-                progress: true,
-                closable: true,
-                pauseOnHover: true,
-                closeOnClick: false
-            });
-            <?php unset($_SESSION['success']); // Hapus supaya notif tidak muncul lagi 
-            ?>
-        <?php endif; ?>
 
         <?php if (!empty($_SESSION['error'])): ?>
             ButterPop.show({
