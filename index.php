@@ -34,6 +34,9 @@ session_start();
             <div class="row">
                 <div class="col-4">
 
+
+                    <img src="assets/img/successful-businessman-standing-confidently.png" width="300rem" alt="">
+
                     <img src="assets/uploaded_pics/successful-businessman-standing-confidently.png" width="250rem" alt="">
 
                     <img src="assets/img/successful-businessman-standing-confidently.png" width="300rem" alt="">
@@ -53,6 +56,7 @@ session_start();
                 </div>
                 <div class="col-4">
 
+                    <img src="assets/img/successful-businessman-standing-confidently.png" width="300rem" alt="" style="transform: scaleX(-1);">
                     <img src="assets/uploaded_pics/successful-businessman-standing-confidently.png" width="250rem" alt="" style="transform: scaleX(-1);">
 
                     <img src="assets/img/successful-businessman-standing-confidently.png" width="300rem" alt="" style="transform: scaleX(-1);">
