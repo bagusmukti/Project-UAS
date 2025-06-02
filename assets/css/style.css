@@ -9,7 +9,7 @@
 
 /* Styling dasar untuk body */
 body {
-  font-family:'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -78,7 +78,6 @@ body {
   text-decoration: none;
   transition: transform 0.2s ease, background-color 0.3s ease;
 }
-
 
 .cta-button:hover {
   background-color: #82baff;
@@ -718,7 +717,7 @@ textarea {
   transition: all 0.3s ease;
 }
 
-.user-info p{
+.user-info p {
   margin-bottom: 0;
 }
 
@@ -757,7 +756,6 @@ textarea {
   fill: white !important;
 }
 
-
 .slmtdtg {
   font-size: small;
   font-weight: lighter;
@@ -791,22 +789,11 @@ textarea {
   box-shadow: none;
 }
 
-/* .dropdown-menu {
-  display: block !important;
-  float: none;
-  width: auto;
-  margin-top: 0;
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-} */
-
 .dropdown:hover .dropdown-menu {
   display: block;
   position: absolute;
   z-index: 1000;
   color: #82baff;
-
 }
 
 .dropdown-toggle {
