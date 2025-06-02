@@ -166,7 +166,7 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
             </div>
         </form>
         <div class="form-group">
-            <button class="button-save" type="submit">Simpan</button>
+            <button class="button-save" href="dashboard_admin.php" type="submit">Simpan</button>
         </div>
         <div class="form-group" style="padding-top: 20px;">
             <a class="button-back" href="dashboard_admin.php">Kembali</a>
