@@ -119,30 +119,106 @@ while ($row = $chartData2->fetch_assoc()) {
             </nav>
         </aside>
 
-    <div class="main-container">
-        <div class="header-user-admin">
-            <div class="btn-group">
-                <div class="user-info">
-                    <p>Admin</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#82BAFF">
-                        <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z" />
-                    </svg>
+        <div class="main-container">
+            <div class="header-user-admin">
+                <div class="btn-group">
+                    <div class="user-info">
+                        <p>Admin</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#82BAFF">
+                            <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z" />
+                        </svg>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="chart-container">
-            <div>
-                <!-- Chart1 -->
-                <div style="width: 400px;"><canvas id="line"></canvas></div>
+            <br>
+            <h3 class="data-pengaduan">Data Pengaduan</h3>
+
+            <!-- Tabel untuk mencari aduan-->
+            <div class="search-container">
+                <form method="get" class="search-form">
+                    <input type="text" name="search_nama" placeholder="Cari nama..."
+                        value="<?= htmlspecialchars($search_nama) ?>" class="search-input">
+
+                    <select name="search_status" class="status-select">
+                        <option value="">Semua Status</option>
+                        <option value="menunggu" <?= $search_status === 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
+                        <option value="proses" <?= $search_status === 'proses' ? 'selected' : '' ?>>Proses</option>
+                        <option value="selesai" <?= $search_status === 'selesai' ? 'selected' : '' ?>>Selesai</option>
+                    </select>
+                    <button type="submit" class="btn-filter">
+                        <span>Cari</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+                            <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+                        </svg>
+                    </button>
+                </form>
             </div>
-            <div>
-                <!-- Chart2 -->
-                <h2>Data proses pengaduan : </h2>
-                <div style="width: 400px;"><canvas id="doughnut"></canvas></div>
-            </div>
+
+            <table border="1" cellpadding="10" cellspacing="0" class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Isi Laporan</th>
+                        <th>Foto</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (empty($complaints)): ?> <!-- Jika tidak ada data -->
+                        <tr>
+                            <td colspan="6" style="text-align: center;">Tidak ada data ditemukan</td>
+                        </tr>
+                    <?php else: ?> <!-- Jika ada data -->
+                        <?php foreach ($complaints as $row): ?> <!-- Looping data -->
+                            <tr>
+                                <td data-table="Nama"><?= htmlspecialchars($row['nama']) ?></td>
+                                <td data-table="Email"><?= htmlspecialchars($row['email']) ?></td>
+                                <td data-table="Isi Laporan"><?= htmlspecialchars($row['isi_lap']) ?></td>
+                                <td data-table="Foto">
+                                    <?php if (!empty($row['foto'])): ?> <!-- Jika ada foto -->
+                                        <img src="../../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
+                                            alt="Laporan <?= $row['id'] ?>"
+                                            loading="lazy"
+                                            class="photo-thumbnail">
+                                    <?php else: ?> <!-- Jika tidak ada foto -->
+                                        -
+                                    <?php endif; ?>
+                                </td>
+
+                                <!-- Menampilkan status -->
+                                <?php
+                                $currentStatus = strtolower($row["status"] ?? 'menunggu');
+                                $currentStatusClass = str_replace(' ', '-', $currentStatus);
+                                ?>
+
+                                <td class="cell-status" data-table="Status">
+                                    <span class="status-badge status-<?= $row['status'] ?>">
+                                        <?= ucfirst(htmlspecialchars($row["status"] ?? 'Menunggu')) ?>
+                                    </span>
+                                </td>
+
+                                <td class=""> <!-- Tindakan untuk edit dan hapus -->
+                                    <a class="btn btn-tanggapi" href="edit.php?id=<?= $row['id'] ?>">Tanggapi
+                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
+                                        </svg>
+                                    </a>
+                                    <a class="btn btn-delete" href="delete.php?id=<?= $row['id'] ?>"
+                                        onclick="return confirm('Yakin menghapus laporan ini?')">Hapus
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
+                                            <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
-    </div>
     </div>
 
 
@@ -211,130 +287,6 @@ while ($row = $chartData2->fetch_assoc()) {
             });
             <?php unset($_SESSION['error']); ?>
         <?php endif; ?>
-    </script>
-
-    <!-- Script untuk Chart -->
-    <script>
-        // LINE CHART
-        (async function() {
-            const data_db = <?= json_encode($chartRows) ?>;
-            const data = [{
-                    month: 'Januari',
-                    count: 0
-                },
-                {
-                    month: 'Februari',
-                    count: 0
-                },
-                {
-                    month: 'Maret',
-                    count: 0
-                },
-                {
-                    month: 'April',
-                    count: 0
-                },
-                {
-                    month: 'Mei',
-                    count: 0
-                },
-                {
-                    month: 'Juni',
-                    count: 0
-                },
-                {
-                    month: 'Juli',
-                    count: 0
-                },
-                {
-                    month: 'Agustus',
-                    count: 0
-                },
-                {
-                    month: 'September',
-                    count: 0
-                },
-                {
-                    month: 'Oktober',
-                    count: 0
-                },
-                {
-                    month: 'November',
-                    count: 0
-                },
-                {
-                    month: 'Desember',
-                    count: 0
-                }
-            ];
-            data_db.forEach(row => {
-                data[row.month - 1].count = row.count;
-            });
-
-            new Chart(document.getElementById("line"), {
-                type: "line",
-                data: {
-                    labels: data.map((row) => row.month),
-                    datasets: [{
-                        label: "Data pengaduan per bulan tahun ini",
-                        data: data.map((row) => row.count),
-                        borderWidth: 3,
-                        borderColor: 'rgb(87, 87, 87)',
-                        backgroundColor: 'rgb(0, 0, 0)'
-                    }, ],
-                },
-                options: {
-                    plugins: {
-                        legend: {
-                            labels: {
-                                font: {
-                                    weight: 'bolder',
-                                    size: 16,
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: "Bulan"
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: "Jumlah Pengaduan"
-                            },
-                            ticks: {
-                                stepSize: 1,
-                            }
-                        }
-                    }
-                },
-
-            });
-        })();
-
-        // DOUGHNUT CHART
-        const status = ['Menunggu', 'Proses', 'Selesai'];
-        const color = ['#ffc107', '#17a2b8', '#28a745'];
-        (async function() {
-            const data = <?= json_encode($chartRows2) ?>;
-            console.log(data);
-            new Chart(document.getElementById("doughnut"), {
-                type: "doughnut",
-                data: {
-                    labels: data.map((row) => status[row.id_status - 1]),
-                    datasets: [{
-                        label: "Jumlah data ",
-                        data: data.map((row) => row.count),
-                        backgroundColor: data.map((row) => color[row.id_status - 1]),
-                    }, ],
-                },
-            });
-        })();
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
