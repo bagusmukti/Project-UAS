@@ -75,6 +75,7 @@ $queryChart2 = "SELECT
 FROM tbl_peng p
 LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng
 GROUP BY COALESCE(pp.id_status, 1)";
+
 $stmt = $conn->prepare($queryChart2);
 $stmt->execute();
 $chartData2 = $stmt->get_result();
@@ -397,9 +398,10 @@ while ($row = $chartData2->fetch_assoc()) {
 
         // DOUGHNUT CHART
         const status = ['Menunggu', 'Proses', 'Selesai'];
+        const color = ['#ffc107', '#17a2b8', '#28a745'];
         (async function() {
             const data = <?= json_encode($chartRows2) ?>;
-
+            console.log(data);
             new Chart(document.getElementById("doughnut"), {
                 type: "doughnut",
                 data: {
@@ -407,11 +409,7 @@ while ($row = $chartData2->fetch_assoc()) {
                     datasets: [{
                         label: "Jumlah data ",
                         data: data.map((row) => row.count),
-                        backgroundColor: [
-                            '#ffc107',
-                            '#17a2b8',
-                            '#28a745'
-                        ],
+                        backgroundColor: data.map((row) => color[row.id_status - 1]),
                     }, ],
                 },
             });
