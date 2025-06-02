@@ -106,9 +106,9 @@ while ($row = $chartData2->fetch_assoc()) {
         <aside class="sidebar bg-light p-3">
             <h1 class="text-dashboard">S!AP</h1>
             <nav class="nav flex-column">
-                <a class="nav-link active" href="dashboard_admin.php">Dashboard</a>
+                <a class="nav-link active" href="dashboard_admin.php" style="color: #82baff !important; text-decoration: none;">Dashboard</a>
 
-                <a class="nav-link active" href="list_pengaduan.php">Data Pengaduan</a>
+                <a class="nav-link active" href="list_pengaduan.php" style="color: #82baff !important; text-decoration: none;">Data Pengaduan</a>
 
                 <a class="mt-auto btn-logout" href="../logout_page.php">
                     Logout
