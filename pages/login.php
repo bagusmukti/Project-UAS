@@ -74,15 +74,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     #img-login{
         width: 350px;
         height: 350px;
-        margin-left :  50px;
+        margin-left :  0px;
     }
   </style>
 </head>
 <body>
-  <div class="container py-3">
-    <div class="row justify-content-center align-items-center" style="margin-left:120px;">
-      <div class="col-lg-5 col-md-8 ">
-
+  <div class="container py-5">
+    <div class="row justify-content-center align-items-center" style="margin-left:50px;">
+      <div class="col-lg-7 col-md-8 ">
           <div class="login-form-container bg-white shadow-lg rounded-4 p-4 p-md-5 lg-auto">
               <form id="loginForm" action="" method="post" enctype="multipart/form-data">
                   <h3 class="text-center mb-4">Sign In</h3>
@@ -111,21 +110,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-xs btn-block w-100">Sign in</button>
   
             <div class="divider d-flex align-items-center my-4">
-              <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+              <!-- <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p> -->
             </div>
   
-            <a data-mdb-ripple-init class="btn btn-primary btn-xs btn-block w-100 mb-2" style="background-color: #3b5998" href="#!" role="button">
-              <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
-            </a>
-            <a data-mdb-ripple-init class="btn btn-primary btn-xs btn-block w-100" style="background-color: #55acee" href="#!" role="button">
-              <i class="fab fa-twitter me-2"></i>Continue with Twitter
-            </a>
+          
+             <div class="label-login" style="margin-top: 20px; text-align: center;">
+                <span>Belum memiliki akun?</span>
+                <a href="register.php">Register</a>
+            </div>
           </form>
         </div>
       </div>
-      <div class="col-lg-6 col-md-8 d-none d-lg-block text-center">
-                  <img src="/Project-UAS/pages/img/login.png" alt="Login Image" id="img-login" />
-
+      <div class="col-lg-4 col-md-8 d-none d-lg-block text-center">
+                <img src="/Project-UAS/pages/img/login.png" alt="Login Image" id="img-login" />
           </div>
     </div>
   </div>
