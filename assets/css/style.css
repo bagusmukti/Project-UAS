@@ -728,3 +728,6 @@ textarea {
 .form-group {
   margin-bottom: 15px;
 }
+.btn-tanggapi svg path {
+  fill: white !important;
+}
