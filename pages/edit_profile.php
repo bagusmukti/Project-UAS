@@ -13,14 +13,27 @@ if (!isset($_SESSION['user_id']) || $_SESSION['level'] !== 'masyarakat') {
 
 $user_id = $_SESSION['user_id'];
 if (isset($_POST['edit'])) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
 
-    $query = "UPDATE tbl_user SET username = ?, email = ? WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssi", $username, $email, $user_id);
-    $stmt->execute();
-    $stmt->close();
+    // Check for duplicate username (excluding current user)
+    $checkQuery = "SELECT id FROM tbl_user WHERE username = ? AND id != ?";
+    $checkStmt = $conn->prepare($checkQuery);
+    $checkStmt->bind_param("si", $username, $user_id);
+    $checkStmt->execute();
+    $checkStmt->store_result();
+
+    if ($checkStmt->num_rows > 0) {
+        $_SESSION['error'] = "Username already taken. Please choose another.";
+    } else {
+        $query = "UPDATE tbl_user SET username = ?, email = ? WHERE id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ssi", $username, $email, $user_id);
+        $stmt->execute();
+        $stmt->close();
+        $_SESSION['success'] = "Profile updated successfully!";
+    }
+    $checkStmt->close();
 }
 
 // Ambil data user dari database
@@ -324,7 +337,40 @@ if ($result->num_rows == 1) {
 
     </div>
 
+    <script src="../assets/js/butterpop.js"></script>
 
+    <script>
+        <?php if (!empty($_SESSION['success'])): ?>
+            ButterPop.show({
+                message: "<?= $_SESSION['success'] ?>",
+                type: "success",
+                position: "bottom-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['success']); // Hapus supaya notif tidak muncul lagi 
+            ?>
+        <?php endif; ?>
+
+        <?php if (!empty($_SESSION['error'])): ?>
+            ButterPop.show({
+                message: "<?= htmlspecialchars($_SESSION['error'], ENT_QUOTES) ?>",
+                type: "error",
+                position: "top-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+    </script>
 </body>
 
 </html>
