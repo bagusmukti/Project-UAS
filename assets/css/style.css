@@ -9,7 +9,7 @@
 
 /* Styling dasar untuk body */
 body {
-  font-family:'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -41,9 +41,10 @@ body {
 
 .hero-content {
   background: #ffffff;
-  padding: 2rem 5rem;
+  padding: 25px 25px;
   border: #000 1px solid;
   border-radius: 10px;
+  text-align: center;
 }
 
 .subtitle {
@@ -65,12 +66,13 @@ body {
 .cta-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   background-color: white;
   color: #82baff;
   padding: 10px 50px;
   border-radius: 5px;
-  margin-top: 10px;
+  margin: 10px auto 0 auto; /* Ini bikin tombol di tengah horizontal */
   font-family: "InstrumentSans-Medium", sans-serif;
   font-size: 32px;
   text-decoration: none;
@@ -352,6 +354,14 @@ th {
   font-weight: 700;
   letter-spacing: -0.5px;
   padding-left: 5px;
+}
+
+.text-index {
+  text-align: left;
+  font-size: 2.5rem;
+  color: #82baff;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .main-container h3 {
@@ -707,7 +717,7 @@ textarea {
   transition: all 0.3s ease;
 }
 
-.user-info p{
+.user-info p {
   margin-bottom: 0;
 }
 
@@ -746,6 +756,11 @@ textarea {
   fill: white !important;
 }
 
+.slmtdtg {
+  font-size: small;
+  font-weight: lighter;
+}
+
 .sidebar {
   height: 100vh;
   width: 200px;
@@ -774,22 +789,11 @@ textarea {
   box-shadow: none;
 }
 
-/* .dropdown-menu {
-  display: block !important;
-  float: none;
-  width: auto;
-  margin-top: 0;
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-} */
-
 .dropdown:hover .dropdown-menu {
   display: block;
   position: absolute;
   z-index: 1000;
   color: #82baff;
-
 }
 
 .dropdown-toggle {

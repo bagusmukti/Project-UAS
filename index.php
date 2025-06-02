@@ -18,7 +18,7 @@ session_start();
     <div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">S!AP</a>
+                <h1 class="text-index">S!AP</h1>
 
                 <div class="collapse navbar-collapse" id="navbarText">
                     <span class="navbar-text ms-auto">
@@ -33,12 +33,20 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-4">
+
+
                     <img src="assets/img/successful-businessman-standing-confidently.png" width="300rem" alt="">
+
+                    <img src="assets/uploaded_pics/successful-businessman-standing-confidently.png" width="250rem" alt="">
+
+                    <img src="assets/img/successful-businessman-standing-confidently.png" width="300rem" alt="">
+
                 </div>
                 <div class="col-4">
                     <div class="hero-content">
-                        <p class="text-center">Selamat datang di sistem informasi aduan publik kami. Silakan masuk atau daftar untuk melanjutkan.</p>
-                        <h1 class="text-center mt-5">Sistem Informasi Aduan Publik</h1>
+                        <h3 class="text-center mt-5">SISTEM INFORMASI ADUAN PUBLIK</h3>
+                        <hr>
+                        <h6 class="slmtdtg">Selamat datang di sistem informasi aduan publik kami. Silakan masuk atau daftar untuk melanjutkan.</h6>
                         <a href="/Project-UAS/pages/login_page.php" class="cta-button">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#82baff">
                                 <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v268q-19-9-39-15.5t-41-9.5v-243H200v560h242q3 22 9.5 42t15.5 38H200Zm0-120v40-560 243-3 280Zm80-40h163q3-21 9.5-41t14.5-39H280v80Zm0-160h244q32-30 71.5-50t84.5-27v-3H280v80Zm0-160h400v-80H280v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Zm-20-80h40v-100h100v-40H740v-100h-40v100H600v40h100v100Z" />
@@ -47,7 +55,12 @@ session_start();
                     </div>
                 </div>
                 <div class="col-4">
+
                     <img src="assets/img/successful-businessman-standing-confidently.png" width="300rem" alt="" style="transform: scaleX(-1);">
+                    <img src="assets/uploaded_pics/successful-businessman-standing-confidently.png" width="250rem" alt="" style="transform: scaleX(-1);">
+
+                    <img src="assets/img/successful-businessman-standing-confidently.png" width="300rem" alt="" style="transform: scaleX(-1);">
+
                 </div>
             </div>
             <!DOCTYPE html>
@@ -165,7 +178,7 @@ session_start();
             </head>
 
             <body>
-                <div class="container mt-5">
+                <div class="container">
                     <div class="row">
                         <div class="col-12">
 
