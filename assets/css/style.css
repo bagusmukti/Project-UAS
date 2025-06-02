@@ -327,7 +327,7 @@ th {
   text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0, 128, 0, 0.3); /* bayangan hijau */
+  box-shadow: 0 4px 6px rgba(0, 128, 0, 0.3);
   transition: all 0.3s ease;
 }
 

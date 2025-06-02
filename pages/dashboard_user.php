@@ -75,7 +75,7 @@ catch (Exception $e) {
             <div class="btn-group">
                 <a href="form_pengaduan.php" class="btn btn-buataduan">
                     Buat Aduan
-                   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="green">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="green">
                         <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z" />
                     </svg>
                 </a>
@@ -184,12 +184,13 @@ catch (Exception $e) {
                 closeOnClick: false
             });
         </script>
-        <?php unset($_SESSION['user_success']); // Hapus supaya notif tidak muncul lagi ?>
+        <?php unset($_SESSION['user_success']); // Hapus supaya notif tidak muncul lagi 
+        ?>
     <?php endif; ?>
 
     <?php if (!empty($_SESSION['form_peng_success'])): ?>
         <script>
-             ButterPop.show({
+            ButterPop.show({
                 message: "<?= $_SESSION['form_peng_success'] ?>",
                 type: "success",
                 position: "bottom-right",
@@ -199,7 +200,6 @@ catch (Exception $e) {
                 closable: true,
                 pauseOnHover: true,
                 closeOnClick: false
-            });
             });
         </script>
         <?php unset($_SESSION['form_peng_success']); ?>
