@@ -320,17 +320,26 @@ th {
 
 .btn-tanggapi {
   display: inline-block;
-  padding: 10px 15px;
-  background-color: green;
-  color: white;
+  padding: 0px 1px;
+  background-color: white;
+  border: 2px solid green;
+  color: green;
   text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 128, 0, 0.3); /* bayangan hijau */
+  transition: all 0.3s ease;
 }
 
 .btn-tanggapi:hover {
-  background-color: rgb(0, 82, 0);
+  background-color: #f0fff0; /* hijau muda saat hover */
+  box-shadow: 0 6px 8px rgba(0, 128, 0, 0.4); /* bayangan lebih dalam */
+  transform: translateY(-2px); /* sedikit naik saat hover */
+}
+
+.btn-tanggapi:active {
+  box-shadow: 0 2px 4px rgba(0, 128, 0, 0.2); /* tekan */
+  transform: translateY(1px);
 }
 
 .text-dashboard {
@@ -439,7 +448,8 @@ input[type="text"].search-input {
   border-collapse: collapse;
   background: white;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgb(110, 110, 110, 5);
+  border-radius: 12px;
 }
 
 .data-table th {
@@ -563,8 +573,15 @@ input[type="text"].search-input {
   margin-bottom: 10px;
 }
 
+.form-buttons {
+  display: flex;
+  justify-content: flex-end; /* Atur jadi flex-end jika mau "Kembali" lebih kanan */
+  gap: 10px;
+  margin-top: 20px;
+}
+
 .button-back {
-  display: block;
+  /* display: block; */
   text-align: center;
   background-color: white;
   font-weight: bold;
@@ -574,6 +591,7 @@ input[type="text"].search-input {
   cursor: pointer;
   font-size: 16px;
   width: 100%;
+  padding: 10px 10px;
   box-sizing: border-box;
   text-decoration: none;
 }
@@ -686,4 +704,27 @@ textarea {
   gap: 40px;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.form-split {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.form-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.form-column.left {
+  max-width: 60%;
+}
+
+.form-column.right {
+  max-width: 40%;
+}
+
+.form-group {
+  margin-bottom: 15px;
 }

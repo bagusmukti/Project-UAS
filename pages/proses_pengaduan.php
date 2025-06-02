@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = "Isi laporan wajib diisi!";
     }
 
-
     // Jika ada error, redirect kembali
     if (!empty($errors)) {
         $_SESSION['error'] = implode("<br>", $errors);
@@ -81,12 +80,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->execute();
                 $stmt->close(); // Tutup statement
             } else {
-                $_SESSION['error'] = "Gagal mengupload foto!";
+                $_SESSION['foto_error'] = "Gagal mengupload foto!";
             }
         }
 
         $conn->commit(); // Commit transaksi
         $_SESSION['success'] = "Laporan berhasil dikirim!"; // Set session success
+
     } catch (Exception $e) {
         $conn->rollback(); // Rollback transaksi jika terjadi error
         $_SESSION['error'] = "Error: " . $e->getMessage(); // Log error

@@ -21,19 +21,19 @@
 
         <br>
         <div>
-            <label form="" class="label-user">Name</label>
-            <input type="text" name="name"><br>
+            <label form="" class="label-user">Nama Lengkap</label>
+            <input type="text" name="name" placeholder="Masukkan Nama Lengkap Anda" required><br>
         </div>
         <div>
             <label form="" class="label-user">Email</label>
-            <input type="text" name="email"><br>
+            <input type="email" name="email" placeholder="Masukkan Email Anda" required><br>
         </div>
         <div>
             <label form="" class="label-user">Isi Laporan</label>
-            <textarea name="isilaporan"></textarea><br>
+            <textarea name="isilaporan" placeholder="Deskripsikan Laporan yang ingin anda adukan" required></textarea><br>
         </div>
         <div>
-            <label for="foto" class="label-user">Pilih file foto : </label>
+            <label for="foto" class="label-user">Foto ( opsional ) </label>
             <input type="file" name="foto" accept="images/"><br><br>
         </div>
         <button type="submit" class="button-user">Send</button>

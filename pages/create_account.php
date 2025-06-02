@@ -1,125 +1,125 @@
 <?php
-
-// Mulai sesi
 session_start();
-
-// Sertakan koneksi database
 include '../config/koneksi.php';
 
-$errors = []; // Array untuk menyimpan error
+$errors = [];
 
-// Jika Formulir metode POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username']; // Ambil data dari form
-    $password = $_POST['password']; // Ambil data dari form
-    $email = $_POST['email']; // Ambil data dari form
+    $username = trim($_POST['username'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+    $email    = trim($_POST['email'] ?? '');
 
-
-    if (empty($username)) {
-        $errors[] = "Username tidak boleh kosong."; // Validasi username
+    if ($username === '') {
+        $errors[] = "Username tidak boleh kosong.";
     }
 
-    if (empty($email)) {
-        $errors[] = "Email tidak boleh kosong."; // Validasi email
+    if ($email === '') {
+        $errors[] = "Email tidak boleh kosong.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Email tidak valid."; // Validasi email
+        $errors[] = "Email tidak valid.";
     }
 
-    if (empty($password)) {
-        $errors[] = "Password tidak boleh kosong."; // Validasi password
+    if ($password === '') {
+        $errors[] = "Password tidak boleh kosong.";
     }
 
-    // Jika tidak ada error
     if (empty($errors)) {
-        $stmt = mysqli_prepare($conn, "SELECT id FROM tbl_user WHERE username = ?"); // Siapkan statement
-        mysqli_stmt_bind_param($stmt, "s", $username); // Bind parameter
-        mysqli_stmt_execute($stmt); // Eksekusi statement
-        mysqli_stmt_store_result($stmt); // Simpan hasil
+        $stmt = mysqli_prepare($conn, "SELECT id FROM tbl_user WHERE username = ?");
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
 
-        // Cek apakah username sudah terdaftar
         if (mysqli_stmt_num_rows($stmt) > 0) {
-            $errors[] = "Username sudah terdaftar."; // Jika username sudah ada
+            $errors[] = "Username sudah terdaftar.";
         } else {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash password
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $insert_stmt = mysqli_prepare($conn, "INSERT INTO tbl_user (username, password, email, level) VALUES (?, ?, ?, 'masyarakat')");
+            mysqli_stmt_bind_param($insert_stmt, "sss", $username, $hashed_password, $email);
 
-            $insert_stmt = mysqli_prepare($conn, "INSERT INTO tbl_user (username, password, email, level) VALUES (?, ?, ?, 'masyarakat')"); // Siapkan statement untuk insert
-            mysqli_stmt_bind_param($insert_stmt, "sss", $username, $hashed_password, $email); // Bind parameter
-
-            // Eksekusi statement untuk insert
             if (mysqli_stmt_execute($insert_stmt)) {
-                echo "Akun berhasil dibuat! Silakan login."; // Tampilkan pesan sukses
-                header("Location: login_page.php"); // Redirect ke halaman login
+                $_SESSION['success'] = "Akun berhasil dibuat! Silakan login.";
+                header("Location: create_account.php");
                 exit();
             } else {
-                $errors[] = "Gagal membuat akun."; // Jika gagal insert
+                $errors[] = "Gagal membuat akun.";
             }
         }
     }
 
-    $_SESSION['errors'] = $errors; // Simpan error ke session
+    $_SESSION['errors'] = $errors;
+    header("Location: create_account.php");
+    exit();
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
     <title>Buat Akun</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-
-    <style>
-        .error {
-            color: red;
-        }
-
-        .success {
-            color: green;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/butterpop.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-
 <body>
+
     <div class="login">
         <h2 class="h2-user">Buat Akun</h2>
-
-        <?php if (!empty($_SESSION['errors'])): ?>
-            <div class="error">
-                <?php foreach ($_SESSION['errors'] as $error): ?>
-                    <div><?= $error ?></div>
-                <?php endforeach; ?>
-            </div>
-            <?php unset($_SESSION['errors']); // Hapus error setelah ditampilkan
-            ?>
-        <?php endif; ?>
-
-        <?php if (!empty($success)): ?>
-            <div class="success"><?= $success ?></div>
-            <?php unset($_SESSION['success']); // Hapus pesan sukses setelah ditampilkan 
-            ?>
-        <?php endif; ?>
-
         <form action="" method="post">
             <div>
-                <label class="label-user" for="">Username</label>
-                <input type="text" name="username" id="">
+                <label class="label-user">Username</label>
+                <input type="text" name="username" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>" />
             </div>
             <div>
-                <label class="label-user" for="">Password</label>
-                <input type="password" name="password" id="">
+                <label class="label-user">Password</label>
+                <input type="password" name="password" />
             </div>
             <div>
-                <label class="label-user" for="">Email</label>
-                <input type="email" name="email" id="">
-            </div><br>
-            <button type="submit" class="button-user">Buat Akun</button><br><br>
+                <label class="label-user">Email</label>
+                <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" />
+            </div><br />
+            <button type="submit" class="button-user">Buat Akun</button><br /><br />
         </form>
         <div class="label-login">
-            <span>Sudah punya akun?</span>
-            <a href="login_page.php">Klik disini</a>
+            <span>Sudah memiliki akun?</span>
+            <a href="login_page.php">Login</a>
         </div>
     </div>
-</body>
 
+    <script src="../assets/js/butterpop.js"></script>
+    <script>
+        <?php if (!empty($_SESSION['errors'])): ?>
+            <?php foreach ($_SESSION['errors'] as $err): ?>
+                ButterPop.show({
+                    message: "<?= htmlspecialchars($err, ENT_QUOTES) ?>",
+                    type: "error",
+                    position: "top-right",
+                    theme: "velvet",
+                    duration: 4000,
+                    progress: true,
+                    closable: true,
+                    pauseOnHover: true,
+                    closeOnClick: false
+                });
+            <?php endforeach; ?>
+            <?php unset($_SESSION['errors']); ?>
+        <?php endif; ?>
+
+        <?php if (!empty($_SESSION['success'])): ?>
+            ButterPop.show({
+                message: "<?= htmlspecialchars($_SESSION['success'], ENT_QUOTES) ?>",
+                type: "success",
+                position: "top-right",
+                theme: "velvet",
+                duration: 5000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+    </script>
+
+</body>
 </html>

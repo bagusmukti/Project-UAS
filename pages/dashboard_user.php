@@ -63,6 +63,8 @@ catch (Exception $e) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard User</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/butterpop.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -73,7 +75,7 @@ catch (Exception $e) {
             <div class="btn-group">
                 <a href="form_pengaduan.php" class="btn btn-buataduan">
                     Buat Aduan
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="green">
+                   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="green">
                         <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z" />
                     </svg>
                 </a>
@@ -91,18 +93,6 @@ catch (Exception $e) {
                 </div>
             </div>
         </div>
-
-
-        <!-- Notifikasi -->
-        <?php if (isset($_SESSION['success'])): ?>
-            <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
-            <?php unset($_SESSION['success']); ?>
-        <?php endif; ?>
-
-        <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-error"><?= $_SESSION['error'] ?></div>
-            <?php unset($_SESSION['error']); ?>
-        <?php endif; ?>
 
         <table border="1" cellpadding="10" cellspacing="0" class="data-table">
             <tr>
@@ -177,6 +167,75 @@ catch (Exception $e) {
             <?php endif; ?>
         </table>
     </div>
+
+    <script src="../assets/js/butterpop.js"></script>
+
+    <?php if (!empty($_SESSION['user_success'])): ?>
+        <script>
+            ButterPop.show({
+                message: "<?= $_SESSION['user_success'] ?>",
+                type: "success",
+                position: "bottom-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+        </script>
+        <?php unset($_SESSION['user_success']); // Hapus supaya notif tidak muncul lagi ?>
+    <?php endif; ?>
+
+    <?php if (!empty($_SESSION['form_peng_success'])): ?>
+        <script>
+             ButterPop.show({
+                message: "<?= $_SESSION['form_peng_success'] ?>",
+                type: "success",
+                position: "bottom-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            });
+        </script>
+        <?php unset($_SESSION['form_peng_success']); ?>
+    <?php endif; ?>
+
+    <script>
+        <?php if (!empty($_SESSION['success'])): ?>
+            ButterPop.show({
+                message: "<?= htmlspecialchars($_SESSION['success'], ENT_QUOTES) ?>",
+                type: "success",
+                position: "bottom-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+
+        <?php if (!empty($_SESSION['error'])): ?>
+            ButterPop.show({
+                message: "<?= htmlspecialchars($_SESSION['error'], ENT_QUOTES) ?>",
+                type: "error",
+                position: "top-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+    </script>
 </body>
 
 </html>

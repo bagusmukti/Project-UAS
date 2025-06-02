@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute(); // Eksekusi query
 
         $conn->commit(); // Commit transaksi
-        $_SESSION['success'] = "Pengaduan berhasil diupdate!"; // Set session success message
+        $_SESSION['editadmin_success'] = "Pengaduan berhasil diupdate!"; // Set session success message
         header("Location: dashboard_admin.php"); // Redirect ke halaman dashboard
         exit(); // Keluar dari script
     } catch (Exception $e) {
@@ -107,12 +107,6 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
     <div class="form-user">
         <h2 class="h2-user">Edit Pengaduan #<?= htmlspecialchars($id) ?></h2>
 
-        <!-- Tampilkan pesan sukses atau error -->
-        <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert error"><?= htmlspecialchars($_SESSION['error']) ?></div>
-            <?php unset($_SESSION['error']); ?>
-        <?php endif; ?>
-
         <div class="form-group">
             <label class="label-user">Isi Laporan:</label>
             <div class="original-complaint">
@@ -134,41 +128,49 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
         </div>
 
         <!-- Tampilan pesan sukses -->
-        <form method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                <label class="label-user">Status:</label>
-                <select name="status" required>
-                    <?php foreach ($statuses as $status): ?>
-                        <option value="<?= htmlspecialchars($status['id']) ?>"
-                            <?= ($data['status'] ?? '') === $status['status'] ? 'selected' : '' ?>>
-                            <?= htmlspecialchars(ucfirst($status['status'])) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+        <form method="POST" enctype="multipart/form-data" class="form-split">
+            <div class="form-column left">
+                <div class="form-group">
+                    <label class="label-user">Status:</label>
+                    <select name="status" required>
+                        <?php foreach ($statuses as $status): ?>
+                            <option value="<?= htmlspecialchars($status['id']) ?>"
+                                <?= ($data['status'] ?? '') === $status['status'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars(ucfirst($status['status'])) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form-group" style="padding-top: 20px;">
+                    <label class="label-user" for="fotoadmin">Unggah Bukti foto:</label>
+                    <input type="file" name="fotoadmin" accept="image/*">
+                </div>
             </div>
 
-            <div class="form-group">
-                <label class="label-user">Jawaban:</label>
-                <textarea name="jawaban"><?= htmlspecialchars($data['answ_peng'] ?? '') ?></textarea>
-            </div>
+            <div class="form-column right">
+                <div class="form-group">
+                    <label class="label-user">Jawaban:</label>
+                    <textarea name="jawaban"><?= htmlspecialchars($data['answ_peng'] ?? '') ?></textarea>
+                </div>
 
-            <div class="form-group">
-                <label class="label-user" for="fotoadmin">Unggah Bukti foto:</label>
-                <input type="file" name="fotoadmin" accept="image/*"><br><br>
-            </div>
+                <div class="form-group">
+                    <?php if (!empty($data['answ_foto'])): ?>
+                        <label class="label-user">Foto saat ini: <?= htmlspecialchars($data['answ_foto']) ?></label>
+                        <div class="original-photo">
+                            <img src="../../assets/uploaded_pics/<?= htmlspecialchars($data['answ_foto']) ?>" width="200">
+                        </div>
+                    <?php endif; ?>
+                </div>
 
-            <div class="form-group">
-                <?php if (!empty($data['answ_foto'])): ?>
-                    <label class="label-user">Foto saat ini: <?= htmlspecialchars($data['answ_foto']) ?></label>
-                    <div class="original-photo">
-                        <img src="../../assets/uploaded_pics/<?= htmlspecialchars($data['answ_foto']) ?>" width="200">
-                    </div>
-                <?php endif; ?>
             </div>
-
-            <button class="button-save" type="submit">Simpan</button>
-            <a class="button-back" href="dashboard_admin.php">Kembali</a>
         </form>
+        <div class="form-group">
+            <button class="button-save" type="submit">Simpan</button>
+        </div>
+        <div class="form-group" style="padding-top: 20px;">
+            <a class="button-back" href="dashboard_admin.php">Kembali</a>
+        </div>
     </div>
 </body>
 

@@ -56,7 +56,6 @@ $result = $stmt->get_result();
 $complaints = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 
-
 $currentYear = date('Y');
 //$queryChart = "SELECT DATE_FORMAT(created_at, '%M') as month, COUNT(*) as count FROM tbl_peng WHERE YEAR(created_at) = $currentYear GROUP BY MONTH(created_at) ORDER BY created_at";
 $queryChart = "SELECT MONTH(created_at) as month, COUNT(*) as count FROM tbl_peng WHERE YEAR(created_at) = $currentYear GROUP BY MONTH(created_at) ORDER BY created_at";
@@ -95,6 +94,7 @@ while ($row = $chartData2->fetch_assoc()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/butterpop.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
@@ -119,20 +119,7 @@ while ($row = $chartData2->fetch_assoc()) {
             </div>
         </div>
 
-        <!-- Notifikasi -->
-        <?php if (isset($_SESSION['success'])): ?>
-            <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
-            <?php unset($_SESSION['success']); ?>
-        <?php endif; ?>
-
-        <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-error"><?= $_SESSION['error'] ?></div>
-            <?php unset($_SESSION['error']); ?>
-        <?php endif; ?>
-
         <br>
-        <!-- Tabel untuk menampilkan data pengaduan -->
-        <!-- <div class="table-container"> -->
         <h3 class="data-pengaduan">Data Pengaduan</h3>
 
         <!-- Tabel untuk mencari aduan-->
@@ -203,16 +190,16 @@ while ($row = $chartData2->fetch_assoc()) {
 
                             </td>
                             <td class=""> <!-- Tindakan untuk edit dan hapus -->
-                                <a class="btn btn-tanggapi" href="edit.php?id=<?= $row['id'] ?>">Berikan Tanggapan
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#fff">
+                                <a class="btn btn-tanggapi" href="edit.php?id=<?= $row['id'] ?>"> Tanggapi
+                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#fff">
                                         <path d="M160-400v-80h280v80H160Zm0-160v-80h440v80H160Zm0-160v-80h440v80H160Zm360 560v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q8 9 12.5 20t4.5 22q0 11-4 22.5T863-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-                                    </svg>
+                                    </svg> -->
                                 </a>
                                 <a class="btn btn-delete" href="delete.php?id=<?= $row['id'] ?>"
                                     onclick="return confirm('Yakin menghapus laporan ini?')">Hapus
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#fff">
+                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#fff">
                                         <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
-                                    </svg>
+                                    </svg> -->
                                 </a>
                             </td>
                         </tr>
@@ -237,6 +224,69 @@ while ($row = $chartData2->fetch_assoc()) {
     </div>
 
 
+    <script src="../../assets/js/butterpop.js"></script>
+
+    <script>
+         <?php if (!empty($_SESSION['admin_success'])): ?>
+            ButterPop.show({
+                message: "<?= $_SESSION['admin_success'] ?>",
+                type: "success",
+                position: "bottom-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['admin_success']); // Hapus supaya notif tidak muncul lagi ?>
+        <?php endif; ?>
+
+         <?php if (!empty($_SESSION['editadmin_success'])): ?>
+            ButterPop.show({
+                message: "<?= $_SESSION['editadmin_success'] ?>",
+                type: "success",
+                position: "bottom-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['editadmin_success']); // Hapus supaya notif tidak muncul lagi ?>
+        <?php endif; ?>
+
+         <?php if (!empty($_SESSION['adminhapus_success'])): ?>
+            ButterPop.show({
+                message: "<?= $_SESSION['adminhapus_success'] ?>",
+                type: "success",
+                position: "bottom-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['adminhapus_success']); // Hapus supaya notif tidak muncul lagi ?>
+        <?php endif; ?>
+
+         <?php if (!empty($_SESSION['error'])): ?>
+            ButterPop.show({
+                message: "<?= htmlspecialchars($_SESSION['error'], ENT_QUOTES) ?>",
+                type: "error",
+                position: "top-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+    </script>
 
     <!-- Script untuk Chart -->
     <script>

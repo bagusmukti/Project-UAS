@@ -27,7 +27,7 @@ try {
     if (mysqli_query($conn, $sql1)) { // Eksekusi query
         if (mysqli_query($conn, $sql2)) {
             mysqli_commit($conn);
-            $_SESSION['success'] = "Data berhasil dihapus!"; // Set session success message
+            $_SESSION['adminhapus_success'] = "Data berhasil dihapus!"; // Set session success message
         } else {
             throw new Exception("Gagal menghapus data pengaduan!");
         }

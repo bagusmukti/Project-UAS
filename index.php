@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,11 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pengaduan Masyarakat</title>
     <link rel="stylesheet" href="../Project-UAS/assets/css/style.css">
+    <link rel="stylesheet" href="../Project-UAS/assets/css/butterpop.css">
 </head>
 
 <body>
 
-    <main class="main-index">
+    <div class="main-index">
         <div class="hero-content">
             <h1 class="h1-index">S!AP</h1>
             <p class="subtitle">Sistem Informasi Aduan Publik</p>
@@ -22,8 +27,54 @@
                 </a>
             </div>
         </div>
-    </main>
+    </div>
 
+    <script src="../Project-UAS/assets/js/butterpop.js"></script>
+    <script>
+        <?php if (!empty($_SESSION['error'])): ?>
+            ButterPop.show({
+                message: "<?= htmlspecialchars($_SESSION['error'], ENT_QUOTES) ?>",
+                type: "error",
+                position: "top-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+
+         <?php if (!empty($_SESSION['success'])): ?>
+            ButterPop.show({
+                message: "<?= htmlspecialchars($_SESSION['success'], ENT_QUOTES) ?>",
+                type: "success",
+                position: "top-right",
+                theme: "velvet",
+                duration: 5000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+
+        <?php if (!empty($_SESSION['logout_success'])): ?>
+            ButterPop.show({
+                message: "<?= $_SESSION['logout_success'] ?>",
+                type: "success",
+                position: "bottom-right",
+                theme: "velvet",
+                duration: 4000,
+                progress: true,
+                closable: true,
+                pauseOnHover: true,
+                closeOnClick: false
+            });
+            <?php unset($_SESSION['logout_success']); ?>
+        <?php endif; ?>
+    </script>
 </body>
-
 </html>
