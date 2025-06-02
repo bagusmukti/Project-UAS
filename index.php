@@ -23,8 +23,8 @@ session_start();
                 <div class="collapse navbar-collapse" id="navbarText">
                     <span class="navbar-text ms-auto">
                         <form class="container-fluid justify-content-start">
-                            <button class="btn btn-outline-success me-2" type="button"><a href="login_page.php">Login</a></button>
-                            <button class="btn btn-sm btn-outline-secondary" type="button"><a href="create_account.php">Register</a></button>
+                            <a class="btn btn-outline-success me-2" href="./pages/login_page.php">Login</a>
+                            <a class="btn btn-sm btn-outline-secondary" href="./pages/create_account.php">Register</a>
                         </form>
                     </span>
                 </div>
@@ -33,7 +33,8 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-4">
-                    <img src="assets/uploaded_pics/successful-businessman-standing-confidently.png" width="250rem" alt="">
+
+                    <img src="assets/img/successful-businessman-standing-confidently.png" width="300rem" alt="">
                 </div>
                 <div class="col-4">
                     <div class="hero-content">
@@ -48,7 +49,7 @@ session_start();
                     </div>
                 </div>
                 <div class="col-4">
-                    <img src="assets/uploaded_pics/successful-businessman-standing-confidently.png" width="250rem" alt="" style="transform: scaleX(-1);">
+                    <img src="assets/img/successful-businessman-standing-confidently.png" width="300rem" alt="" style="transform: scaleX(-1);">
                 </div>
             </div>
             <!DOCTYPE html>
