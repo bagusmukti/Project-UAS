@@ -729,6 +729,11 @@ textarea {
   gap: 40px;
   align-items: center;
   justify-content: space-evenly;
+  border-collapse: collapse;
+  background: white;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgb(110, 110, 110, 5);
+  border-radius: 12px;
 }
 
 .form-split {
@@ -807,10 +812,13 @@ a{
 }
 
 .cont-keluhan {
-  background-color: white;
   text-align: center;
   padding: 250px 50px;
-  border-radius: 10px;
+  border-collapse: collapse;
+  background: white;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgb(110, 110, 110, 5);
+  border-radius: 12px;
 }
 
 .link-lapor {
