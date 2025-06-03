@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validasi server side minimal (jaga keamanan)
     if ($username === '' || $password === '') {
         $_SESSION['error'] = "Masukkan data yang sesuai.";
-        header("Location: login_page.php");
+        header("Location: login.php");
         exit();
     }
 
@@ -36,12 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         } else {
             $_SESSION['error'] = "Data yang dimasukkan salah.";
-            header("Location: login_page.php");
+            header("Location: login.php");
             exit();
         }
     } else {
         $_SESSION['error'] = "Data yang dimasukkan salah.";
-        header("Location: login_page.php");
+        header("Location: login.php");
         exit();
     }
 }

@@ -73,29 +73,29 @@ catch (Exception $e) {
 
 <body>
     <div class="wrapper d-flex">
-        <aside class="sidebar bg-light p-3">
-            <h1 class="text-dashboard">S!AP</h1>
+        <aside class="sidebar p-3" style="background-color:#0e468b; color:rgb(255, 255, 255);">
+            <h1 class="mb-3" style="color:rgb(255, 255, 255) !important; text-decoration: none; padding-left: 15px;">S!AP</h1>
             <nav class="nav flex-column">
-                <a class="nav-link active" href="dashboard_user.php" style="color: #82baff !important; text-decoration: none;">Dashboard</a>
+                <a class="nav-link active" href="dashboard_user.php" style="color:rgb(255, 255, 255) !important; text-decoration: none;">Dashboard</a>
                 <div class="dropdown mt-2">
-                    <a class="nav-link dropdown-toggle" href="#" style="color: #82baff !important; text-decoration: none;">
+                    <a class="nav-link dropdown-toggle" href="#" style="color:rgb(255, 255, 255) !important; text-decoration: none;">
                         Pengaduan
                     </a>
                     <ul class="dropdown-menu w-100">
                         <li>
-                            <a class="dropdown-item" href="form_pengaduan.php" style="color:rgb(108, 168, 242) !important; text-decoration: none; font-size: smaller;">
-                                Buat Aduan
+                           <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalLaporKeluhan" style="color:rgb(10, 60, 120) !important; text-decoration: none; font-size: smaller;">
+                                Form Pengaduan
                             </a>
                         </li>
-                        <li><a class="dropdown-item" href="riwayat_aduan.php" style="color: rgb(108, 168, 242) !important; text-decoration: none; font-size: smaller;">Riwayat</a></li>
+                        <li><a class="dropdown-item" href="riwayat_aduan.php" style="color: rgb(10, 60, 120) !important; text-decoration: none; font-size: smaller;">Riwayat</a></li>
                     </ul>
                 </div>
 
                 <a class="mt-auto btn-logout" href="logout_page.php">
-                    Logout
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="red">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white" style="transform: scaleX(-1);">
                         <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
                     </svg>
+                    Logout
                 </a>
             </nav>
         </aside>
@@ -104,7 +104,7 @@ catch (Exception $e) {
             <div class="header-user-admin">
                 <a class="user-info" href="edit_profile.php">
                     <p><?= htmlspecialchars($username) ?></p>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#82BAFF">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#2a6ec1">
                         <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z" />
                     </svg>
                 </a>
@@ -112,7 +112,7 @@ catch (Exception $e) {
 
             <div class="cont-keluhan">
                 <h2>Ada keluhan apa hari ini?</h2><br>
-                <a href="form_pengaduan.php" class="link-lapor">Lapor disini</a>
+                <button class="link-lapor p-3" data-bs-toggle="modal" data-bs-target="#modalLaporKeluhan">Lapor Keluhan</button>
             </div>
         </div>
     </div>
@@ -186,6 +186,8 @@ catch (Exception $e) {
         <?php endif; ?>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <?php include 'modal.php'; ?>
+
 </body>
 
 </html>
