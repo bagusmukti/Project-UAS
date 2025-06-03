@@ -10,12 +10,11 @@
 /* Styling dasar untuk body */
 body {
   font-family: "Courier New", Courier, monospace;
-  min-height: 100vh;
-  display: flex;
+  display: block;
   flex-direction: column;
 }
 
-/* Styling untuk Index */
+
 
 .h1-index {
   color: #ffffff;
@@ -36,15 +35,24 @@ body {
   justify-content: center;
   padding: 2rem;
   text-align: center;
-  background-color: #82baff;
+  background-color: #01408d;
 }
 
 .hero-content {
-  background: #ffffff;
+  background: #ff3535;
   padding: 25px 25px;
   border: #000 1px solid;
   border-radius: 10px;
   text-align: center;
+}
+
+.bg-blue {
+  background-color: #01408d;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .subtitle {
@@ -65,14 +73,13 @@ body {
 
 .cta-button {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  margin-left: 200px;
+  margin-right: 0px;
   gap: 1rem;
   background-color: white;
-  color: #82baff;
+  color: rgb(0, 0, 255);
   padding: 10px 50px;
   border-radius: 5px;
-  margin: 10px auto 0 auto; /* Ini bikin tombol di tengah horizontal */
   font-family: "InstrumentSans-Medium", sans-serif;
   font-size: 32px;
   text-decoration: none;
@@ -80,7 +87,7 @@ body {
 }
 
 .cta-button:hover {
-  background-color: #82baff;
+  background-color: rgb(0, 0, 255);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }
@@ -192,16 +199,18 @@ th {
 .btn-logout {
   display: inline-block;
   padding: 10px 15px;
-  color: red;
+  color: rgb(255, 255, 255);
+  background-color: red;
   text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  box-shadow: #ffffff 0px 2px 4px rgba(0, 0, 0, 5);
 }
 
 .btn-logout:hover {
-  background-color: red;
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: red;
 }
 
 .btn-logout svg {
@@ -209,7 +218,7 @@ th {
 }
 
 .btn-logout:hover svg {
-  fill: white;
+  fill: rgb(255, 0, 0);
 }
 
 .btn-buataduan {
@@ -294,17 +303,23 @@ th {
   background: #285a8f;
   transform: translateY(-2px);
 }
+.wrapper {
+    height: 100vh; /* Buat wrapper memenuhi tinggi layar */
+}
 
+.sidebar {
+    height: 100%; /* Biarkan sidebar mengikuti tinggi wrapper */
+}
 .btn-tanggapi {
   display: inline-block;
   padding: 0px 1px;
   background-color: white;
-  border: 2px solid green;
-  color: green;
+  border: 2px solid rgb(32, 32, 32);
+  color: rgb(226, 192, 0);
   text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0, 128, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(130, 130, 130, 0.3);
   transition: all 0.3s ease;
 }
 
@@ -357,10 +372,19 @@ th {
   fill: red !important;
 }
 
+.nav-blue{
+  background-color: rgb(0, 0, 255);
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
 .text-dashboard {
   text-align: left;
   font-size: 2.5rem;
-  color: #82baff !important;
+  color: #ffffff !important;
   font-weight: 700;
   letter-spacing: -0.5px;
   padding-left: 15px;
@@ -374,12 +398,12 @@ th {
 }
 
 .main-container {
-  flex: 1;
   padding: 0 2rem 2rem;
   gap: 2rem;
   margin: 0 auto;
   width: 100%;
-  background: #82baff;
+  background: #e7e7e7;
+  overflow-y: scroll;
 }
 
 .table-container {
@@ -446,7 +470,7 @@ input[type="text"].search-input {
 }
 
 .header-user-admin {
-  background: #82baff;
+  background: #e7e7e7;
   padding: 1rem;
   margin-bottom: 1rem;
   display: flex;
@@ -707,7 +731,7 @@ textarea {
 
 .user-info {
   gap: 10px;
-  color: #82baff;
+  color: #2a6ec1;
   background-color: white;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
@@ -813,7 +837,7 @@ a{
 
 .cont-keluhan {
   text-align: center;
-  padding: 250px 50px;
+  padding: 150px 50px;
   border-collapse: collapse;
   background: white;
   overflow: hidden;
@@ -822,19 +846,23 @@ a{
 }
 
 .link-lapor {
-  background-color: #82baff; 
-  margin-top: 20px;
+  background-color: #0e468b; 
+  margin-top: 0px;
   color: white; 
   text-decoration-line: none;
   padding: 10px 10px;
   border-radius: 5px;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
   font-weight: bold;
   transition: transform 0.5s ease, background-color 0.5s ease;
 }
 
 .link-lapor:hover {
   background-color: white;
-  color: #82baff;
+  color: #08366d;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }

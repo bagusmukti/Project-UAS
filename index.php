@@ -14,54 +14,51 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 </head>
 
-<body style="background-color: rgb(138, 193, 247);">
+<body style="background-color: white;">
     <div>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top mb-5">
             <div class="container-fluid">
-                <h1 class="text-dashboard">S!AP</h1>
+                <h1 class="text-dashboard" style="margin-left: 20px; margin-top:5px;">S!AP</h1>
 
                 <div class="collapse navbar-collapse" id="navbarText">
                     <span class="navbar-text ms-auto">
                         <form class="container-fluid justify-content-start">
                             <a class="btn btn-outline-success me-2"
-                                href="./pages/login_page.php"
+                                href="./pages/login.php"
                                 style="transition: transform 0.5s ease, background-color 0.5s ease, color 0.5s ease;"
-                                onmouseover="this.style.backgroundColor='#82baff'; this.style.color='white'"
+                                onmouseover="this.style.backgroundColor='#fff'; this.style.color='rgb(0, 0, 255)'; this.style.transform='scale(1.05)';"
                                 onmouseout="this.style.backgroundColor=''; this.style.color=''">
                                 Login
                             </a>
-                            <a class="btn btn-outline-success me-2"
-                                href="./pages/create_account.php"
-                                style="transition: transform 0.5s ease, background-color 0.5s ease, color 0.5s ease;"
-                                onmouseover="this.style.backgroundColor='#82baff'; this.style.color='white'"
-                                onmouseout="this.style.backgroundColor=''; this.style.color=''">
-                                Register
-                            </a>
+                           
                         </form>
                     </span>
                 </div>
             </div>
         </nav>
-        <div class="container">
-            <div class="row" style="margin-top: 50px;">
-                <div class="col-4">
-                    <img src="assets/img/successful-businessman-standing-confidently.png" width="250rem" alt="" style="margin-left: 50px;">
+        <div class="container mt-3">
+            <div class="row mt-5" style="margin-top: 50px;">
+                <div class="col-3 mt-5">
+                    <img src="assets/img/successful-businessman-standing-confidently.png" width="250rem" alt="" style="margin-left: 0px;">
                 </div>
-                <div class="col-4">
-                    <div class="hero-content">
+                <div class="col-6">
+                    <div class="mt-5" style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                         <h3 class="text-center mt-5">SISTEM INFORMASI ADUAN PUBLIK</h3>
                         <hr>
-                        <h6 class="slmtdtg">Selamat datang di sistem informasi aduan publik kami. Silakan masuk atau daftar untuk melanjutkan.</h6>
-                        <hr>
-                        <a href="/Project-UAS/pages/login_page.php" class="cta-button">
+                        <p class="slmtdtg p-3">
+                        Selamat datang di sistem informasi aduan publik kami. Silakan masuk atau daftar untuk melanjutkan.  
+                        Sistem ini dirancang untuk memudahkan masyarakat dalam menyampaikan laporan, keluhan, atau saran kepada instansi terkait secara cepat dan transparan.  
+                        </p>                       
+                         <hr>
+                        <a href="/Project-UAS/pages/login.php" class="cta-button">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#82baff">
                                 <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v268q-19-9-39-15.5t-41-9.5v-243H200v560h242q3 22 9.5 42t15.5 38H200Zm0-120v40-560 243-3 280Zm80-40h163q3-21 9.5-41t14.5-39H280v80Zm0-160h244q32-30 71.5-50t84.5-27v-3H280v80Zm0-160h400v-80H280v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Zm-20-80h40v-100h100v-40H740v-100h-40v100H600v40h100v100Z" />
                             </svg>
                         </a>
                     </div>
                 </div>
-                <div class="col-4">
-                    <img src="assets/img/successful-businessman-standing-confidently.png" width="250rem" alt="" style="transform: scaleX(-1); margin-left: 90px;">
+                <div class="col-3 mt-5">
+                    <img src="assets/img/successful-businessman-standing-confidently.png" width="250rem" alt="" style="transform: scaleX(-1); margin-left: 0px;">
                 </div>
             </div>
             <!DOCTYPE html>

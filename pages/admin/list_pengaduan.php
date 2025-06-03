@@ -103,18 +103,18 @@ while ($row = $chartData2->fetch_assoc()) {
 
 <body>
     <div class="wrapper d-flex">
-        <aside class="sidebar bg-light p-3">
-            <h1 class="text-dashboard">S!AP</h1>
+         <aside class="sidebar p-3" style="background-color:#0e468b; color:rgb(255, 255, 255);">
+            <h1 class="mb-3" style="color:rgb(255, 255, 255) !important; text-decoration: none; padding-left: 15px;">S!AP</h1>
             <nav class="nav flex-column">
-                <a class="nav-link active" href="dashboard_admin.php" style="color: #82baff !important; text-decoration: none;">Dashboard</a>
-
-                <a class="nav-link active" href="list_pengaduan.php" style="color: #82baff !important; text-decoration: none;">Data Pengaduan</a>
+                <a class="nav-link active" href="dashboard_admin.php" style="color:rgb(255, 255, 255) !important; text-decoration: none;">Dashboard</a>
+                <a class="nav-link active" href="list_pengaduan.php" style="color:rgb(255, 255, 255) !important; text-decoration: none;">Data Pengaduan</a>
+                
 
                 <a class="mt-auto btn-logout" href="../logout_page.php">
-                    Logout
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="red">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white" style="transform: scaleX(-1);">
                         <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
                     </svg>
+                    Logout
                 </a>
             </nav>
         </aside>
@@ -124,7 +124,7 @@ while ($row = $chartData2->fetch_assoc()) {
                 <div class="btn-group">
                     <div class="user-info">
                         <p>Admin</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#82BAFF">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#2a6ec1">
                             <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z" />
                         </svg>
                     </div>
@@ -132,15 +132,16 @@ while ($row = $chartData2->fetch_assoc()) {
             </div>
 
             <br>
-            <h3 class="data-pengaduan">Data Pengaduan</h3>
-
+            <h3 style="color: #2a6ec1; letter-spacing: 2px; text-align: center; margin-bottom: 2rem;">
+                DATA PENGADUAN
+            </h3>
             <!-- Tabel untuk mencari aduan-->
             <div class="search-container">
                 <form method="get" class="search-form">
                     <input type="text" name="search_nama" placeholder="Cari nama..."
                         value="<?= htmlspecialchars($search_nama) ?>" class="search-input">
 
-                    <select name="search_status" class="status-select">
+                    <select name="search_status" class="status-select pr-5">
                         <option value="">Semua Status</option>
                         <option value="menunggu" <?= $search_status === 'menunggu' ? 'selected' : '' ?>>Menunggu</option>
                         <option value="proses" <?= $search_status === 'proses' ? 'selected' : '' ?>>Proses</option>
@@ -201,12 +202,12 @@ while ($row = $chartData2->fetch_assoc()) {
                                 </td>
 
                                 <td class=""> <!-- Tindakan untuk edit dan hapus -->
-                                    <a class="btn btn-tanggapi" href="edit.php?id=<?= $row['id'] ?>">Tanggapi
+                                    <a class="btn btn-outline-success" href="edit.php?id=<?= $row['id'] ?>">Tanggapi
                                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                         </svg>
                                     </a>
-                                    <a class="btn btn-delete" href="delete.php?id=<?= $row['id'] ?>"
+                                    <a class="btn btn-danger" style="color:#fff;" href="delete.php?id=<?= $row['id'] ?>"
                                         onclick="return confirm('Yakin menghapus laporan ini?')">Hapus
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
                                             <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
