@@ -96,19 +96,19 @@ while ($row = $chartData2->fetch_assoc()) {
     <title>Dashboard Admin</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/butterpop.css">
-   
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="wrapper d-flex">
-         <aside class="sidebar p-3" style="background-color:#0e468b; color:rgb(255, 255, 255);">
+        <aside class="sidebar p-3" style="background-color:#0e468b; color:rgb(255, 255, 255);">
             <h1 class="mb-3" style="color:rgb(255, 255, 255) !important; text-decoration: none; padding-left: 15px;">S!AP</h1>
             <nav class="nav flex-column">
                 <a class="nav-link active" href="dashboard_admin.php" style="color:rgb(255, 255, 255) !important; text-decoration: none;">Dashboard</a>
                 <a class="nav-link active" href="list_pengaduan.php" style="color:rgb(255, 255, 255) !important; text-decoration: none;">Data Pengaduan</a>
-                
+
 
                 <a class="mt-auto btn-logout" href="../logout_page.php">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white" style="transform: scaleX(-1);">
@@ -153,7 +153,9 @@ while ($row = $chartData2->fetch_assoc()) {
                             <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
                         </svg>
                     </button>
+                    <button type="button" class="link-lapor p-3" data-bs-toggle="modal" data-bs-target="#modalLaporKeluhan">Lapor Keluhan</button>
                 </form>
+
             </div>
 
             <table border="1" cellpadding="10" cellspacing="0" class="data-table">
@@ -222,6 +224,7 @@ while ($row = $chartData2->fetch_assoc()) {
         </div>
     </div>
 
+    <?php include '../modal.php'; ?>
 
     <script src="../../assets/js/butterpop.js"></script>
 
