@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Update atau insert ke tbl_proses_peng
         if ($data['status']) {
             // Jika sudah ada status, update
-            $stmt = $conn->prepare("UPDATE tbl_proses_peng 
+            $stmt = $conn->prepare("UPDATE tbl_proses_peng, tb;_peng
                                    SET id_status = ?, answ_peng = ?, answ_foto = ?
                                    WHERE id_peng = ?");
             $stmt->bind_param("issi", $status_id, $jawaban, $fotoadmin, $id); // Perhatikan tipe data: i-integer, s-string
@@ -110,7 +110,7 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
         <div class="form-group">
             <label class="label-user">Isi Laporan:</label>
             <div class="original-complaint">
-                <?= nl2br(htmlspecialchars($data['isi_lap'] ?? '')) ?>
+                <textarea name="isi_lap" class="form-control" required><?= htmlspecialchars($data['isi_lap'] ?? '') ?></textarea>
             </div>
         </div>
 
