@@ -83,7 +83,7 @@ catch (Exception $e) {
                     </a>
                     <ul class="dropdown-menu w-100">
                         <li>
-                           <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalLaporKeluhan" style="color:rgb(10, 60, 120) !important; text-decoration: none; font-size: smaller;">
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalLaporKeluhan" style="color:rgb(10, 60, 120) !important; text-decoration: none; font-size: smaller;">
                                 Form Pengaduan
                             </a>
                         </li>
@@ -116,6 +116,8 @@ catch (Exception $e) {
             </div>
         </div>
     </div>
+
+    <?php include 'modal.php'; ?>
 
     <script src="../assets/js/butterpop.js"></script>
 
@@ -186,7 +188,6 @@ catch (Exception $e) {
         <?php endif; ?>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-    <?php include 'modal.php'; ?>
 
 </body>
 
