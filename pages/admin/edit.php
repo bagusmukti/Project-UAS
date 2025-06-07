@@ -1,9 +1,6 @@
 <?php
-
-// Mulai sesi
 session_start();
 
-// Cek apakah user admin sudah login
 include '../../config/koneksi.php';
 
 // Cek session admin
@@ -12,85 +9,108 @@ if (!isset($_SESSION['user_id']) || $_SESSION['level'] !== 'admin') {
     exit();
 }
 
-// Ambil ID pengaduan dari URL
 $id = $_GET['id'] ?? 0;
 
-// Ambil data pengaduan
-// Menggunakan LEFT JOIN untuk mendapatkan status pengaduan
-$query = "SELECT p.*, s.status, pp.answ_peng, pp.answ_foto 
+// Query untuk mengambil data pengaduan
+$query = "SELECT 
+            p.id,
+            p.isi_lap,
+            p.foto,
+            pp.id_status,
+            s.status,
+            pp.answ_peng,
+            pp.answ_foto,
+            pp.id as proses_id
           FROM tbl_peng p
           LEFT JOIN tbl_proses_peng pp ON p.id = pp.id_peng
           LEFT JOIN tbl_status_peng s ON pp.id_status = s.id
           WHERE p.id = ?";
 
-$stmt = $conn->prepare($query); // Menyiapkan statement
-$stmt->bind_param("i", $id); // Mengikat parameter
-$stmt->execute(); // Eksekusi query
-$result = $stmt->get_result(); // Mendapatkan hasil
-$data = $result->fetch_assoc(); // Mengambil data pengaduan
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$data = $result->fetch_assoc();
 
-// Jika form disubmit
+// Cek apakah data ditemukan
+if (!$data) {
+    $_SESSION['error'] = "Data pengaduan tidak ditemukan";
+    header("Location: dashboard_admin.php");
+    exit();
+}
+
+// Set default values jika NULL
+if (empty($data['id_status'])) {
+    $data['id_status'] = 1; // Default status pertama
+}
+if (empty($data['status'])) {
+    $data['status'] = 'menunggu';
+}
+if (empty($data['answ_peng'])) {
+    $data['answ_peng'] = '';
+}
+if (empty($data['answ_foto'])) {
+    $data['answ_foto'] = '';
+}
+
+// Proses form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status_id = $_POST['status'];
     $jawaban = $_POST['jawaban'];
-    $fotoadmin = $data['answ_foto'] ?? ''; // Gunakan foto yang sudah ada jika tidak diupdate
+    $isi_lap = $_POST['isi_lap'];
+    $fotoadmin = $data['answ_foto']; // Gunakan foto lama sebagai default
+    $is_edit = 1; // Tandai sebagai sudah di-edit
 
-    $conn->begin_transaction(); // Memulai transaksi
+    $conn->begin_transaction();
 
     try {
-        // Handle file upload
+        // Handle file upload jika ada
         if (!empty($_FILES['fotoadmin']['name'])) {
-            $target_dir = "../../assets/uploaded_pics/"; // Ganti dengan direktori tujuan upload
-
+            $target_dir = "../../assets/uploaded_pics/";
             $extension = pathinfo($_FILES['fotoadmin']['name'], PATHINFO_EXTENSION);
-
-            $new_filename = "balasan_laporan_" . $id . "." . $extension; // Nama file baru
+            $new_filename = "balasan_laporan_" . $id . "." . $extension;
             $target_file = $target_dir . $new_filename;
-
-            // Validasi file (opsional)
-            $imageFileType = strtolower($extension);
-            $allowed_types = array('jpg', 'jpeg', 'png', 'gif');
-
-            if (!in_array($imageFileType, $allowed_types)) {
-                throw new Exception("Hanya file JPG, JPEG, PNG & GIF yang diizinkan.");
-            }
 
             if (move_uploaded_file($_FILES['fotoadmin']['tmp_name'], $target_file)) {
                 $fotoadmin = $new_filename;
-            } else {
-                throw new Exception("Gagal mengupload file!");
             }
         }
 
-        // Update atau insert ke tbl_proses_peng
-        if ($data['status']) {
-            // Jika sudah ada status, update
-            $stmt = $conn->prepare("UPDATE tbl_proses_peng, tb;_peng
-                                   SET id_status = ?, answ_peng = ?, answ_foto = ?
+        // Update isi laporan
+        $stmt = $conn->prepare("UPDATE tbl_peng SET isi_lap = ?, is_edited = ? WHERE id = ?");
+        $stmt->bind_param("sii", $isi_lap, $is_edit, $id);
+        $stmt->execute();
+
+        // Cek apakah sudah ada record di tbl_proses_peng
+        if (!empty($data['proses_id'])) {
+            // Jika sudah ada, lakukan UPDATE
+            $stmt = $conn->prepare("UPDATE tbl_proses_peng 
+                                   SET id_status = ?, answ_peng = ?, answ_foto = ? 
                                    WHERE id_peng = ?");
-            $stmt->bind_param("issi", $status_id, $jawaban, $fotoadmin, $id); // Perhatikan tipe data: i-integer, s-string
+            $stmt->bind_param("issi", $status_id, $jawaban, $fotoadmin, $id);
         } else {
-            // Jika belum ada status, insert
+            // Jika belum ada, lakukan INSERT
             $stmt = $conn->prepare("INSERT INTO tbl_proses_peng 
                                    (id_peng, id_status, answ_peng, answ_foto) 
                                    VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("iiss", $id, $status_id, $jawaban, $fotoadmin); // Perhatikan tipe data
+            $stmt->bind_param("iiss", $id, $status_id, $jawaban, $fotoadmin);
         }
+        $stmt->execute();
 
-        $stmt->execute(); // Eksekusi query
-
-        $conn->commit(); // Commit transaksi
-        $_SESSION['editadmin_success'] = "Pengaduan berhasil diupdate!"; // Set session success message
-        header("Location: dashboard_admin.php"); // Redirect ke halaman dashboard
-        exit(); // Keluar dari script
+        $conn->commit();
+        $_SESSION['editadmin_success'] = "Pengaduan berhasil diupdate!";
+        header("Location: dashboard_admin.php");
+        exit();
     } catch (Exception $e) {
-        $conn->rollback(); // Rollback transaksi jika terjadi kesalahan
-        $_SESSION['error'] = "Gagal update: " . $e->getMessage(); // Set session error message
+        $conn->rollback();
+        $_SESSION['error'] = "Gagal update: " . $e->getMessage();
     }
 }
 
 // Ambil semua status pengaduan
-$statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSOC);
+$query_status = "SELECT id, status FROM tbl_status_peng ORDER BY id";
+$result_status = $conn->query($query_status);
+$statuses = $result_status->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -107,28 +127,28 @@ $statuses = $conn->query("SELECT * FROM tbl_status_peng")->fetch_all(MYSQLI_ASSO
     <div class="form-user">
         <h2 class="h2-user">Edit Pengaduan #<?= htmlspecialchars($id) ?></h2>
 
-        <div class="form-group">
-            <label class="label-user">Isi Laporan:</label>
-            <div class="original-complaint">
-                <textarea name="isi_lap" class="form-control" required><?= htmlspecialchars($data['isi_lap'] ?? '') ?></textarea>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="label-user">Foto Laporan:</label>
-            <div class="original-photo">
-                <?php if (!empty($data['foto'])): ?>
-                    <img src="../../assets/uploaded_pics/<?= htmlspecialchars($data['foto']) ?>"
-                        alt="Foto Aduan"
-                        class="complaint-photo">
-                <?php else: ?>
-                    <p>Tidak ada foto yang diunggah</p>
-                <?php endif; ?>
-            </div>
-        </div>
-
-        <!-- Tampilan pesan sukses -->
         <form method="POST" enctype="multipart/form-data" class="form-split">
+            <div class="form-group">
+                <label class="label-user">Isi Laporan:</label>
+                <div class="original-complaint">
+                    <textarea name="isi_lap" class="form-control" required><?= htmlspecialchars($data['isi_lap'] ?? '') ?></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="label-user">Foto Laporan:</label>
+                <div class="original-photo">
+                    <?php if (!empty($data['foto'])): ?>
+                        <img src="../../assets/uploaded_pics/<?= htmlspecialchars($data['foto']) ?>"
+                            alt="Foto Aduan"
+                            class="complaint-photo">
+                    <?php else: ?>
+                        <p>Tidak ada foto yang diunggah</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Tampilan pesan sukses -->
             <div class="form-column left">
                 <div class="form-group">
                     <label class="label-user">Status:</label>

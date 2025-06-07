@@ -73,7 +73,7 @@ catch (Exception $e) {
 
 <body>
     <div class="wrapper d-flex">
-         <aside class="sidebar p-3" style="background-color:#0e468b; color:rgb(255, 255, 255);">
+        <aside class="sidebar p-3" style="background-color:#0e468b; color:rgb(255, 255, 255);">
             <h1 class="mb-3" style="color:rgb(255, 255, 255) !important; text-decoration: none; padding-left: 15px;">S!AP</h1>
             <nav class="nav flex-column">
                 <a class="nav-link active" href="dashboard_user.php" style="color:rgb(255, 255, 255) !important; text-decoration: none;">Dashboard</a>
@@ -83,7 +83,7 @@ catch (Exception $e) {
                     </a>
                     <ul class="dropdown-menu w-100">
                         <li>
-                           <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalLaporKeluhan" style="color:rgb(10, 60, 120) !important; text-decoration: none; font-size: smaller;">
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalLaporKeluhan" style="color:rgb(10, 60, 120) !important; text-decoration: none; font-size: smaller;">
                                 Form Pengaduan
                             </a>
                         </li>
@@ -132,7 +132,7 @@ catch (Exception $e) {
                         <tr>
                             <td><?= htmlspecialchars($row["nama"]) ?></td>
                             <td><?= htmlspecialchars($row["email"]) ?></td>
-                            <td><?= htmlspecialchars($row["isi_lap"]) ?></td>
+                            <td><?= htmlspecialchars($row["isi_lap"]) ?><i><?= $row['is_edited'] ? ' (edited)' : '' ?></i></td>
                             <td data-table="Foto">
                                 <!-- Cek apakah ada foto -->
                                 <!-- Jika ada foto, tampilkan gambar -->
@@ -254,7 +254,7 @@ catch (Exception $e) {
         <?php endif; ?>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-        <?php include 'modal.php'; ?>
+    <?php include 'modal.php'; ?>
 
 </body>
 
