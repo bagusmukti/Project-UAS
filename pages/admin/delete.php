@@ -8,7 +8,7 @@ include '../../config/koneksi.php';
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     $_SESSION['error'] = "ID tidak valid!";
-    header("Location: dashboard_admin.php");
+    header("Location: list_pengaduan.php");
     exit();
 }
 
@@ -38,5 +38,5 @@ try {
 }
 
 mysqli_close($conn); // Tutup koneksi
-header("Location: dashboard_admin.php"); // Redirect ke halaman dashboard
+header("Location: list_pengaduan.php"); // Redirect ke halaman dashboard
 exit(); // Keluar dari script
