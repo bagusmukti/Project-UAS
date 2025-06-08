@@ -3,9 +3,9 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <form action="/Project-UAS/pages/proses_pengaduan.php" method="POST" enctype="multipart/form-data">
-        <div class="modal-header mb-3" style="background-color: rgb(0, 0, 255);">
+        <div class="modal-header mb-3" style="background-color: #08366d;">
           <h5 class="modal-title" id="modalLaporLabel" style="color: #fff;">Formulir Pengaduan</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup" style="color: #fff;"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup" style="color: white;"></button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
