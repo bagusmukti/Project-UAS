@@ -7,7 +7,7 @@ include '../config/koneksi.php';
 session_start();
 
 // Cek apakah pengguna sudah login sebagai user
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['level'])) {
     header("Location: login_page.php");
     exit();
 }
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Jika ada error, redirect kembali
     if (!empty($errors)) {
         $_SESSION['error'] = implode("<br>", $errors);
-        header("Location: dashboard_user.php");
+        header("Location: " . ($_SESSION['level'] == 'admin' ? '../pages/admin/dashboard_admin.php' : 'dashboard_user.php'));
         exit();
     }
 
@@ -91,7 +91,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $conn->rollback(); // Rollback transaksi jika terjadi error
         $_SESSION['error'] = "Error: " . $e->getMessage(); // Log error
     } finally {
-        header("Location: dashboard_user.php"); // Redirect ke halaman dashboard
+        if ($_SESSION['level'] == 'admin') {
+            header("Location: ../pages/admin/dashboard_admin.php");
+        } else {
+            header("Location: dashboard_user.php");
+        }
         exit();
     }
 }
