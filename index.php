@@ -23,7 +23,7 @@ session_start();
                 <div class="collapse navbar-collapse" id="navbarText">
                     <span class="navbar-text ms-auto">
                         <form class="container-fluid justify-content-start">
-                            <a class="btn btn-outline-success me-2"
+                            <a class="btn me-2"
                                 href="./pages/login.php"
                                 style="transition: transform 0.5s ease, background-color 0.5s ease, color 0.5s ease;"
                                 onmouseover="this.style.backgroundColor='#fff'; this.style.color='rgb(0, 0, 255)'; this.style.transform='scale(1.05)';"
