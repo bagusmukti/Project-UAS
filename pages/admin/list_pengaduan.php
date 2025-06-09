@@ -212,12 +212,12 @@ while ($row = $chartData2->fetch_assoc()) {
                                 </td>
 
                                 <td class="button-action"> <!-- Tindakan untuk edit dan hapus -->
-                                    <a class="btn btn-outline-success" href="edit.php?id=<?= $row['id'] ?>">Tanggapi
+                                    <a class="btn btn-outline-success btn-xs mt-1" href="edit.php?id=<?= $row['id'] ?>">Tanggapi
                                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                         </svg>
                                     </a>
-                                    <a class="btn btn-danger" style="color:#fff;" href="delete.php?id=<?= $row['id'] ?>"
+                                    <a class="btn btn-danger btn-xs mt-1" style="color:#fff;" href="delete.php?id=<?= $row['id'] ?>"
                                         onclick="return confirm('Yakin menghapus laporan ini?')">Hapus
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff">
                                             <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
