@@ -192,7 +192,10 @@ while ($row = $chartData2->fetch_assoc()) {
                                             loading="lazy"
                                             class="photo-thumbnail">
                                     <?php else: ?> <!-- Jika tidak ada foto -->
-                                        -
+                                        <img src="../../assets/uploaded_pics/<?= htmlspecialchars($row['foto']) ?>"
+                                            alt="Laporan <?= $row['id'] ?>"
+                                            loading="lazy"
+                                            class="photo-thumbnail">
                                     <?php endif; ?>
                                 </td>
 
