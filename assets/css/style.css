@@ -14,8 +14,6 @@ body {
   flex-direction: column;
 }
 
-
-
 .h1-index {
   color: #ffffff;
   text-align: center;
@@ -304,11 +302,11 @@ th {
   transform: translateY(-2px);
 }
 .wrapper {
-    height: 100vh; /* Buat wrapper memenuhi tinggi layar */
+  height: 100vh; /* Buat wrapper memenuhi tinggi layar */
 }
 
 .sidebar {
-    height: 100%; /* Biarkan sidebar mengikuti tinggi wrapper */
+  height: 100%; /* Biarkan sidebar mengikuti tinggi wrapper */
 }
 .btn-tanggapi {
   display: inline-block;
@@ -372,7 +370,7 @@ th {
   fill: red !important;
 }
 
-.nav-blue{
+.nav-blue {
   background-color: rgb(0, 0, 255);
   color: white;
   padding: 10px 20px;
@@ -620,13 +618,12 @@ input[type="text"].search-input {
 .form-buttons {
   display: flex;
   justify-content: flex-end;
-  /* Atur jadi flex-end jika mau "Kembali" lebih kanan */
   gap: 10px;
   margin-top: 20px;
 }
 
 .button-back {
-  /* display: block; */
+  display: block;
   text-align: center;
   background-color: white;
   font-weight: bold;
@@ -831,7 +828,7 @@ textarea {
   cursor: pointer;
 }
 
-a{
+a {
   text-decoration: none !important;
 }
 
@@ -846,9 +843,9 @@ a{
 }
 
 .link-lapor {
-  background-color: #0e468b; 
+  background-color: #0e468b;
   margin-top: 0px;
-  color: white; 
+  color: white;
   text-decoration-line: none;
   padding: 10px 10px;
   border-radius: 5px;
