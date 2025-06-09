@@ -8,7 +8,7 @@ include '../../config/koneksi.php';
 
 // Cek session user admin
 if (!isset($_SESSION['user_id']) || $_SESSION['level'] !== 'admin') {
-    header("Location: ../login_page.php");
+    header("Location: ../login.php");
     exit();
 }
 

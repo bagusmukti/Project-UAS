@@ -5,7 +5,7 @@ include '../../config/koneksi.php';
 
 // Cek session admin
 if (!isset($_SESSION['user_id']) || $_SESSION['level'] !== 'admin') {
-    header("Location: ../login_page.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -182,15 +182,16 @@ $statuses = $result_status->fetch_all(MYSQLI_ASSOC);
                         </div>
                     <?php endif; ?>
                 </div>
-
             </div>
-            <div class="form-group">
+
+            <div class="form-group button-save">
                 <button class="button-save" type="submit">Simpan</button>
             </div>
+            <br>
+            <div class="form-group button-back">
+                <a href="dashboard_admin.php">Kembali</a>
+            </div>
         </form>
-        <div class="form-group" style="padding-top: 20px;">
-            <a class="button-back" href="dashboard_admin.php">Kembali</a>
-        </div>
     </div>
 </body>
 

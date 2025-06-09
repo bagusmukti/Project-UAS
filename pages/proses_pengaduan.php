@@ -92,9 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['error'] = "Error: " . $e->getMessage(); // Log error
     } finally {
         if ($_SESSION['level'] == 'admin') {
-            header("Location: ../pages/admin/dashboard_admin.php");
+            header("Location: ../pages/admin/list_pengaduan.php");
         } else {
-            header("Location: dashboard_user.php");
+            header("Location: riwayat_aduan.php");
         }
         exit();
     }
